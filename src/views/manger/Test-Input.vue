@@ -53,7 +53,12 @@
         <br>
         <input-jurs></input-jurs>
         <br>
-        <el-button type="danger"><i class="el-icon-edit-outline"></i>&nbsp;发布</el-button>
+        <div style="text-align: center">
+            <el-button type="danger">
+                <i class="el-icon-edit-outline"></i>&nbsp;发布
+            </el-button>
+        </div>
+
     </div>
 </template>
 

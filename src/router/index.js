@@ -16,15 +16,18 @@ import WritePage from '../views/Write-Page'
 Vue.use(VueRouter)
 
 const routes = [
-   /* {
-        path:'/',
-        redirect:Index
-    },*/
     {
-        path: '/',
+        path:'/',
+        redirect:Index,
+        meta:{
+            title:'半次元'
+        }
+    },
+    {
+        path: '/index',
         name: 'Index',
         component: Index,
-        // redirect:RecommendPage,
+        redirect:'/recommend-page',
         meta:{
             title:'半次元'
         },
@@ -40,23 +43,38 @@ const routes = [
             {
                 path:'/attention-page',
                 component:AttentionPage,
+                meta:{
+                    title:'关注'
+                },
 
             },
             {
                 path:'/ranking-page',
-                component:RankingPage
+                component:RankingPage,
+                meta:{
+                    title:'榜单'
+                },
             },
             {
                 path:'/recommend-page',
-                component:RecommendPage
+                component:RecommendPage,
+                meta:{
+                    title:'半次元'
+                }
             },
             {
                 path:'/cospage-page',
-                component:CosPage
+                component:CosPage,
+                meta:{
+                    title:'COS'
+                }
             },
             {
                 path:'/write-page',
-                component:WritePage
+                component:WritePage,
+                meta:{
+                    title:'写作'
+                }
             },
         ]
     }, {
@@ -107,13 +125,12 @@ const router = new VueRouter({
 
 
 //导航守卫
-/*
 router.beforeEach((to, from, next) => {
-    // document.title = to.matched[0].meta.title
+    console.log(to)
+    document.title = to.meta.title
 
     next()
 })
-*/
 
 
 export default router

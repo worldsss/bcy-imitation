@@ -1,10 +1,10 @@
 <template>
     <div>
-<!--        所有主页显示的导航栏-->
+<!--        所有主页显示的导航栏 @select="handleSelect"-->
         <el-menu :default-active="activeIndex"
                  class="el-menu-demo"
                  mode="horizontal"
-                 @select="handleSelect"
+
                  router="true">
             <el-menu-item >
                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1586095787109&di=9d94e497c119221870c877eca449b9b0&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F406662d67a08dfa8a2f552df19400886b240a4eb3781-btlcig_fw658" width="50" height="50" alt="">

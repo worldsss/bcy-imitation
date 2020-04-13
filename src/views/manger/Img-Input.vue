@@ -139,8 +139,11 @@
                 <br><br>
             </el-card>
             <br>
-            <el-button type="danger">提交发布</el-button>
-
+            <div style="text-align: center">
+                <el-button type="danger">
+                    <i class="el-icon-edit-outline"></i>&nbsp;发布
+                </el-button>
+            </div>
         </el-main>
     </div>
 

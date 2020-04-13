@@ -12,12 +12,13 @@
                     </el-carousel-item>
                 </el-carousel>
                 <div style="width: 100%;margin: 5px auto;height: 60px;text-align: center;border: 1px solid #e6e6e6;border-radius: 10px">
+<!--                    @select="handleSelect"-->
                     <el-menu :default-active="activeIndex"
                              class="el-menu-demo"
                              style="width: 50%;margin: 0 auto;height: 60px;text-align: center"
                              mode="horizontal"
                              active-text-color="#fb678b"
-                             @select="handleSelect">
+                             >
                         <el-menu-item index="1">推荐</el-menu-item>
                         <el-menu-item index="2">关注</el-menu-item>
                         <el-menu-item index="3">榜单</el-menu-item>
@@ -31,13 +32,11 @@
                 </div>
 
 
-
-                <!--                下面是不同的组件的代码-->
+                <!-- 下面是不同的组件的代码-->
                 <keep-alive>
                     <router-view></router-view>
                 </keep-alive>
             </el-main>
-
 
 
         </el-container>
@@ -60,6 +59,7 @@
         activeIndex: '/',
       }
     },
+
   }
 </script>
 

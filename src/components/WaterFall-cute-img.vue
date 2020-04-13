@@ -20,9 +20,10 @@
             </p>
             <div>
                 <a href="" target="_blank">
-                    <!-- 图片插槽-->
-                    <slot name="img"></slot>
-<!--                    <img src="2.jpg" style="height: 100%;width: 90%;border-radius: 10px">-->
+                    <div style="width: 90%;margin: 0 auto">
+                        <!-- 图片插槽-->
+                        <slot name="img"></slot>
+                    </div>
                 </a>
             </div>
 
@@ -36,7 +37,7 @@
 
                 </slot>
                 <br>
-                <ui class="img-ul">
+                <ul class="img-ul">
                     <li class="img-li">
                         <el-link icon="el-icon-star-off" :underline="false" type="info">
                             <slot name="img-collect"></slot>
@@ -58,7 +59,7 @@
                         </el-link>
 
                     </li>
-                </ui>
+                </ul>
             </div>
         </el-card>
 

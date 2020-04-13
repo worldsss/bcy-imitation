@@ -1,193 +1,8 @@
 <template>
     <div>
         <div style="width: 70%;float: left;border: 1px solid #E6E6E6" >
-            <el-row gutter="10" style="margin: 10px 0px">
+            <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12" >
-                    <!--  <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                          <el-header style="padding-top: 10px">
-                              <el-col :span="1">
-                                  <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                              </el-col>
-                              <el-col :span="8">
-                                  <p style=""><strong>ochia</strong></p>
-                              </el-col>
-
-                          </el-header>
-                          <p style="text-align: left;width: 90%;margin: 5px auto">
-                              试一下灯光的感觉
-                          </p>
-                          <div>
-                              <a href="" target="_blank">
-                                  <img src="2.jpg" style="height: 100%;width: 90%;border-radius: 10px">
-                              </a>
-                          </div>
-
-                          <div style="padding: 14px 14px 0px 14px;">
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <br>
-                              <ui class="img-ul" >
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                  </li>
-                              </ui>
-                              &lt;!&ndash; <div class="bottom clearfix">
-                                   <time class="time">{{ currentDate }}</time>
-                                   <el-button type="text" class="button">操作按钮</el-button>
-                               </div>&ndash;&gt;
-                          </div>
-                      </el-card>
-                      <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                          <el-header style="padding-top: 10px">
-                              <el-col :span="1">
-                                  <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                              </el-col>
-                              <el-col :span="8">
-                                  <p style=""><strong>ochia</strong></p>
-                              </el-col>
-
-                          </el-header>
-                          <p style="text-align: left;width: 90%;margin: 5px auto">
-                              试一下灯光的感觉
-                          </p>
-                          <div>
-                              <a href="" target="_blank">
-                                  <img src="2.jpg" style="height: 100%;width: 90%;border-radius: 10px">
-                              </a>
-                          </div>
-
-                          <div style="padding: 14px 14px 0px 14px;">
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <br>
-                              <ui class="img-ul" >
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                  </li>
-                              </ui>
-                              &lt;!&ndash; <div class="bottom clearfix">
-                                   <time class="time">{{ currentDate }}</time>
-                                   <el-button type="text" class="button">操作按钮</el-button>
-                               </div>&ndash;&gt;
-                          </div>
-                      </el-card>
-                      <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                          <el-header style="padding-top: 10px">
-                              <el-col :span="1">
-                                  <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                              </el-col>
-                              <el-col :span="8">
-                                  <p style=""><strong>ochia</strong></p>
-                              </el-col>
-
-                          </el-header>
-                          <p style="text-align: left;width: 90%;margin: 5px auto">
-                              试一下灯光的感觉
-                          </p>
-                          <div>
-                              <a href="" target="_blank" style="text-align: center">
-                                  <img src="6.jpg" style="height: 100%;width: 90%;border-radius: 10px;">
-                              </a>
-                          </div>
-
-                          <div style="padding: 14px 14px 0px 14px;">
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <br>
-                              <ui class="img-ul" >
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                  </li>
-                              </ui>
-                              &lt;!&ndash; <div class="bottom clearfix">
-                                   <time class="time">{{ currentDate }}</time>
-                                   <el-button type="text" class="button">操作按钮</el-button>
-                               </div>&ndash;&gt;
-                          </div>
-                      </el-card>
-                      <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                          <el-header style="padding-top: 10px">
-                              <el-col :span="1">
-                                  <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                              </el-col>
-                              <el-col :span="8">
-                                  <p style=""><strong>ochia</strong></p>
-                              </el-col>
-
-                          </el-header>
-                          <p style="text-align: left;width: 90%;margin: 5px auto">
-                              试一下灯光的感觉
-                          </p>
-                          <div>
-                              <a href="" target="_blank" style="text-align: center">
-                                  <img src="6.jpg" style="height: 100%;width: 90%;border-radius: 10px;">
-                              </a>
-                          </div>
-
-                          <div style="padding: 14px 14px 0px 14px;">
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                              <br>
-                              <ui class="img-ul" >
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                  </li>
-                                  <li class="img-li">
-                                      <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                  </li>
-                              </ui>
-                              &lt;!&ndash; <div class="bottom clearfix">
-                                   <time class="time">{{ currentDate }}</time>
-                                   <el-button type="text" class="button">操作按钮</el-button>
-                               </div>&ndash;&gt;
-                          </div>
-                      </el-card>-->
-
                     <water-fall-cute v-for="(item,index) in imgCute01">
                         <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">
@@ -200,7 +15,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -220,7 +35,7 @@
                     <water-fall-cute>
                         <span slot="img-text">测试插槽的使用</span>
                         <img src="11.jpg" slot="img" class="cute-img" alt="">
-                        <el-button slot="img-tags" type="info" size="mini" plain="true" :autofocus="false">武汉加油</el-button>
+                        <el-button slot="img-tags" type="info" size="mini" :plain="true" :autofocus="false">武汉加油</el-button>
                         <span slot="img-go">10</span>
                         <span slot="img-comment">50</span>
                         <span slot="img-click">870</span>
@@ -235,7 +50,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -262,7 +77,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -279,301 +94,12 @@
                              {{item.imgClick}}
                          </span>
                     </water-fall-text-cute>
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="3.jpg" alt="" style="width: 90%;height: 100%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-            <el-row gutter="10" style="margin: 10px 0px">
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-
-                </el-col>
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-            <el-row gutter="10" style="margin: 10px 0px">
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-
-                </el-col>
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
                 </el-col>
             </el-row>
         </div>
         <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
-            <el-collapse v-model="activeNames" @change="handleChange">
+<!--            v-model="activeNames"-->
+            <el-collapse>
                 <el-collapse-item title="一致性 Consistency" name="1">
                     <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                     <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -582,14 +108,8 @@
 
                 <!--                :class="{'fixedlunbo':isFixed}"-->
                 <div style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
-                    <!--<el-carousel height="500px">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <h3 class="small lunbo-small">{{ item }}</h3>
-                        </el-carousel-item>
-                    </el-carousel>-->
-
                     <div  @change="handleScroll">
-                        <div  :class="{'fixedlunbo':isFixeds}">
+                        <div  :class="{'fixedlunbo':isFixed}">
                             <el-card class="box-card">
                                 <div slot="header" class="clearfix">
                                     <span>我关注的圈子</span>
@@ -613,7 +133,7 @@
                                     </el-row>
                                 </div>
                                 <br>
-                                <el-button type="info" plain="true" style="width: 100%">查看全部</el-button>
+                                <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                             </el-card>
                             <br>
                             <el-card class="box-card">
@@ -636,30 +156,32 @@
                                     </el-row>
                                 </div>
                                 <br>
-                                <el-button type="info" plain="true" style="width: 100%">查看全部</el-button>
+                                <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                             </el-card>
+
+                            <p>
+                                © 2020 bcy.net 版权所有
+
+                                ICP证：浙ICP备14021595号-1
+
+                                浙网文[2014]0701-051号
+
+                                浙公网安备 33010802002901号
+                                信息产业部备案管理系统
+                                浙江省互联网违法和不良信息举报中心
+                                12318全国文化市场举报网站
+
+                                关于我们·商务合作
+
+                                举报指引·营业执照
+
+                                帮助中心·知乎
+                            </p>
                         </div>
+
 
                     </div>
 
-                    <p>
-                        © 2020 bcy.net 版权所有
-
-                        ICP证：浙ICP备14021595号-1
-
-                        浙网文[2014]0701-051号
-
-                        浙公网安备 33010802002901号
-                        信息产业部备案管理系统
-                        浙江省互联网违法和不良信息举报中心
-                        12318全国文化市场举报网站
-
-                        关于我们·商务合作
-
-                        举报指引·营业执照
-
-                        帮助中心·知乎
-                    </p>
                 </div>
 
             </el-collapse>
@@ -687,6 +209,8 @@
         fill:'fill',
         isFixed:false,
         scrollNowLoation:'',
+        circleUrl:'2.jpg',
+        squareUrl:'3.jpg',
         imgCute01:[
           {
             imgAvatar:'1.jpg',

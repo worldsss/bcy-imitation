@@ -38,7 +38,7 @@
 
                 </slot>
                 <br>
-                <ui class="img-ul">
+                <ul class="img-ul">
                     <li class="img-li">
                         <el-link icon="el-icon-star-off" :underline="false" type="info">
                             <slot name="img-collect"></slot>
@@ -60,7 +60,7 @@
                         </el-link>
 
                     </li>
-                </ui>
+                </ul>
             </div>
         </el-card>
 

@@ -1,9 +1,11 @@
 <template>
+<!--    @select="handleSelect"-->
     <el-menu :default-active="activeIndex"
              class="el-menu-demo"
              mode="horizontal"
-             @select="handleSelect"
-             router="true">
+
+             :router="true"
+             active-text-color="#fb678b">
         <el-menu-item>
             <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656495429,2926291651&fm=15&gp=0.jpg"
                  width="150" height="50" alt="">
@@ -99,7 +101,7 @@
                             </el-col>
                             <el-col :span="4">
                                 <!--                           <button style="width: 30px;height: 30px;border-radius: 50%;background-color:#ff6fa2 ">1</button>-->
-                                <el-button type="danger" size="mini" style="margin-top: 5px" circle="true"></el-button>
+                                <el-button type="danger" size="mini" style="margin-top: 5px" :circle="true"></el-button>
                             </el-col>
                         </el-row>
                         <el-row :gutter="10">
@@ -114,7 +116,7 @@
                             </el-col>
                             <el-col :span="4">
                                 <!--                           <button style="width: 30px;height: 30px;border-radius: 50%;background-color:#ff6fa2 ">1</button>-->
-                                <el-button type="danger" size="mini" style="margin-top: 5px" circle="true"></el-button>
+                                <el-button type="danger" size="mini" style="margin-top: 5px" :circle="true"></el-button>
                             </el-col>
                         </el-row>
                     </el-tab-pane>
@@ -127,8 +129,9 @@
         </el-menu-item>
         <!--        头像图标-->
         <el-menu-item style="float: right;" v-popover:popo>
+<!--            :src="circleUrl"-->
             <el-avatar :size="40"
-                       :src="circleUrl">
+                       >
                 头像
             </el-avatar>
 
@@ -200,7 +203,8 @@
                     placeholder="搜索cos,绘画,文字.."
                     suffix-icon="el-icon-search"
                     size="medium"
-                    v-model="input1">
+                    >
+<!--            v-model="input1-->
             </el-input>
         </el-menu-item>
 
@@ -217,9 +221,20 @@
     },
     data() {
       return {
-        avtiveName: 'first'
+        avtiveName: 'first',
+        activeIndex:'/'
+        // recommend-page
       }
+    },
+    created() {
+        this.activeIndex = this.$route.path
+    },
+    beforeRouteLeave(to,from,next){
+      console.log(this.$route.path.path)
+      this.activeIndex = this.$route.path
+        next()
     }
+
   }
 </script>
 
