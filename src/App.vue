@@ -14,8 +14,8 @@
     li{
       list-style: none;
     }
-    #app{
+   /* #app{
       text-align: center;
-    }
+    }*/
 
 </style>

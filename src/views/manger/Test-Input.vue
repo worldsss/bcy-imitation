@@ -1,9 +1,11 @@
 <template>
     <div>
         <input-nav></input-nav>
-        <p>发布文字</p>
 
+        <br>
         <el-card style="width: 60%;margin: 0 auto">
+            <h3>发布文字</h3>
+            <el-divider></el-divider>
             <el-input
                     type="text"
                     placeholder="有趣的标题更吸引人(30字以内)"

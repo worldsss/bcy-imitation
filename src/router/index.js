@@ -9,18 +9,22 @@ import QuestionInput from '../views/manger/Question-Input'
 import UserMain from '../views/user-page/User-main'
 import AttentionPage from '../views/Attention-page'
 import RankingPage from '../views/Ranking-page'
+import RecommendPage from '../views/Recommend-Page'
+import CosPage from '../views/Cos-Page'
+import WritePage from '../views/Write-Page'
 
 Vue.use(VueRouter)
 
 const routes = [
-    {
+   /* {
         path:'/',
         redirect:Index
-    },
+    },*/
     {
-        path: '/index',
+        path: '/',
         name: 'Index',
         component: Index,
+        // redirect:RecommendPage,
         meta:{
             title:'半次元'
         },
@@ -41,7 +45,19 @@ const routes = [
             {
                 path:'/ranking-page',
                 component:RankingPage
-            }
+            },
+            {
+                path:'/recommend-page',
+                component:RecommendPage
+            },
+            {
+                path:'/cospage-page',
+                component:CosPage
+            },
+            {
+                path:'/write-page',
+                component:WritePage
+            },
         ]
     }, {
         path: '/test',

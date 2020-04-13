@@ -12,8 +12,8 @@
         <el-menu-item index="/attention-page">关注</el-menu-item>
         <el-menu-item index="/ranking-page">榜单</el-menu-item>
         <el-menu-item index="/img-page">绘画</el-menu-item>
-        <el-menu-item index="6">COS</el-menu-item>
-        <el-menu-item index="7">写作</el-menu-item>
+        <el-menu-item index="/cospage-page">COS</el-menu-item>
+        <el-menu-item index="/write-page">写作</el-menu-item>
         <el-menu-item index="8">问答</el-menu-item>
 
         <!--        发布按钮的popover-->
@@ -24,37 +24,42 @@
                 trigger="hover"
                 visible-arrow="false"
                 content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+            <router-link to="/test-input">
+                <input-link-button>
+                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                         alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <span slot="link-name">文字</span>
+                    <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
+                </input-link-button>
+            </router-link>
+            <!--<router-link to="/q-input">
+                <input-link-button>
+                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                          alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <span slot="link-name">文字</span>
+                    <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
+                </input-link-button>
+            </router-link>-->
             <router-link to="/img-input">
-                <el-button style="width: 100%;padding:5px;background-color: #f5f6f7">
-                    <el-row>
-                        <el-col :span="5">
-                            <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                                 alt="" style="width: 100%;height: 100%;margin: 10px">
-                        </el-col>
-                        <el-col :span="12" style="margin-left: 20px">
-                            <p class="my-test-left">图片</p>
-                            <p style="opacity: 0.5">绘画，cos，手办,汉服，表情包</p>
-                        </el-col>
-                    </el-row>
-                </el-button>
+
+                <input-link-button>
+                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                          alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <span slot="link-name">图片</span>
+                    <span slot="link-info">小说，漫评，段子，文章，碎碎念</span>
+
+                </input-link-button>
+
             </router-link>
 
-            <router-link to="/test-input">
+            <router-link to="/question-input">
+                <input-link-button>
+                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                          alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <span slot="link-name">问答</span>
+                    <span slot="link-info">如何评论？如何反驳？为什么讨厌</span>
 
-                <br>
-                <el-button style="width: 100%;padding:5px;background-color: #f5f6f7">
-                    <el-row>
-                        <el-col :span="5">
-                            <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                                 alt="" style="width: 100%;height: 100%;margin: 10px">
-                        </el-col>
-                        <el-col :span="12" style="margin-left: 20px">
-                            <p class="my-test-left">图片</p>
-                            <p style="opacity: 0.5">绘画，cos，手办,汉服，表情包</p>
-                        </el-col>
-                    </el-row>
-                </el-button>
-
+                </input-link-button>
             </router-link>
 
         </el-popover>
@@ -141,7 +146,7 @@
                 <el-divider></el-divider>
                 <el-row :gutter="10">
                     <el-col :span="12">
-                        <el-link :underline="false">
+                        <el-link :underline="false" href="/user-main">
                             <i class="el-icon-s-home"></i>
                             个人主页
                         </el-link>
@@ -203,14 +208,19 @@
 </template>
 
 <script>
-    export default {
-        name: "Input-NavMenu",
-        data() {
-            return {
-                avtiveName: 'first'
-            }
-        }
+  import InputLinkButton from '../../components/Input-LinkButton'
+
+  export default {
+    name: "Input-NavMenu",
+    components:{
+      InputLinkButton
+    },
+    data() {
+      return {
+        avtiveName: 'first'
+      }
     }
+  }
 </script>
 
 <style scoped>

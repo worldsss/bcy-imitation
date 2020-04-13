@@ -8,7 +8,7 @@
             <el-card>
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
-                <el-upload
+               <!-- <el-upload
                         action="#"
                         list-type="picture-card"
                         :auto-upload="false">
@@ -46,7 +46,20 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
 
-                <p>点击添加图片</p>
+                <p>点击添加图片</p>-->
+                <el-upload
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        list-type="picture-card"
+                        :on-preview="handlePictureCardPreview"
+                        :on-remove="handleRemove" style="text-align: left">
+                    <i class="el-icon-plus"></i>
+                    <!--  <span> 点击添加图片，不得超过20m</span>-->
+
+                </el-upload>
+                <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
 
 
                 <p style="text-align: left">想说的话</p>
