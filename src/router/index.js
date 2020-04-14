@@ -15,6 +15,7 @@ import WritePage from '../views/Write-Page'
 import Content from '../views/Content-Page'
 import UserSetting from '../views/user-page/User-setting'
 import UserMessage from '../views/user-page/User-message'
+import ImgUpload from '../views/Test-imgupload'
 
 Vue.use(VueRouter)
 
@@ -138,6 +139,14 @@ const routes = [
         path: '/user-message',
         name: 'UserMessage',
         component: UserMessage,
+        meta:{
+            title:'消息'
+        },
+    },
+    {
+        path: '/test-imgupload',
+        name: 'ImgUpload',
+        component: ImgUpload,
         meta:{
             title:'消息'
         },
