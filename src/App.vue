@@ -11,6 +11,9 @@
 </script>
 
 <style>
+  #app{
+    width: 100%;
+  }
     li{
       list-style: none;
     }

@@ -1,16 +1,16 @@
 <template>
-<!--    @select="handleSelect"-->
+    <!--    @select="handleSelect"-->
     <el-menu :default-active="activeIndex"
              class="el-menu-demo"
              mode="horizontal"
-
+             :class="{'fixedMenu':isFixed}"
              :router="true"
              active-text-color="#fb678b">
         <el-menu-item>
             <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2656495429,2926291651&fm=15&gp=0.jpg"
                  width="150" height="50" alt="">
         </el-menu-item>
-        <el-menu-item index="/">推荐</el-menu-item>
+        <el-menu-item index="/recommend-page">推荐</el-menu-item>
         <el-menu-item index="/attention-page">关注</el-menu-item>
         <el-menu-item index="/ranking-page">榜单</el-menu-item>
         <el-menu-item index="/img-page">绘画</el-menu-item>
@@ -28,7 +28,8 @@
                 content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
             <router-link to="/test-input">
                 <input-link-button>
-                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                    <img slot="link-img"
+                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
                          alt="" style="width: 100%;height: 100%;margin: 10px">
                     <span slot="link-name">文字</span>
                     <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
@@ -45,8 +46,9 @@
             <router-link to="/img-input">
 
                 <input-link-button>
-                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                          alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <img slot="link-img"
+                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                         alt="" style="width: 100%;height: 100%;margin: 10px">
                     <span slot="link-name">图片</span>
                     <span slot="link-info">小说，漫评，段子，文章，碎碎念</span>
 
@@ -56,8 +58,9 @@
 
             <router-link to="/question-input">
                 <input-link-button>
-                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                          alt="" style="width: 100%;height: 100%;margin: 10px">
+                    <img slot="link-img"
+                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                         alt="" style="width: 100%;height: 100%;margin: 10px">
                     <span slot="link-name">问答</span>
                     <span slot="link-info">如何评论？如何反驳？为什么讨厌</span>
 
@@ -65,7 +68,7 @@
             </router-link>
 
         </el-popover>
-        <el-menu-item style="float: right;padding-left: 5px">
+        <el-menu-item style="float: right;padding-left: 0px">
             <el-button type="danger" size="mini" style="background-color: #fb678b" v-popover:fabu>
                 <i class="el-icon-edit-outline" style="color: white"></i>
                 发布
@@ -78,49 +81,116 @@
             </el-badge>
             <el-popover
                     ref="infor"
-                    placement="bottom"
-                    width="200"
+                    placement="bottom-start"
+                    width="300"
                     trigger="click"
                     visible-arrow="false"
                     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
 
-                <el-tabs v-model="avtiveName">
-                    <el-tab-pane label="消息" name="first">
-                        <!-- <p><i class="el-icon-s-comment"></i>消息</p>
-                         <el-divider></el-divider>-->
+                <el-tabs v-model="activeName" id="mymenu">
+                    <el-tab-pane label="消息" name="ones">
+                        <ul style="padding: 0">
+                            <a href="/user-message" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-chat-line-square"></i>
+                                    消息
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        10
+                                    </el-avatar>
 
-                        <el-row :gutter="10">
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-news"></i>
+                                    提醒
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        10
+                                    </el-avatar>
 
-                            <el-col :span="20">
-                                <p style="border-bottom: 1px solid #f3f3f3;margin: 0">
-                                    <el-button type="text"
-                                               style="width: 100%;display: block;text-align: left;font-size: 16px;color:#333333 ">
-                                        <i class="el-icon-s-comment"></i>&nbsp;消息
-                                    </el-button>
-                                </p>
-                            </el-col>
-                            <el-col :span="4">
-                                <!--                           <button style="width: 30px;height: 30px;border-radius: 50%;background-color:#ff6fa2 ">1</button>-->
-                                <el-button type="danger" size="mini" style="margin-top: 5px" :circle="true"></el-button>
-                            </el-col>
-                        </el-row>
-                        <el-row :gutter="10">
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-postcard"></i>
+                                    公告
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        3
+                                    </el-avatar>
 
-                            <el-col :span="20">
-                                <p style="border-bottom: 1px solid #f3f3f3;margin: 0">
-                                    <el-button type="text"
-                                               style="width: 100%;display: block;text-align: left;font-size: 16px;color:#333333 ">
-                                        <i class="el-icon-s-comment"></i>&nbsp;消息
-                                    </el-button>
-                                </p>
-                            </el-col>
-                            <el-col :span="4">
-                                <!--                           <button style="width: 30px;height: 30px;border-radius: 50%;background-color:#ff6fa2 ">1</button>-->
-                                <el-button type="danger" size="mini" style="margin-top: 5px" :circle="true"></el-button>
-                            </el-col>
-                        </el-row>
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-connection"></i>
+                                    新粉丝
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        3
+                                    </el-avatar>
+
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-folder-add"></i>
+                                    合集更新
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        3
+                                    </el-avatar>
+
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-message"></i>
+                                    私信
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        3
+                                    </el-avatar>
+
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <i class="el-icon-lollipop"></i>
+                                    勾搭
+                                    <el-avatar :size="15" style="background-color: #ff6fa2;float: right">
+                                        3
+                                    </el-avatar>
+
+                                </li>
+                            </a>
+                        </ul>
                     </el-tab-pane>
-                    <el-tab-pane label="问答" name="second">问答</el-tab-pane>
+                    <el-tab-pane label="问答" name="second">
+                        <ul style="padding: 0">
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <span>第一次穿c服被爸妈看到怎么办？</span>
+                                    <span style="float: right;color: #ff6fa2">+562</span>
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <span>第一次穿c服被爸妈看到怎么办？</span>
+                                    <span style="float: right;color: #ff6fa2">+562</span>
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <span>第一次穿c服被爸妈看到怎么办？</span>
+                                    <span style="float: right;color: #ff6fa2">+562</span>
+                                </li>
+                            </a>
+                            <a href="#" class="my-a-color">
+                                <li class="my-message-li">
+                                    <span>第一次穿c服被爸妈看到怎么办？</span>
+                                    <span style="float: right;color: #ff6fa2">+562</span>
+                                </li>
+                            </a>
+                        </ul>
+                        <el-link style="float: right">查看全部></el-link>
+                    </el-tab-pane>
                 </el-tabs>
 
 
@@ -129,9 +199,9 @@
         </el-menu-item>
         <!--        头像图标-->
         <el-menu-item style="float: right;" v-popover:popo>
-<!--            :src="circleUrl"-->
+            <!--            :src="circleUrl"-->
             <el-avatar :size="40"
-                       >
+            >
                 头像
             </el-avatar>
 
@@ -155,7 +225,7 @@
                         </el-link>
                     </el-col>
                     <el-col :span="12">
-                        <el-link :underline="false">
+                        <el-link :underline="false" href="/user-setting">
                             <i class="el-icon-s-tools"></i>
                             设置
                         </el-link>
@@ -203,8 +273,8 @@
                     placeholder="搜索cos,绘画,文字.."
                     suffix-icon="el-icon-search"
                     size="medium"
-                    >
-<!--            v-model="input1-->
+            >
+                <!--            v-model="input1-->
             </el-input>
         </el-menu-item>
 
@@ -216,32 +286,99 @@
 
   export default {
     name: "Input-NavMenu",
-    components:{
+    components: {
       InputLinkButton
     },
     data() {
       return {
-        avtiveName: 'first',
-        activeIndex:'/'
+        activeName: 'ones',
+        activeIndex: '/',
+        isFixed: false,
+        messages:[],
         // recommend-page
       }
     },
     created() {
-        this.activeIndex = this.$route.path
+      //页面加载时，获取当前激活的路径作为激活状态
+      this.activeIndex = this.$route.path
+      if (this.$route.path == '/') {
+        this.activeIndex = "/recommend-page"
+      }
     },
-    beforeRouteLeave(to,from,next){
+    beforeRouteLeave(to, from, next) {
+
       console.log(this.$route.path.path)
       this.activeIndex = this.$route.path
-        next()
+      next()
+    },
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll)
+    },
+    methods: {
+      handleScroll() {
+        console.log(window.scrollY)
+        if (window.scrollY > 10) {
+          this.isFixed = true
+        } else {
+          this.isFixed = false
+        }
+      }
     }
 
   }
 </script>
 
-<style scoped>
-
+<style>
+    /*scoped*/
     .my-test-left {
         text-align: left;
+    }
+    #mymenu .el-tabs__nav{
+      width: 100%;
+
+    }
+    #mymenu .el-tabs__item{
+        width: 50%;
+        text-align: center;
+    }
+    #mymenu .el-tabs__active-bar{
+        background-color: #ff6fa2;
+    }
+    #mymenu .el-tabs__item:hover{
+        color: #ff6fa2;
+    }
+    #mymenu .el-tabs__item.is-active{
+        color: #ff6fa2;
+    }
+  /*  #mymenu .el-radio__input.is-checked .el-radio__inner{
+        background-color: #ff6fa2 !important;
+        border-color: #ff6fa2 !important;
+    }
+    #mymenu .el-radio__input.is-checked+.el-radio__label{
+        color: #ff6fa2 !important;
+
+    }*/
+    .my-a-color{
+        text-decoration: none;
+        color: black;
+    }
+    .my-message-li{
+        margin: 5px 0px;
+        padding: 10px 0px;
+        border-bottom: 1px solid #e6e6e6;
+    }
+    .my-message-li:hover{
+        color: #ff6fa2;
+    }
+    .el-menu-item:hover {
+        color: #ff6fa2 !important;
+    }
+
+    .fixedMenu {
+        width: 100%;
+        position: fixed !important;
+        top: 0px;
+        z-index: 1000000;
     }
 
 

@@ -12,6 +12,9 @@ import RankingPage from '../views/Ranking-page'
 import RecommendPage from '../views/Recommend-Page'
 import CosPage from '../views/Cos-Page'
 import WritePage from '../views/Write-Page'
+import Content from '../views/Content-Page'
+import UserSetting from '../views/user-page/User-setting'
+import UserMessage from '../views/user-page/User-message'
 
 Vue.use(VueRouter)
 
@@ -115,6 +118,31 @@ const routes = [
             title:'个人主页'
         },
     },
+    {
+        path: '/user-setting',
+        name: 'UserSetting',
+        component: UserSetting,
+        meta:{
+            title:'个人主页'
+        },
+    },
+    {
+        path: '/content',
+        name: 'UserMain',
+        component: Content,
+        meta:{
+            title:'内容'
+        },
+    },
+    {
+        path: '/user-message',
+        name: 'UserMessage',
+        component: UserMessage,
+        meta:{
+            title:'消息'
+        },
+    },
+
 ]
 
 const router = new VueRouter({

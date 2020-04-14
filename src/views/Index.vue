@@ -1,14 +1,15 @@
 <template>
     <div>
         <el-container><!--style="border-bottom: 1px solid #e6e6e6"-->
-            <el-header>
+            <el-header style="padding: 0">
                 <input-nav></input-nav>
 
             </el-header>
             <el-main style="width: 80%;margin: 0 auto;">
                 <el-carousel :interval="5000" arrow="always">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3>{{ item }}</h3>
+                    <el-carousel-item v-for="item in lunboImg" :key="item">
+                        <img :src="item" alt="" style="width: 100%;height: 100%">
+<!--                        <h3>{{ item }}</h3>-->
                     </el-carousel-item>
                 </el-carousel>
                 <div style="width: 100%;margin: 5px auto;height: 60px;text-align: center;border: 1px solid #e6e6e6;border-radius: 10px">
@@ -57,6 +58,10 @@
       return {
         input1: '',
         activeIndex: '/',
+        lunboImg:['https://p9-bcy.byteimg.com/img/banciyuan/779d2d710f304e50a91e00825b2c3323~tplv-banciyuan-sq90.image',
+          'https://p9-bcy.byteimg.com/img/banciyuan/95491050c9434d3fa21dc0c6b6136064~tplv-banciyuan-sq90.image',
+          'https://p9-bcy.byteimg.com/img/banciyuan/f139b5cc25664951b7d5c085ae072b41~tplv-banciyuan-sq90.image',
+          'https://p9-bcy.byteimg.com/img/banciyuan/22ee5b7b5983476a83901daff9e5a648~tplv-banciyuan-sq90.image']
       }
     },
 

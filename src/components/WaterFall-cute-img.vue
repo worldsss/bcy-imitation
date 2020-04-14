@@ -19,7 +19,7 @@
                 <slot name="img-text"></slot>
             </p>
             <div>
-                <a href="" target="_blank">
+                <a href="/content" target="_blank">
                     <div style="width: 90%;margin: 0 auto">
                         <!-- 图片插槽-->
                         <slot name="img"></slot>

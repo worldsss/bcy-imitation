@@ -248,8 +248,14 @@
         width: 22%;
         position: fixed;
         top: 20px;
-    }
 
+    }
+    .fixedMenu {
+        width: 100%;
+        position: fixed;
+        top: 0px;
+
+    }
 
     .el-dropdown-link {
         cursor: pointer;
