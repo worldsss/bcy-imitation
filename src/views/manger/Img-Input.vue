@@ -8,12 +8,18 @@
                 <el-divider></el-divider>
                 <!--  action="http://localhost:8081/upload"
                 action="https://jsonplaceholder.typicode.com/posts/"-->
+
+
+                <div style="width:100%;overflow: hidden;" v-html="addimgs">
+                    <!-- <img :src="src" alt="" style="width:100%;"/>-->
+
+                </div>
                 <el-upload
                         action="http://localhost:8081/uploads/"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove" style="text-align: left"
-                        :on-change="changeFile"  :before-upload="beforeupload">
+                        :on-change="changeFile" :before-upload="beforeupload">
                     <i class="el-icon-plus"></i>
                 </el-upload>
                 <!--  <span> 点击添加图片，不得超过20m</span>-->
@@ -32,21 +38,25 @@
                  </el-upload>-->
 
                 <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
+
+                <!--                这里是放大图片的显示-->
                 <el-dialog :visible.sync="dialogVisible">
-                    <img width="100%" :src="dialogImageUrl" alt="">
+                    <!--                <el-dialog :visible.sync="true">-->
+                    <!--                    <img width="100%" :src="dialogImageUrl" alt="">-->
+                    <img width="100%" :src="src" alt="">
                 </el-dialog>
 
 
-                <div style="width:100%;overflow: hidden;margin-left:150px;">
-                    <img :src="src" alt="" style="width:100%;"/>
-                </div>
-<!--                <img :src="src" alt="" style="width: 50px;height: 50px;border: 1px solid">-->
-<!--
-                <form action="http://localhost:8081/uploads" method="post" enctype="multipart/form-data">
+                <!--  <div style="width:100%;overflow: hidden;margin-left:150px;">
+                      <img :src="src" alt="" style="width:100%;"/>
+                  </div>-->
+                <!--                <img :src="src" alt="" style="width: 50px;height: 50px;border: 1px solid">-->
+                <!--
+                                <form action="http://localhost:8081/uploads" method="post" enctype="multipart/form-data">
 
-                    <input type="file" name="file" value="点击上传">
-                    <input type="submit" value="点击">
-                </form>-->
+                                    <input type="file" name="file" value="点击上传">
+                                    <input type="submit" value="点击">
+                                </form>-->
 
 
                 <p style="text-align: left">想说的话</p>
@@ -157,7 +167,9 @@
         inputVisible: false,
         inputValue: '',
         testimg: '',
-        src:'',
+        // addimgs:`<img :src='src' style='width:100%'/>`,
+        addimgs: '',
+        src: '',
         fileList: [{
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
@@ -192,16 +204,20 @@
         // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/java/com\\example\\bcyimitation\\img"+file.name
         // this.testimg = "http://localhost:8081/img/"+file.name
         // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/resources/static/img" + file.name
-        setTimeout(() =>{
+        setTimeout(() => {
           this.testimg = "http://localhost:8081/static/img/" + file.name
-        },30)
+        }, 30)
       },
       beforeupload(file) {
         console.log(file);
         //创建临时的路径来展示图片
         var windowURL = window.URL || window.webkitURL;
 
-        this.src=windowURL.createObjectURL(file);
+        // this.src=windowURL.createObjectURL(file);
+        var imgnumber = windowURL.createObjectURL(file);
+
+
+        this.addimgs = this.addimgs + "<img src=" + imgnumber + " style='width:100%;'/>"
 
       },
       handlePictureCardPreview(file) {
