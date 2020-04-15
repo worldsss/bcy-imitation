@@ -6,20 +6,33 @@
             <el-card>
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
-                <!--  action="http://localhost:8081/upload"
+                <!--  action="http://localhost:8081/uploads/""
                 action="https://jsonplaceholder.typicode.com/posts/"-->
 
+                <!-- <img :src="src" alt="" style="width:100%;"/>-->
+                <!--  <div style="width:100%;overflow: hidden;" v-html="addimgs">
 
-                <div style="width:100%;overflow: hidden;" v-html="addimgs">
-                    <!-- <img :src="src" alt="" style="width:100%;"/>-->
 
+                  </div>-->
+
+                <div style="" class="addimg-div" v-for="(item,index) in addimgarr">
+                    <img :src="item" alt="" class="my-uploadimg-style"/>
+<!--                    <el-button type="danger" class="my-uploadbutton-style" @click="removeImg(index)" style="">删除</el-button>-->
+<!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
+<!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
+
+                    <el-button type="danger" class="my-uploadbutton-style" icon="el-icon-delete" @click="removeImg(index)" circle></el-button>
                 </div>
+
+
                 <el-upload
                         action="http://localhost:8081/uploads/"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove" style="text-align: left"
-                        :on-change="changeFile" :before-upload="beforeupload">
+                        :on-change="changeFile"
+                        :on-success="onSuccess"
+                        :before-upload="beforeupload">
                     <i class="el-icon-plus"></i>
                 </el-upload>
                 <!--  <span> 点击添加图片，不得超过20m</span>-->
@@ -169,6 +182,7 @@
         testimg: '',
         // addimgs:`<img :src='src' style='width:100%'/>`,
         addimgs: '',
+        addimgarr: [],
         src: '',
         fileList: [{
           name: 'food.jpeg',
@@ -198,6 +212,17 @@
     methods: {
       handleRemove(file) {
         console.log(file);
+        // this.addimgarr.
+        alert("这里调用了？")
+        var afx = 'blob:http://localhost:8080/' + file.name;
+        for (var i = -1; i < this.addimgarr.length; i++) {
+          if (this.addimgarr[i] == afx) {
+            alert("删除这个")
+          }
+          alert("这里调用了？")
+          console.log(this.addimgarr[i])
+        }
+
       },
       changeFile(file) {
         console.log(file)
@@ -216,8 +241,51 @@
         // this.src=windowURL.createObjectURL(file);
         var imgnumber = windowURL.createObjectURL(file);
 
-
+        //在上面添加显示图片
         this.addimgs = this.addimgs + "<img src=" + imgnumber + " style='width:100%;'/>"
+        // this.addimgs = this.addimgs + "<img src=" + file.url + " style='width:100%;'/>"
+
+        //在图片数组中添加值
+        this.addimgarr.push(imgnumber)
+        // this.addimgarr.push(file.url)
+        // alert(this.addimgarr)
+
+        //重新写一个表单上传的方法
+        this.param = new FormData();
+        this.param.append('file', file, file.name);
+
+        // var names = this.form.name;
+        var names = "file";
+        //下面append的东西就会到form表单数据的fields中；
+        this.param.append('message', names);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        };
+        //然后通过下面的方式把内容通过axios来传到后台
+        //下面的this.$reqs 是在主js中通过Vue.prototype.$reqs = axios 来把axios赋给它;
+        /*  /!* this.$reqs.post("http://localhost:8081/uploads", this.param, config).then(function(result) {
+             console.log(result);
+           })*!/*/
+        axios.post("http://localhost:8081/uploads", this.param, config)
+            .then(res => {
+              console.log(res)
+            })
+
+      },
+      onSuccess(response, file, fileList) {
+        /* alert("上传成功！")
+
+         console.log(file.url)
+         this.addimgarr.push(file.url)*/
+        ;
+
+        alert("上传成功！")
+
+      },
+      onSubmit() {//表单提交的事件
+
 
       },
       handlePictureCardPreview(file) {
@@ -234,6 +302,15 @@
       },
       handleRemove(file, fileList) {
         console.log(file, fileList);
+        var afx = 'blob:http://localhost:8080/' + file.name;
+        for (var i = 0; i < this.addimgarr.length; i++) {
+          if (this.addimgarr[i] == afx) {
+            alert("删除这个")
+          }
+          console.log(this.addimgarr[i])
+          console.log(afx)
+        }
+
       },
       handlePreview(file) {
         console.log(file);
@@ -299,6 +376,11 @@
 
 
       },
+      //删除页面中显示的上传图片
+      removeImg(index) {
+        this.addimgarr.splice(index,1)
+        // delete this.addimgarr[index]
+      },
     }
   }
 </script>
@@ -307,5 +389,49 @@
     .el-tag {
         margin: 0px 5px;
     }
+
+    .my-uploadimg-style {
+        width: 100%;
+        filter: ;
+        transition: filter 1s;
+    }
+    .addimg-div{
+        width:100%;
+        overflow: hidden;
+        position: relative
+    }
+
+    .my-uploadbutton-style {
+        opacity: 0;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+    }
+    .addimg-div:hover .my-uploadimg-style{
+        transition: filter 1s;
+        filter: brightness(0.5);
+    }
+       /* .my-uploadimg-style:hover{
+           !*opacity: 0.5;*!
+            transition: filter 1s;
+            !*transition: opacity 2s;*!
+            filter: brightness(0.5);
+        }
+*/
+    /*    不是父子关系时要用兄弟相连选择器，不能直接空格*/
+    .my-uploadimg-style:hover+.my-uploadbutton-style {
+        /*display: block;*/
+        transition: opacity 1s;
+        opacity: 1;
+
+    }
+
+    .my-uploadbutton-style:hover{
+        opacity: 1;
+    }
+  /*  .my-uploadbutton-style:hover+.my-uploadimg-style{
+        filter: brightness(0.5);
+    }
+*/
 
 </style>

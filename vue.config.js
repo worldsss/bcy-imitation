@@ -1,23 +1,5 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset',
-
-  ],
- /* publicPath: '/',
-  devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        ws: true,
-        pathRewrite: {
-          '^/api': ''
-        }
-      }
-    }
-  }*/
-
-  /*configureWebpack: {
+  configureWebpack: {
     devServer: {
       proxy: {
         //名字可以自定义，这里我用的是api
@@ -31,7 +13,4 @@ module.exports = {
       }
     }
   },
-
-*/
-
 }

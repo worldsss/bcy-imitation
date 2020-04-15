@@ -16,6 +16,7 @@ import Content from '../views/Content-Page'
 import UserSetting from '../views/user-page/User-setting'
 import UserMessage from '../views/user-page/User-message'
 import ImgUpload from '../views/Test-imgupload'
+import NewImgInput from '../views/manger/new-Img-Input'
 
 Vue.use(VueRouter)
 
@@ -151,6 +152,10 @@ const routes = [
             title:'消息'
         },
     },
+    {
+        path:'/new-img-input',
+        component:NewImgInput
+    }
 
 ]
 
