@@ -76,10 +76,10 @@
                                         list-type="picture-card"
                                         :on-preview="handlePictureCardPreview"
                                         :on-remove="handleRemove"
-                                        limit="1">
+                                        :limit="1">
                                     <i class="el-icon-plus"></i>
-                                </el-upload>
-                                <el-dialog :visible.sync="dialogVisible">
+                                </el-upload><!--:visible.sync="dialogVisible"-->
+                                <el-dialog >
                                     <img width="100%" :src="dialogImageUrl" alt="">
                                 </el-dialog>
                                 <p>点击上传头像</p>
@@ -101,7 +101,6 @@
                                         action="https://jsonplaceholder.typicode.com/posts/"
                                         :on-preview="handlePreview"
                                         :on-remove="handleRemove"
-                                        :file-list="fileList"
                                         list-type="picture">
                                     <el-button size="small" type="primary">点击上传</el-button>
                                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
@@ -403,6 +402,8 @@
 
         tags:['Coser','绘师','写手','CV','P主','摄影君','后期君'],
         moretags:false,
+        inputVisible:true,
+
 
       }
 
@@ -481,7 +482,24 @@
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
         return isJPG && isLt2M;
-      }
+      },
+      handlePictureCardPreview(){
+
+      },
+      dialogImageUrl(){
+
+      },
+      handleRemove(){
+
+      },
+      dialogVisible(){
+
+      },
+      handlePreview(){
+
+      },
+
+
     }
   }
 </script>

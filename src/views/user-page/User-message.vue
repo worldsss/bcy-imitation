@@ -143,7 +143,7 @@
                         <el-card>
                             <el-row :gutter="10">
                              <el-col :span="2">
-                                 <el-avatar size="50">10</el-avatar>
+                                 <el-avatar :size="50">10</el-avatar>
                              </el-col>
                              <el-col :span="20">
                                  <p style="margin:0px 0px 5px">你关注的合集 <span>2019</span>更新了 <span>1周前</span></p>
@@ -152,13 +152,13 @@
                                  </p>
                              </el-col>
                              <el-col :span="2" style="text-align: right">
-                                 <el-avatar size="50" shape="square">10</el-avatar>
+                                 <el-avatar :size="50" shape="square">10</el-avatar>
                              </el-col>
                             </el-row>
                             <el-divider></el-divider>
                             <el-row :gutter="10">
                                 <el-col :span="2">
-                                    <el-avatar size="50">10</el-avatar>
+                                    <el-avatar :size="50">10</el-avatar>
                                 </el-col>
                                 <el-col :span="20">
                                     <p style="margin:0px 0px 5px">你关注的合集 <span>2019</span>更新了 <span>1周前</span></p>
@@ -167,7 +167,7 @@
                                     </p>
                                 </el-col>
                                 <el-col :span="2" style="text-align: right">
-                                    <el-avatar size="50" shape="square">10</el-avatar>
+                                    <el-avatar :size="50" shape="square">10</el-avatar>
                                 </el-col>
                             </el-row>
                             <el-divider></el-divider>
@@ -222,7 +222,9 @@
     },
     data() {
       return {
-        activeName: 'seconds'
+        activeName: 'seconds',
+        squareUrl:"",
+
       }
     }
   }

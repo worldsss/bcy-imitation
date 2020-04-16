@@ -19,7 +19,7 @@ export function request01(config) {
   return new Promise((resolve, reject) => {
     // 1.创建axios实例
     const instance1 = axios.create({
-      baseURL: `http://localhost:8081`,
+      baseURL: `http://localhost:8090`,
       timeout: 5000,
      /* headers: {
         'content-type': 'application/x-www-form-urlencoded&charset=utf-8'

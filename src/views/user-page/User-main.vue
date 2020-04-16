@@ -138,7 +138,7 @@
                                 </el-col>
                             </el-row>
                         </div>
-                        <el-button type="info" plain="true" style="width: 100%">查看全部</el-button>
+                        <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                     </el-card>
                     <br>
                     <el-card class="box-card">
@@ -160,7 +160,7 @@
                                 </el-col>
                             </el-row>
                         </div>
-                        <el-button type="info" plain="true" style="width: 100%">查看全部</el-button>
+                        <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                     </el-card>
                 </div>
 
@@ -187,7 +187,9 @@
           'https://p9-bcy.byteimg.com/img/banciyuan/68ca07be62004cf0af5d42859abc43db~tplv-banciyuan-w650.image',
         ],
         fits: 'scale-down',
-        isFixeds: false
+        isFixeds: false,
+        squareUrl:"",
+
       }
     },
     mounted() {
@@ -195,7 +197,6 @@
     },
     methods: {
       handleScroll() {
-        console.log(window.scrollY)
         if (window.scrollY > 20) {
           this.isFixeds = true
         } else {

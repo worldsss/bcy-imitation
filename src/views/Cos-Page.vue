@@ -381,7 +381,6 @@
     },
     methods: {
       handleScroll () {
-        console.log(window.scrollY)
         if(window.scrollY>600){
           this.isFixed = true
         }else {

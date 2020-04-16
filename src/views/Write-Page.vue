@@ -1,13 +1,14 @@
 <template>
     <div>
-        <div style="width: 70%;float: left;border: 1px solid #E6E6E6" >
+        <div style="width: 70%;float: left;border: 1px solid #E6E6E6">
 
             <el-tabs type="border-card">
                 <el-tab-pane label="COS周榜">
                     <el-row>
                         <el-col :span="8">
-                            <el-card :body-style="{ padding: '0px' }" >
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-big">
+                            <el-card :body-style="{ padding: '0px' }">
+                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                     class="image-big">
                                 <div style="position: absolute;left: 10px;bottom: 10px;display: inline-block">
                                     <el-avatar :size="40"
                                                :src="circleUrl"
@@ -21,50 +22,48 @@
                         </el-col>
                         <el-col :span="16">
                             <el-row>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
+                                <page-ranks></page-ranks>
+                               <!-- <page-tags>
+                                    <img slot="img"
+                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                         class="image-small">
+                                    <el-avatar slot="avatar" :size="30"
+                                               :src="circleUrl"
+                                               style="float: left"></el-avatar>
+                                    <span slot="name">
+                                        用户姓名
+                                    </span>
+                                </page-tags>
+
+                                <page-tags>
+                                    <img slot="img"
+                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                         class="image-small">
+                                    <el-avatar slot="avatar" :size="30"
+                                               :src="circleUrl"
+                                               style="float: left"></el-avatar>
+                                    <span slot="name">
+                                        用户姓名
+                                    </span>
+                                </page-tags>
+                                <page-tags>
+                                    <img slot="img"
+                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                         class="image-small">
+                                    <el-avatar slot="avatar" :size="30"
+                                               :src="circleUrl"
+                                               style="float: left"></el-avatar>
+                                    <span slot="name">
+                                        用户姓名
+                                    </span>
+                                </page-tags>-->
+
                             </el-row>
                             <el-row>
                                 <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
+                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
+                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                             class="image-small">
                                         <div class="img-avator-div">
                                             <el-avatar :size="30"
                                                        :src="circleUrl"
@@ -76,8 +75,9 @@
                                     </el-card>
                                 </el-col>
                                 <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
+                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
+                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                             class="image-small">
                                         <div class="img-avator-div">
                                             <el-avatar :size="30"
                                                        :src="circleUrl"
@@ -89,8 +89,9 @@
                                     </el-card>
                                 </el-col>
                                 <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
+                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
+                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                                             class="image-small">
                                         <div class="img-avator-div">
                                             <el-avatar :size="30"
                                                        :src="circleUrl"
@@ -107,7 +108,6 @@
                     </el-row>
 
 
-
                 </el-tab-pane>
                 <el-tab-pane label="COS日榜">绘画日榜</el-tab-pane>
                 <el-tab-pane label="COS新人榜">绘画新人榜</el-tab-pane>
@@ -116,8 +116,8 @@
             <!--                 页面的重复的相同的内容-->
 
 
-            <el-row gutter="10" style="margin: 10px 0px">
-                <el-col :span="12" >
+            <el-row :gutter="10" style="margin: 10px 0px">
+                <el-col :span="12">
 
                     <water-fall-cute v-for="(item,index) in imgCute01">
                         <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
@@ -131,7 +131,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -151,13 +151,14 @@
                     <water-fall-cute>
                         <span slot="img-text">测试插槽的使用</span>
                         <img src="11.jpg" slot="img" class="cute-img" alt="">
-                        <el-button slot="img-tags" type="info" size="mini" plain="true" :autofocus="false">武汉加油</el-button>
+                        <el-button slot="img-tags" type="info" size="mini" :plain="true" :autofocus="false">武汉加油
+                        </el-button>
                         <span slot="img-go">10</span>
                         <span slot="img-comment">50</span>
                         <span slot="img-click">870</span>
                     </water-fall-cute>
                 </el-col>
-                <el-col :span="12" >
+                <el-col :span="12">
                     <water-fall-cute v-for="(item,index) in imgCute02">
                         <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">{{item.imgName}}</strong>
@@ -166,7 +167,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -193,7 +194,7 @@
                         <el-button slot="img-tags"
                                    type="info"
                                    size="mini"
-                                   plain="true"
+                                   :plain="true"
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
@@ -210,298 +211,10 @@
                              {{item.imgClick}}
                          </span>
                     </water-fall-text-cute>
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
 
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="3.jpg" alt="" style="width: 90%;height: 100%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
                 </el-col>
             </el-row>
-            <el-row gutter="10" style="margin: 10px 0px">
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
 
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-
-                </el-col>
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-            <el-row gutter="10" style="margin: 10px 0px">
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-
-                </el-col>
-                <el-col :span="12" >
-                    <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px">
-                        <el-header style="padding-top: 10px">
-                            <el-col :span="1">
-                                <el-avatar :size="40" :src="circleUrl"></el-avatar>
-                            </el-col>
-                            <el-col :span="8">
-                                <p style=""><strong>ochia</strong></p>
-                            </el-col>
-
-                        </el-header>
-                        <p style="text-align: left;width: 90%;margin: 5px auto">
-                            试一下灯光的感觉
-                        </p>
-                        <div>
-                            <a href="" target="_blank">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" style="height: 100%;width: 90%;border-radius: 10px">
-                            </a>
-                        </div>
-
-                        <div style="padding: 14px 14px 0px 14px;">
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">cos</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">武汉加油</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <el-button type="info"  size="mini" plain="true" :autofocus="false">Fate</el-button>
-                            <br>
-                            <ui class="img-ul" >
-                                <li class="img-li">
-                                    <el-link icon="el-icon-star-off" :underline="false" type="info">收藏</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-position" :underline="false" type="info">20</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-chat-line-round" :underline="false" type="info">545</el-link>
-                                </li>
-                                <li class="img-li">
-                                    <el-link icon="el-icon-view" :underline="false" type="info">152</el-link>
-
-                                </li>
-                            </ui>
-                            <!-- <div class="bottom clearfix">
-                                 <time class="time">{{ currentDate }}</time>
-                                 <el-button type="text" class="button">操作按钮</el-button>
-                             </div>-->
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
         </div>
         <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
             <el-collapse v-model="activeNames" @change="handleChange">
@@ -516,31 +229,19 @@
                     </el-carousel-item>
                 </el-carousel>
                 <!--                :class="{'fixedlunbo':isFixed}"-->
-                <el-card style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
+                <el-card style="padding-top: 0px" :class="{'fixedlunbo':isFixed}" id="so">
                     <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
                     <el-carousel height="500px">
                         <el-carousel-item v-for="item in 4" :key="item">
                             <h3 class="small lunbo-small">{{ item }}</h3>
                         </el-carousel-item>
                     </el-carousel>
-                    <p>
-                        © 2020 bcy.net 版权所有
-
-                        ICP证：浙ICP备14021595号-1
-
-                        浙网文[2014]0701-051号
-
-                        浙公网安备 33010802002901号
-                        信息产业部备案管理系统
-                        浙江省互联网违法和不良信息举报中心
-                        12318全国文化市场举报网站
-
-                        关于我们·商务合作
-
-                        举报指引·营业执照
-
-                        帮助中心·知乎
-                    </p>
+                    <p class="p-nomargin"> © 2020 bcy.net 版权所有</p>
+                    <p class="p-nomargin"> ICP证：浙ICP备14021595号-1</p>
+                    <p class="p-nomargin"> 浙公网安备 33010802002901号</p>
+                    <p class="p-nomargin"> 信息产业部备案管理系统</p>
+                    <p class="p-nomargin">  浙江省互联网违法和不良信息举报中心</p>
+                    <p class="p-nomargin"> 浙网文[2014]0701-051号</p>
                 </el-card>
 
             </el-collapse>
@@ -552,109 +253,115 @@
 <script>
   import WaterFallCute from '../components/WaterFall-cute-img'
   import WaterFallTextCute from '../components/WaterFall-cute-text'
+  import PageTags from '../components/public-page/Page-Tags'
+  import PageRanks from '../components/public-page/Page-Rankings'
 
 
   export default {
     name: "WritePage",
     //注册组件
-    components:{
-      WaterFallCute,
-      WaterFallTextCute
+    components: {
+      WaterFallCute, //瀑布流图片
+      WaterFallTextCute, //瀑布流文字内容
+      PageTags, //榜单最小模块
+      PageRanks,
     },
-    data(){
-      return{
-        fill:'fill',
-        isFixed:false,
-        scrollNowLoation:'',
-        imgCute01:[
+    data() {
+      return {
+        fill: 'fill',
+        isFixed: false,
+        scrollNowLoation: '',
+        circleUrl: '',
+        activeNames: '',
+        imgCute01: [
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'20.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '20.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'21.jpg',
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '21.jpg',
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'22.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-        ],
-        imgCute02:[
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'24.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'25.jpg',
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'26.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '22.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
         ],
-        TestCute01:[
+        imgCute02: [
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'25.jpg',
-            imgContent:`<b>测试文字的显示是什么样子</b>`,
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '24.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'发布文字',
-            img:'26.jpg',
-            imgContent:`<b>测试文字的显示是什么样子</b>
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '25.jpg',
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '26.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+        ],
+        TestCute01: [
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '25.jpg',
+            imgContent: `<b>测试文字的显示是什么样子</b>`,
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '发布文字',
+            img: '26.jpg',
+            imgContent: `<b>测试文字的显示是什么样子</b>
 
                                             <p><strong>在如今的互联网时代，人们越来越喜欢将自己的数据存放到互联网上，于是便诞生了很多类型的软件，比如360网盘，百度网盘，云盘之类的。所以说，文件上传和下载的功能是现在非常主流的一个功能，应用十分广泛。</strong><br>
 <strong>那现在，我们就来学习一下，在web中，如何去实现文件上传和下载！</strong><br>
@@ -662,27 +369,29 @@
 在web页面中添加上传输入项<br>
 
 `,
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
         ]
       }
     },
-    mounted () {
+    mounted() {
       window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
-      handleScroll () {
-        console.log(window.scrollY)
-        if(window.scrollY>600){
+      handleScroll() {
+        if (window.scrollY > 600) {
           this.isFixed = true
-        }else {
+        } else {
           this.isFixed = false
         }
-      }
+      },
+      handleChange() {
+
+      },
     }
 
   }
@@ -694,17 +403,20 @@
         color: #999;
 
     }
-    .fixedlunbo{
+
+    .fixedlunbo {
         width: 22%;
         position: fixed;
         top: 20px;
     }
-    .cute-img{
+
+    .cute-img {
         width: 90%;
         height: auto;
         border-radius: 10px;
     }
-    .cute-text-img{
+
+    .cute-text-img {
         /* width: 90%;
          height: 100%;
          border-radius: 10px;*/
@@ -723,6 +435,10 @@
         padding: 0;
         float: right;
     }
+    .p-nomargin{
+        margin: 0px;
+        opacity: 0.5;
+    }
 
     .image-big {
         width: 100%;
@@ -730,28 +446,39 @@
         height: 500px;
         border-radius: 10px;
     }
+
     .image-small {
         width: 100%;
         display: block;
         height: 250px;
         border-radius: 10px;
     }
-    .img-avator-samll{
+
+    .img-avator-samll {
 
     }
 
-    .card-class{
+    .card-class {
         position: relative;
     }
-    .img-avator-div{
-        position: absolute;left: 5px;bottom: 0px;display: inline
+
+    .img-avator-div {
+        position: absolute;
+        left: 5px;
+        bottom: 0px;
+        display: inline
     }
-    .img-avator-img{
+
+    .img-avator-img {
 
     }
-    .img-avator-name{
-        color: white;float:right;margin: 10px 0px 10px 5px
+
+    .img-avator-name {
+        color: white;
+        float: right;
+        margin: 10px 0px 10px 5px
     }
+
     .clearfix:before,
     .clearfix:after {
         display: table;
@@ -761,14 +488,16 @@
     .clearfix:after {
         clear: both
     }
-    .lunbo-big{
+
+    .lunbo-big {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
         line-height: 150px;
         margin: 0;
     }
-    .lunbo-small{
+
+    .lunbo-small {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;

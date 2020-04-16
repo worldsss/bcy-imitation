@@ -5,20 +5,14 @@
 </template>
 
 <script>
-  export default {
 
-  }
+export default {
+
+}
 </script>
 
 <style>
-  #app{
-    width: 100%;
-  }
-    li{
-      list-style: none;
-    }
-   /* #app{
-      text-align: center;
-    }*/
+
+
 
 </style>

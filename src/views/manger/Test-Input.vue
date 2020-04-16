@@ -84,6 +84,7 @@
                 textarea: '',
                 inputVisible: false,
                 inputValue: '',
+                options:[1,2,3,4]
             }
         },
         methods:{

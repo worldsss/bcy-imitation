@@ -1,7 +1,9 @@
 <template>
     <div>
         <!--        填写页面的导航栏-->
-        <input-nav></input-nav>
+        <InputNavMenu>
+
+        </InputNavMenu>
         <el-main style="width: 60%;margin: 0 auto">
             <el-card>
                 <h2>发布图片</h2>
@@ -17,16 +19,17 @@
 
                 <div style="" class="addimg-div" v-for="(item,index) in addimgarr">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
-<!--                    <el-button type="danger" class="my-uploadbutton-style" @click="removeImg(index)" style="">删除</el-button>-->
-<!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
-<!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
+                    <!--                    <el-button type="danger" class="my-uploadbutton-style" @click="removeImg(index)" style="">删除</el-button>-->
+                    <!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
+                    <!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
 
-                    <el-button type="danger" class="my-uploadbutton-style" icon="el-icon-delete" @click="removeImg(index)" circle></el-button>
+                    <el-button type="danger" class="my-uploadbutton-style" icon="el-icon-delete"
+                               @click="removeImg(index)" circle></el-button>
                 </div>
 
 
                 <el-upload
-                        action="http://localhost:8081/uploads/"
+                        action="http://localhost:8090/uploads/"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove" style="text-align: left"
@@ -81,38 +84,7 @@
                         v-model="textarea2">
                 </el-input>
 
-                <p style="text-align: left">更多标签</p>
-                <el-tag :key="tag"
-                        v-for="tag in dynamicTags"
-                        closable
-                        :disable-transitions="false"
-                        @close="handleClose(tag)"
-                        style="float: left">
-                    {{tag}}
-                </el-tag>
-                <el-input
-                        class="input-new-tag"
-                        v-if="inputVisible"
-                        v-model="inputValue"
-                        ref="saveTagInput"
-                        size="small"
-                        @keyup.enter.native="handleInputConfirm"
-                        @blur="handleInputConfirm"
-                >
-                </el-input>
-                <el-button v-else class="button-new-tag" style="float: left" size="small" @click="showInput">
-                    添加标签+
-                </el-button>
-                <br><br>
-                <p style="opacity: 0.5;text-align: left">
-                    推荐标签（合适的标签能带来更多赞，COS、插画、绘画作品请打上‘COS’、‘插画’、‘绘画’标签哦)
-                </p>
-                <el-tag :key="tag"
-                        v-for="tag in modelTags"
-                        :disable-transitions="false"
-                        @click="clickAddTag(tag)">
-                    {{tag}}
-                </el-tag>
+               <input-tag></input-tag>
 
             </el-card>
             <br>
@@ -163,11 +135,16 @@
   import InputNavMenu from "../../components/public-page/Input-NavMenu"
   import Vue from 'vue'
   import {request01} from "../../network/request";
+  import InputTag from '../../components/public-page/Input-Tag'
 
 
   Vue.component("input-nav", InputNavMenu)
   export default {
     name: "ImgInput",
+    components: {
+      InputNavMenu,
+      InputTag
+    },
     data() {
       return {
         dialogImageUrl: '',
@@ -183,6 +160,7 @@
         // addimgs:`<img :src='src' style='width:100%'/>`,
         addimgs: '',
         addimgarr: [],
+        uploadImgs:[],
         src: '',
         fileList: [{
           name: 'food.jpeg',
@@ -229,9 +207,15 @@
         // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/java/com\\example\\bcyimitation\\img"+file.name
         // this.testimg = "http://localhost:8081/img/"+file.name
         // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/resources/static/img" + file.name
-        setTimeout(() => {
-          this.testimg = "http://localhost:8081/static/img/" + file.name
-        }, 30)
+
+        // this.testimg = "http://localhost:8081/static/img/" + file.name
+
+        var imgs = "http://localhost:8090/static/img/" + file.name
+        this.uploadImgs.push(imgs)
+
+      /*  setTimeout(() => {
+          // this.testimg = "http://localhost:8081/static/img/" + file.name
+        }, 30)*/
       },
       beforeupload(file) {
         console.log(file);
@@ -268,7 +252,7 @@
         /*  /!* this.$reqs.post("http://localhost:8081/uploads", this.param, config).then(function(result) {
              console.log(result);
            })*!/*/
-        axios.post("http://localhost:8081/uploads", this.param, config)
+        axios.post("http://localhost:8090/uploads", this.param, config)
             .then(res => {
               console.log(res)
             })
@@ -341,8 +325,8 @@
       },
       insertProContent() {
         console.log(this.testimg)
-        request01({
-          url: `test`,
+      /*  request01({
+          url: `/test`,
           params: {
             uid: 1,
             prid: 1,
@@ -358,27 +342,47 @@
         }).catch(err => {
           console.log(err)
         })
+*/
 
-        /*  axios.get("http://localhost:8081/test",{
-                params:{
-                  uid: 1,
-                  prid: 1,
-                  cid: 1,
-                  pr_img: "11",
-                  pr_info:"哈哈哈",
-                  pr_date:"123213",
-                  pr_givelike:200
-                },
-            headers: {'content-type': 'application/x-www-form-urlencoded'}
-          }).then(res =>{
-            console.log(res)
-          })*/
+        request01({
+          url: `/test`,
+          params: {
+            uid: 1,
+            prid: 1,
+            cid: 1,
+            pr_img: this.uploadImgs,
+            pr_info: this.textarea2,
+            pr_date: `123213`,
+            pr_givelike: 200
+          },
+          method: 'get',
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
 
+
+        /*   axios.get("http://localhost:8090/test",{
+                 params:{
+                   uid: 1,
+                   prid: 1,
+                   cid: 1,
+                   pr_img: "11",
+                   pr_info:"哈哈哈",
+                   pr_date:"123213",
+                   pr_givelike:200
+                 },
+             headers: {'content-type': 'application/x-www-form-urlencoded'}
+           }).then(res =>{
+             console.log(res)
+           })
+ */
 
       },
       //删除页面中显示的上传图片
       removeImg(index) {
-        this.addimgarr.splice(index,1)
+        this.addimgarr.splice(index, 1)
         // delete this.addimgarr[index]
       },
     }
@@ -395,8 +399,9 @@
         filter: ;
         transition: filter 1s;
     }
-    .addimg-div{
-        width:100%;
+
+    .addimg-div {
+        width: 100%;
         overflow: hidden;
         position: relative
     }
@@ -407,31 +412,34 @@
         bottom: 50%;
         left: 50%;
     }
-    .addimg-div:hover .my-uploadimg-style{
+
+    .addimg-div:hover .my-uploadimg-style {
         transition: filter 1s;
         filter: brightness(0.5);
     }
-       /* .my-uploadimg-style:hover{
-           !*opacity: 0.5;*!
-            transition: filter 1s;
-            !*transition: opacity 2s;*!
-            filter: brightness(0.5);
-        }
+
+    /* .my-uploadimg-style:hover{
+        !*opacity: 0.5;*!
+         transition: filter 1s;
+         !*transition: opacity 2s;*!
+         filter: brightness(0.5);
+     }
 */
     /*    不是父子关系时要用兄弟相连选择器，不能直接空格*/
-    .my-uploadimg-style:hover+.my-uploadbutton-style {
+    .my-uploadimg-style:hover + .my-uploadbutton-style {
         /*display: block;*/
         transition: opacity 1s;
         opacity: 1;
 
     }
 
-    .my-uploadbutton-style:hover{
+    .my-uploadbutton-style:hover {
         opacity: 1;
     }
-  /*  .my-uploadbutton-style:hover+.my-uploadimg-style{
-        filter: brightness(0.5);
-    }
-*/
+
+    /*  .my-uploadbutton-style:hover+.my-uploadimg-style{
+          filter: brightness(0.5);
+      }
+  */
 
 </style>

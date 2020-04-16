@@ -26,11 +26,12 @@
         <p style="opacity: 0.5;text-align: left">
             推荐标签（合适的标签能带来更多赞，COS、插画、绘画作品请打上‘COS’、‘插画’、‘绘画’标签哦)
         </p>
-        <el-tag :key="tag"
-                v-for="tag in modelTags"
+<!--        :key="tag.index"-->
+        <el-tag
+                v-for="(tags,index) in modelTags"
                 :disable-transitions="false"
-                @click="clickAddTag(tag)">
-            {{tag}}
+                @click="addTags(tags)">
+            {{tags}}
         </el-tag>
     </div>
 </template>
@@ -49,13 +50,31 @@
                 dynamicTags: [],
                 inputVisible: false,
                 inputValue: '',
+                moretags:false,
             }
         },
         methods: {
+          addTags(index){
+            console.log('点击')
+            for (var i=-1;i<this.dynamicTags.length;i++){
+              if (this.dynamicTags[i] == index){
+                this.moretags = false
+                alert("不能添加相同的标签")
+              }else {
+                this.moretags = true
+
+              }
+            }
+
+            if(this.moretags){
+              this.dynamicTags.push(index)
+            }
+
+
+          },
             handleClose(tag) {
                 this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
             },
-
             showInput() {
                 this.inputVisible = true;
                 this.$nextTick(_ => {
@@ -70,9 +89,9 @@
                 this.inputVisible = false;
                 this.inputValue = '';
             },
-            clickAddTag(tag){
+          /*  clickAddTag(tag){
                 this.dynamicTags.push(tag)
-            }
+            }*/
         }
     }
 </script>
