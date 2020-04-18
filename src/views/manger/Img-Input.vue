@@ -9,7 +9,7 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
-                <div style="" class="addimg-div" v-for="(item,index) in pr_img">
+                <div style="" class="addimg-div" v-for="(item,index) in img">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
                                class="my-uploadbutton-style"
@@ -18,16 +18,16 @@
                                circle>
                     </el-button>
                 </div>
-<!--
-                <div style="" class="addimg-div">
-                    <img :src="proContent.pr_img" alt="" class="my-uploadimg-style"/>
-                    <el-button type="danger"
-                               class="my-uploadbutton-style"
-                               icon="el-icon-delete"
-                               @click="removeImg(index)"
-                               circle>
-                    </el-button>
-                </div>-->
+                <!--
+                                <div style="" class="addimg-div">
+                                    <img :src="proContent.pr_img" alt="" class="my-uploadimg-style"/>
+                                    <el-button type="danger"
+                                               class="my-uploadbutton-style"
+                                               icon="el-icon-delete"
+                                               @click="removeImg(index)"
+                                               circle>
+                                    </el-button>
+                                </div>-->
                 <el-upload
                         class="upload-file"
                         list-type="picture-card"
@@ -45,8 +45,8 @@
                     <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
 
-               <!-- &lt;!&ndash;        当点击这个发布时，上传事件才发生&ndash;&gt;
-                <button @click="newSubmitForm">发布</button>-->
+                <!-- &lt;!&ndash;        当点击这个发布时，上传事件才发生&ndash;&gt;
+                 <button @click="newSubmitForm">发布</button>-->
 
                 <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
                 <p style="text-align: left">想说的话</p>
@@ -127,15 +127,18 @@
         dialogImageUrl: '',
         dialogVisible: false, //是否显示模态框
 
-        //表单上传的对象
-        proContent:{
-          uid:"1",
-          cid:"1",
+        //表单上传值的对象
+        proContent: {
+          uid: "1",
+          cid: "1",
           pr_info: "",
           pr_date: "啊啊啊啊",
-          pr_givelike:"0"
+          pr_givelike: "0"
         },
-        pr_img: [],
+
+        //上传多个图片的对象
+        img: [], //上传到对应作品的图片
+        prid: '',
         radio: 3,
         checkList: ['允许右键'],
         options: [{
@@ -162,28 +165,42 @@
 
 
         //在点击上传之后才会执行的异步操作
-        axios.post('/api/uploads', fd).then(res =>{
-            alert("上传成功")
+        axios.post('/api/uploads', fd).then(res => {
+          // alert("上传成功")
 
         }).catch(err => {
 
         })
 
       },
-      change(file){
-        this.pr_img.push(file.url)
+      change(file) {
+        this.img.push(file.url)
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
+        //格式化日期
+        this.proContent.pr_date = new Date().toLocaleString() + "";
 
-        this.proContent.pr_date =  new Date().toLocaleString()+"";
-        alert(this.proContent.pr_date)
         this.$refs.newupload.submit();
-        axios.post("/api/test",this.proContent).then(res =>{
-          console.log(res)
-          //在这里发送插入图片的请求就好了
+        axios.post("/api/test", this.proContent).then(res => {
 
-        }).catch(err =>{
+          alert(res.data)
+          var dass = parseInt(res.data)
+          alert(dass)
+          //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
+          for (var i = 0; i < this.img.length; i++) {
+
+            axios.post("/api/insertImgs", {
+              prid: dass,
+              img: this.img[i]
+            })
+                .then(res => {
+                  console.log(res)
+                })
+
+          }
+
+        }).catch(err => {
 
         })
 

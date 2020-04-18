@@ -18,24 +18,6 @@
             </span>
         </page-tags>
 
-        <!-- <page-tags>
-             <img slot="img"
-                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                  class="image-small">
-             <el-avatar slot="avatar" :size="30"
-                        :src="circleUrl"
-                        style="float: left"></el-avatar>
-             <span slot="name">用户姓名</span>
-         </page-tags>
-         <page-tags>
-             <img slot="img"
-                  src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                  class="image-small">
-             <el-avatar slot="avatar" :size="30"
-                        :src="circleUrl"
-                        style="float: left"></el-avatar>
-             <span slot="name">用户姓名</span>
-         </page-tags>-->
 
     </div>
 </template>
