@@ -8,23 +8,15 @@
             <el-card>
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
-                <!--  action="http://localhost:8081/uploads/""
-                action="https://jsonplaceholder.typicode.com/posts/"-->
-
-                <!-- <img :src="src" alt="" style="width:100%;"/>-->
-                <!--  <div style="width:100%;overflow: hidden;" v-html="addimgs">
-
-
-                  </div>-->
 
                 <div style="" class="addimg-div" v-for="(item,index) in addimgarr">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
-                    <!--                    <el-button type="danger" class="my-uploadbutton-style" @click="removeImg(index)" style="">删除</el-button>-->
-                    <!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
-                    <!--                    <button class="my-uploadbutton-style" style="" @click="removeImg(index)">删除</button>-->
-
-                    <el-button type="danger" class="my-uploadbutton-style" icon="el-icon-delete"
-                               @click="removeImg(index)" circle></el-button>
+                    <el-button type="danger"
+                               class="my-uploadbutton-style"
+                               icon="el-icon-delete"
+                               @click="removeImg(index)"
+                               circle>
+                    </el-button>
                 </div>
 
 
@@ -84,7 +76,7 @@
                         v-model="textarea2">
                 </el-input>
 
-               <input-tag></input-tag>
+                <input-tag></input-tag>
 
             </el-card>
             <br>
@@ -160,7 +152,7 @@
         // addimgs:`<img :src='src' style='width:100%'/>`,
         addimgs: '',
         addimgarr: [],
-        uploadImgs:[],
+        uploadImgs: [],
         src: '',
         fileList: [{
           name: 'food.jpeg',
@@ -213,9 +205,9 @@
         var imgs = "http://localhost:8090/static/img/" + file.name
         this.uploadImgs.push(imgs)
 
-      /*  setTimeout(() => {
-          // this.testimg = "http://localhost:8081/static/img/" + file.name
-        }, 30)*/
+        /*  setTimeout(() => {
+            // this.testimg = "http://localhost:8081/static/img/" + file.name
+          }, 30)*/
       },
       beforeupload(file) {
         console.log(file);
@@ -325,57 +317,57 @@
       },
       insertProContent() {
         console.log(this.testimg)
-      /*  request01({
-          url: `/test`,
-          params: {
-            uid: 1,
-            prid: 1,
-            cid: 1,
-            pr_img: this.testimg,
-            pr_info: this.textarea2,
-            pr_date: `123213`,
-            pr_givelike: 200
-          },
-          method: 'get',
-        }).then(res => {
-          console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })
-*/
+        /*  request01({
+            url: `/test`,
+            params: {
+              uid: 1,
+              prid: 1,
+              cid: 1,
+              pr_img: this.testimg,
+              pr_info: this.textarea2,
+              pr_date: `123213`,
+              pr_givelike: 200
+            },
+            method: 'get',
+          }).then(res => {
+            console.log(res)
+          }).catch(err => {
+            console.log(err)
+          })
+  */
 
-     /*   request01({
-          url: `/test`,
+        /*   request01({
+             url: `/test`,
+             params: {
+               uid: 1,
+               prid: 1,
+               cid: 1,
+               pr_img: this.uploadImgs,
+               pr_info: this.textarea2,
+               pr_date: `123213`,
+               pr_givelike: 200
+             },
+             method: 'get',
+           }).then(res => {
+             console.log(res)
+           }).catch(err => {
+             console.log(err)
+           })*/
+
+        alert("发送请求")
+        axios.get("http://localhost:8090/test", {
           params: {
             uid: 1,
             prid: 1,
             cid: 1,
             pr_img: this.uploadImgs,
             pr_info: this.textarea2,
-            pr_date: `123213`,
-            pr_givelike: 200
+            pr_date: "123213",
+            pr_givelike: 0
           },
-          method: 'get',
         }).then(res => {
           console.log(res)
-        }).catch(err => {
-          console.log(err)
-        })*/
-
-        alert("发送请求")
-           axios.get("http://localhost:8090/test",{
-                 params:{
-                   uid: 1,
-                   prid: 1,
-                   cid: 1,
-                   pr_img: this.uploadImgs,
-                   pr_info:this.textarea2,
-                   pr_date:"123213",
-                   pr_givelike:0
-                 },
-           }).then(res =>{
-             console.log(res)
-           })
+        })
 
       },
       //删除页面中显示的上传图片
