@@ -9,7 +9,7 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
-                <div style="" class="addimg-div" v-for="(item,index) in addimgarr">
+              <!--  <div style="" class="addimg-div" v-for="(item,index) in proContent.pr_img">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
                                class="my-uploadbutton-style"
@@ -17,63 +17,45 @@
                                @click="removeImg(index)"
                                circle>
                     </el-button>
+                </div>-->
+
+                <div style="" class="addimg-div">
+                    <img :src="proContent.pr_img" alt="" class="my-uploadimg-style"/>
+                    <el-button type="danger"
+                               class="my-uploadbutton-style"
+                               icon="el-icon-delete"
+                               @click="removeImg(index)"
+                               circle>
+                    </el-button>
                 </div>
-
-
                 <el-upload
-                        action="http://localhost:8090/uploads/"
+                        class="upload-file"
                         list-type="picture-card"
+                        :action="doUpload"
+                        :before-upload="beforeUpload"
+                        ref="newupload"
+                        multiple
+                        :auto-upload="false"
                         :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove" style="text-align: left"
-                        :on-change="changeFile"
-                        :on-success="onSuccess"
-                        :before-upload="beforeupload">
+                        :on-change="change">
                     <i class="el-icon-plus"></i>
                 </el-upload>
-                <!--  <span> 点击添加图片，不得超过20m</span>-->
-                <!-- <el-upload
-                         class="upload-demo"
-                         action="http://localhost:8081/uploads"
-                         :on-preview="handlePreview"
-                         :on-remove="handleRemove"
-                         :before-remove="beforeRemove"
-                         multiple
-                         :limit="3"
-                         :on-exceed="handleExceed"
-                         :file-list="fileList">
-                     <el-button size="small" type="primary">点击上传</el-button>
-                     <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-                 </el-upload>-->
-
-                <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
-
-                <!--                这里是放大图片的显示-->
+                <!--        模特框，用来显示上传列表中的大图-->
                 <el-dialog :visible.sync="dialogVisible">
-                    <!--                <el-dialog :visible.sync="true">-->
-                    <!--                    <img width="100%" :src="dialogImageUrl" alt="">-->
-                    <img width="100%" :src="src" alt="">
+                    <img width="100%" :src="dialogImageUrl" alt="">
                 </el-dialog>
 
+               <!-- &lt;!&ndash;        当点击这个发布时，上传事件才发生&ndash;&gt;
+                <button @click="newSubmitForm">发布</button>-->
 
-                <!--  <div style="width:100%;overflow: hidden;margin-left:150px;">
-                      <img :src="src" alt="" style="width:100%;"/>
-                  </div>-->
-                <!--                <img :src="src" alt="" style="width: 50px;height: 50px;border: 1px solid">-->
-                <!--
-                                <form action="http://localhost:8081/uploads" method="post" enctype="multipart/form-data">
-
-                                    <input type="file" name="file" value="点击上传">
-                                    <input type="submit" value="点击">
-                                </form>-->
-
-
+                <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
                 <p style="text-align: left">想说的话</p>
                 <div style="margin: 20px 0;"></div>
                 <el-input
                         type="textarea"
                         :autosize="{ minRows: 4, maxRows: 4}"
                         placeholder="有什么想说的就写在这里吧，盗用会被关小黑屋哦"
-                        v-model="textarea2">
+                        v-model="proContent.pr_info">
                 </el-input>
 
                 <input-tag></input-tag>
@@ -114,7 +96,7 @@
             </el-card>
             <br>
             <div style="text-align: center">
-                <el-button type="danger" @click="insertProContent">
+                <el-button type="danger" @click="newSubmitForm">
                     <i class="el-icon-edit-outline"></i>&nbsp;发布
                 </el-button>
             </div>
@@ -139,28 +121,23 @@
     },
     data() {
       return {
-        dialogImageUrl: '',
-        dialogVisible: false,
         disabled: false,
-        textarea1: '',
-        textarea2: '',
         modelTags: ['限定捏土', 'jk', '汉服', 'Lolita', '手写', 'cos'],
-        dynamicTags: [],
-        inputVisible: false,
-        inputValue: '',
-        testimg: '',
-        // addimgs:`<img :src='src' style='width:100%'/>`,
-        addimgs: '',
-        addimgarr: [],
-        uploadImgs: [],
-        src: '',
-        fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }],
+        doUpload: 'http://l/uploads',
+        dialogImageUrl: '',
+        dialogVisible: false, //是否显示模态框
+
+        //表单上传的对象
+        proContent:{
+          uid:"1",
+          prid:"1",
+          cid:"1",
+          pr_info: '',
+          // pr_img: [],
+          pr_img: "",
+          pr_data: new Date(),
+          pr_givelike:"0"
+        },
         radio: 3,
         checkList: ['允许右键'],
         options: [{
@@ -180,201 +157,38 @@
       }
     },
     methods: {
-      handleRemove(file) {
-        console.log(file);
-        // this.addimgarr.
-        alert("这里调用了？")
-        var afx = 'blob:http://localhost:8080/' + file.name;
-        for (var i = -1; i < this.addimgarr.length; i++) {
-          if (this.addimgarr[i] == afx) {
-            alert("删除这个")
-          }
-          alert("这里调用了？")
-          console.log(this.addimgarr[i])
-        }
-
-      },
-      changeFile(file) {
-        console.log(file)
-        // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/java/com\\example\\bcyimitation\\img"+file.name
-        // this.testimg = "http://localhost:8081/img/"+file.name
-        // this.testimg = "G:/IDEA_Projects/bcy-imitation/src/main/resources/static/img" + file.name
-
-        // this.testimg = "http://localhost:8081/static/img/" + file.name
-
-        var imgs = "http://localhost:8090/static/img/" + file.name
-        this.uploadImgs.push(imgs)
-
-        /*  setTimeout(() => {
-            // this.testimg = "http://localhost:8081/static/img/" + file.name
-          }, 30)*/
-      },
-      beforeupload(file) {
-        console.log(file);
-        //创建临时的路径来展示图片
-        var windowURL = window.URL || window.webkitURL;
-
-        // this.src=windowURL.createObjectURL(file);
-        var imgnumber = windowURL.createObjectURL(file);
-
-        //在上面添加显示图片
-        this.addimgs = this.addimgs + "<img src=" + imgnumber + " style='width:100%;'/>"
-        // this.addimgs = this.addimgs + "<img src=" + file.url + " style='width:100%;'/>"
-
-        //在图片数组中添加值
-        this.addimgarr.push(imgnumber)
-        // this.addimgarr.push(file.url)
-        // alert(this.addimgarr)
-
-        //重新写一个表单上传的方法
-        this.param = new FormData();
-        this.param.append('file', file, file.name);
-
-        // var names = this.form.name;
-        var names = "file";
-        //下面append的东西就会到form表单数据的fields中；
-        this.param.append('message', names);
-        let config = {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        };
-        //然后通过下面的方式把内容通过axios来传到后台
-        //下面的this.$reqs 是在主js中通过Vue.prototype.$reqs = axios 来把axios赋给它;
-        /*  /!* this.$reqs.post("http://localhost:8081/uploads", this.param, config).then(function(result) {
-             console.log(result);
-           })*!/*/
-        axios.post("http://localhost:8090/uploads", this.param, config)
-            .then(res => {
-              console.log(res)
-            })
-
-      },
-      onSuccess(response, file, fileList) {
-        /* alert("上传成功！")
-
-         console.log(file.url)
-         this.addimgarr.push(file.url)*/
-        ;
-
-        alert("上传成功！")
-
-      },
-      onSubmit() {//表单提交的事件
+      beforeUpload(file) {
+        let fd = new FormData();
+        fd.append('file', file);//传文件
+        // fd.append('srid', this.aqForm.srid);//传其他参数
 
 
-      },
-      handlePictureCardPreview(file) {
-        console.log(file)
-        // this.dialogImageUrl =  "G:\\IDEA_Projects\\bcy-imitation\\src\\main\\java\\com\\example\\bcyimitation\\img"+file;
-        this.dialogImageUrl = file.url
-        this.dialogVisible = true;
-      },
-      handleDownload(file) {
-        console.log(file);
-      },
-      handleClose(tag) {
-        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-      },
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-        var afx = 'blob:http://localhost:8080/' + file.name;
-        for (var i = 0; i < this.addimgarr.length; i++) {
-          if (this.addimgarr[i] == afx) {
-            alert("删除这个")
-          }
-          console.log(this.addimgarr[i])
-          console.log(afx)
-        }
+        //在点击上传之后才会执行的异步操作
+        axios.post('/api/uploads', fd).then(function (res) {
+          alert('上传成功');
+        }).catch(err => {
 
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${file.name}？`);
-      },
-      showInput() {
-        this.inputVisible = true;
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus();
-        });
-      },
-
-      handleInputConfirm() {
-        let inputValue = this.inputValue;
-        if (inputValue) {
-          this.dynamicTags.push(inputValue);
-        }
-        this.inputVisible = false;
-        this.inputValue = '';
-      },
-      clickAddTag(tag) {
-        this.dynamicTags.push(tag)
-      },
-      insertProContent() {
-        console.log(this.testimg)
-        /*  request01({
-            url: `/test`,
-            params: {
-              uid: 1,
-              prid: 1,
-              cid: 1,
-              pr_img: this.testimg,
-              pr_info: this.textarea2,
-              pr_date: `123213`,
-              pr_givelike: 200
-            },
-            method: 'get',
-          }).then(res => {
-            console.log(res)
-          }).catch(err => {
-            console.log(err)
-          })
-  */
-
-        /*   request01({
-             url: `/test`,
-             params: {
-               uid: 1,
-               prid: 1,
-               cid: 1,
-               pr_img: this.uploadImgs,
-               pr_info: this.textarea2,
-               pr_date: `123213`,
-               pr_givelike: 200
-             },
-             method: 'get',
-           }).then(res => {
-             console.log(res)
-           }).catch(err => {
-             console.log(err)
-           })*/
-
-        alert("发送请求")
-        axios.get("http://localhost:8090/test", {
-          params: {
-            uid: 1,
-            prid: 1,
-            cid: 1,
-            pr_img: this.uploadImgs,
-            pr_info: this.textarea2,
-            pr_date: "123213",
-            pr_givelike: 0
-          },
-        }).then(res => {
-          console.log(res)
         })
 
       },
-      //删除页面中显示的上传图片
-      removeImg(index) {
-        this.addimgarr.splice(index, 1)
-        // delete this.addimgarr[index]
+      change(file){
+        this.proContent.pr_img = file.url
       },
+      //真正的上传事件
+      newSubmitForm() {//确定上传
+        this.$refs.newupload.submit();
+        axios.post("/api/test",this.proContent).then(res =>{
+          alert(res.data)
+        })
+
+
+      },
+      //在模态框中查看图片大图
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      }
+
     }
   }
 </script>
