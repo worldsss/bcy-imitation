@@ -3,7 +3,7 @@
         <div style="width: 70%;float: left;border: 1px solid #E6E6E6" >
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12" >
-                    <water-fall-cute v-for="(item,index) in imgCute01">
+                   <!-- <water-fall-cute v-for="(item,index) in imgCute01">
                         <el-avatar :size="40" :src="item.img_avatar" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">
                             {{item.img_name}}
@@ -31,7 +31,39 @@
                         <span slot="img-click">
                              {{item.img_click}}
                          </span>
+                    </water-fall-cute>-->
+
+
+                    <water-fall-cute v-for="(item,index) in imgCute01">
+                        <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
+                        <strong slot="img-name">
+                            {{item.user_name}}
+                        </strong>
+                        <span slot="img-text">
+                             {{item.pr_info}}
+                         </span>
+                        <img :src="item.pr_img" slot="img" class="cute-img" alt="">
+                        <el-button slot="img-tags"
+                                   type="info"
+                                   size="mini"
+                                   :plain="true"
+                                   :autofocus="false" v-for="(item2,index) in item.imgTags">
+<!--                            {{item2}}-->
+                        </el-button>
+                        <span slot="img-collect" >
+<!--                             {{item.img_collect?'收藏':'未收藏'}}-->
+                         </span>
+                        <span slot="img-go">
+                             {{item.pr_go}}
+                         </span>
+                        <span slot="img-comment">
+<!--                             {{item.}}-->
+                         </span>
+                        <span slot="img-click">
+                             {{item.pr_click}}
+                         </span>
                     </water-fall-cute>
+
                     <water-fall-cute>
                         <span slot="img-text">测试插槽的使用</span>
                         <img src="11.jpg" slot="img" class="cute-img" alt="">
@@ -343,7 +375,7 @@
       }
     },
     created() {
-      axios.get("http://localhost:8090/showMain")
+      axios.get("http://localhost:8090/showPro")
       .then(res =>{
         console.log(res.data)
         this.imgCute01 = res.data.list;

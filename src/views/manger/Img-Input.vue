@@ -9,8 +9,17 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
-                <div style="" class="addimg-div" v-for="(item,index) in img">
-                    <img :src="item" alt="" class="my-uploadimg-style"/>
+                <!--  <div style="" class="addimg-div" v-for="(item,index) in img">
+                      <img :src="item" alt="" class="my-uploadimg-style"/>
+                      <el-button type="danger"
+                                 class="my-uploadbutton-style"
+                                 icon="el-icon-delete"
+                                 @click="removeImg(index)"
+                                 circle>
+                      </el-button>
+                  </div>-->
+                <div style="" class="addimg-div">
+                    <img :src="img" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
                                class="my-uploadbutton-style"
                                icon="el-icon-delete"
@@ -18,16 +27,6 @@
                                circle>
                     </el-button>
                 </div>
-                <!--
-                                <div style="" class="addimg-div">
-                                    <img :src="proContent.pr_img" alt="" class="my-uploadimg-style"/>
-                                    <el-button type="danger"
-                                               class="my-uploadbutton-style"
-                                               icon="el-icon-delete"
-                                               @click="removeImg(index)"
-                                               circle>
-                                    </el-button>
-                                </div>-->
                 <el-upload
                         class="upload-file"
                         list-type="picture-card"
@@ -37,7 +36,8 @@
                         multiple
                         :auto-upload="false"
                         :on-preview="handlePictureCardPreview"
-                        :on-change="change">
+                        :on-change="change"
+                        :limit="1">
                     <i class="el-icon-plus"></i>
                 </el-upload>
                 <!--        模特框，用来显示上传列表中的大图-->
@@ -48,7 +48,7 @@
                 <!-- &lt;!&ndash;        当点击这个发布时，上传事件才发生&ndash;&gt;
                  <button @click="newSubmitForm">发布</button>-->
 
-                <p style="text-align: left;opacity: 0.5">点击添加图片,不得超过20M</p>
+                <p style="text-align: left;opacity: 0.5">点击添加图片,只能发布一张</p>
                 <p style="text-align: left">想说的话</p>
                 <div style="margin: 20px 0;"></div>
                 <el-input
@@ -131,14 +131,15 @@
         proContent: {
           uid: "1",
           cid: "1",
+          pr_img: "",
           pr_info: "",
           pr_date: "啊啊啊啊",
           pr_givelike: "0"
         },
 
-        //上传多个图片的对象
-        img: [], //上传到对应作品的图片
-        prid: '',
+        //上传单个图片的对象
+        img: "", //上传到对应作品的图片
+
         radio: 3,
         checkList: ['允许右键'],
         options: [{
@@ -174,7 +175,11 @@
 
       },
       change(file) {
-        this.img.push(file.url)
+        // this.proContent.pr_img = file.url
+        this.img = file.url
+
+        this.proContent.pr_img = "http://localhost:8090/static/img/" + file.name
+        alert(this.proContent.pr_img)
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
@@ -182,24 +187,20 @@
         this.proContent.pr_date = new Date().toLocaleString() + "";
 
         this.$refs.newupload.submit();
+        alert(this.proContent.pr_img)
         axios.post("/api/test", this.proContent).then(res => {
-
           alert(res.data)
-          var dass = parseInt(res.data)
-          alert(dass)
           //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
-          for (var i = 0; i < this.img.length; i++) {
+          /* for (var i = 0; i < this.img.length; i++) {
 
-            axios.post("/api/insertImgs", {
-              prid: dass,
-              img: this.img[i]
-            })
-                .then(res => {
-                  console.log(res)
-                })
-
-          }
-
+             axios.post("/api/insertImgs", {
+               prid: dass,
+               img: this.img[i]
+             })
+                 .then(res => {
+                   console.log(res)
+                 })
+           }*/
         }).catch(err => {
 
         })
