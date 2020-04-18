@@ -1,110 +1,29 @@
 <template>
     <div>
-        <div style="width: 70%;float: left;border: 1px solid #E6E6E6">
+        <div class="main-left">
 
             <el-tabs type="border-card">
                 <el-tab-pane label="COS周榜">
                     <el-row>
-                        <el-col :span="8">
-                            <el-card :body-style="{ padding: '0px' }">
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                     class="image-big">
-                                <div style="position: absolute;left: 10px;bottom: 10px;display: inline-block">
-                                    <el-avatar :size="40"
-                                               :src="circleUrl"
-                                               style="float: left">
-                                        地理
-                                    </el-avatar>
-                                    <p style="color: white;float:right;margin: 10px">_Sheya</p>
-                                </div>
-
-                            </el-card>
-                        </el-col>
+                        <page-tag-big v-for="(item,index) in rankbig" >
+                            <img slot="img"
+                                 :src="item.img"
+                                 class="image-big">
+                            <el-avatar slot="avatar" :size="30"
+                                       :src="item.avator"
+                                       style="float: left"></el-avatar>
+                            <span slot="name">{{item.name}}</span>
+                            <span slot="img-counts">{{item.counts}}</span>
+                            <span slot="img-giveup">{{item.giveup}}</span>
+                        </page-tag-big>
                         <el-col :span="16">
                             <el-row>
-                                <page-ranks></page-ranks>
-                               <!-- <page-tags>
-                                    <img slot="img"
-                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                         class="image-small">
-                                    <el-avatar slot="avatar" :size="30"
-                                               :src="circleUrl"
-                                               style="float: left"></el-avatar>
-                                    <span slot="name">
-                                        用户姓名
-                                    </span>
-                                </page-tags>
-
-                                <page-tags>
-                                    <img slot="img"
-                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                         class="image-small">
-                                    <el-avatar slot="avatar" :size="30"
-                                               :src="circleUrl"
-                                               style="float: left"></el-avatar>
-                                    <span slot="name">
-                                        用户姓名
-                                    </span>
-                                </page-tags>
-                                <page-tags>
-                                    <img slot="img"
-                                         src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                         class="image-small">
-                                    <el-avatar slot="avatar" :size="30"
-                                               :src="circleUrl"
-                                               style="float: left"></el-avatar>
-                                    <span slot="name">
-                                        用户姓名
-                                    </span>
-                                </page-tags>-->
-
+                                <page-ranks :rankinto="ranksinto01"></page-ranks>
                             </el-row>
                             <el-row>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                             class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                             class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                                             class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
+                                <page-ranks :rankinto="ranksinto02"></page-ranks>
                             </el-row>
                         </el-col>
-
                     </el-row>
 
 
@@ -216,7 +135,7 @@
             </el-row>
 
         </div>
-        <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
+        <div class="main-right">
             <el-collapse v-model="activeNames" @change="handleChange">
                 <el-collapse-item title="一致性 Consistency" name="1">
                     <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
@@ -228,7 +147,6 @@
                         <h3 class="small lunbo-big">{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
-                <!--                :class="{'fixedlunbo':isFixed}"-->
                 <el-card style="padding-top: 0px" :class="{'fixedlunbo':isFixed}" id="so">
                     <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
                     <el-carousel height="500px">
@@ -240,7 +158,7 @@
                     <p class="p-nomargin"> ICP证：浙ICP备14021595号-1</p>
                     <p class="p-nomargin"> 浙公网安备 33010802002901号</p>
                     <p class="p-nomargin"> 信息产业部备案管理系统</p>
-                    <p class="p-nomargin">  浙江省互联网违法和不良信息举报中心</p>
+                    <p class="p-nomargin"> 浙江省互联网违法和不良信息举报中心</p>
                     <p class="p-nomargin"> 浙网文[2014]0701-051号</p>
                 </el-card>
 
@@ -255,6 +173,7 @@
   import WaterFallTextCute from '../components/WaterFall-cute-text'
   import PageTags from '../components/public-page/Page-Tags'
   import PageRanks from '../components/public-page/Page-Rankings'
+  import PageTagBig from '../components/public-page/Page-TagBig'
 
 
   export default {
@@ -265,6 +184,7 @@
       WaterFallTextCute, //瀑布流文字内容
       PageTags, //榜单最小模块
       PageRanks,
+      PageTagBig,
     },
     data() {
       return {
@@ -273,6 +193,19 @@
         scrollNowLoation: '',
         circleUrl: '',
         activeNames: '',
+        rankbig:[
+          {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1,giveup:548,back:'background-color:#fa5757'},
+        ],
+        ranksinto01: [
+          {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2,giveup:548,back:'background-color:#ffa008'},
+          {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3,giveup:1520,back:'background-color:#fad73c'},
+          {img: '31.jpg', avator: '6.jpg', name: '测试3', counts: 4,giveup:687},
+        ],
+        ranksinto02: [
+          {img: '16.jpg', avator: '4.jpg', name: '测试1', counts: 5,giveup:578},
+          {img: '20.jpg', avator: '5.jpg', name: '测试2', counts: 6,giveup:784},
+          {img: '23.jpg', avator: '6.jpg', name: '测试3', counts: 7,giveup:231},
+        ],
         imgCute01: [
           {
             imgAvatar: '1.jpg',
@@ -410,8 +343,14 @@
         top: 20px;
     }
 
+    /*
+        .cute-img {
+            width: 90%;
+            height: auto;
+            border-radius: 10px;
+        }*/
     .cute-img {
-        width: 90%;
+        width: 100%;
         height: auto;
         border-radius: 10px;
     }
@@ -435,7 +374,8 @@
         padding: 0;
         float: right;
     }
-    .p-nomargin{
+
+    .p-nomargin {
         margin: 0px;
         opacity: 0.5;
     }
@@ -443,7 +383,7 @@
     .image-big {
         width: 100%;
         display: block;
-        height: 500px;
+        height: 513px;
         border-radius: 10px;
     }
 

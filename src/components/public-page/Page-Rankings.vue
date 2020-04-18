@@ -1,6 +1,6 @@
 <template>
     <div>
-        <page-tags v-for="(item,index) in rankinto">
+        <page-tags v-for="(item,index) in rankinto" :rankbackcolor="item.back">
             <img slot="img"
                  :src="item.img"
                  class="image-small">
@@ -9,6 +9,12 @@
                        style="float: left"></el-avatar>
             <span slot="name">
                 {{item.name}}
+            </span>
+            <span slot="img-counts">
+                {{item.counts}}
+            </span>
+            <span slot="img-giveup">
+                {{item.giveup}}
             </span>
         </page-tags>
 
@@ -47,11 +53,15 @@
         type: Array,
         default() {
           return [
-            {img: '23.jpg', avator: '3.jpg', name: '用户1'},
-            {img: '16.jpg', avator: '3.jpg', name: '用户2'},
-            {img: '33.jpg', avator: '3.jpg', name: '用户3'},
+            {img: '23.jpg', avator: '3.jpg', name: '用户1',counts:1,giveup:1200,back:'background-color:#fa5757'},
+            {img: '16.jpg', avator: '3.jpg', name: '用户2',counts:2,giveup:100,back:'background-color:#ffa008'},
+            {img: '33.jpg', avator: '3.jpg', name: '用户3',counts:3,giveup:2543,back:'background-color:#fa5757'},
           ]
         }
+      },
+      rankbackcolor:{
+        type:String,
+        default:'background-color:#a1a1a6'
       }
     },
     data() {

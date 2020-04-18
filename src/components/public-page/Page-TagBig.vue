@@ -1,19 +1,32 @@
 <template>
     <div>
+<!--
 
+        <el-col :span="8">
+            <el-card :body-style="{ padding: '0px' }">
+                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                     class="image-big">
+                <div style="position: absolute;left: 10px;bottom: 10px;display: inline-block">
+                    <el-avatar :size="40"
+                               :src="circleUrl"
+                               style="float: left">
+                        地理
+                    </el-avatar>
+                    <p style="color: white;float:right;margin: 10px">_Sheya</p>
+                </div>
 
+            </el-card>
+-->
 
         <el-col :span="8">
             <el-card :body-style="{ padding: '5px' }" class="card-class">
-                <!--                插槽图片-->
+                <!-- 插槽图片-->
                 <a href="#" class="imgs-a">
                     <slot name="img"></slot>
                 </a>
-                <!--插槽阴影-->
                 <div class="img-shade">
                     <span class="imgs-giveup">
                         <i class="el-icon-lollipop"></i>
-<!--                        12050-->
                         <slot name="img-giveup"></slot>
                     </span>
                 </div>
@@ -48,7 +61,15 @@
     props:{
       rankbackcolor:{
         type:String,
-        default:' background-color:#a1a1a6'
+        default:' background-color:#fa5757'
+      }
+    },
+    data(){
+      return{
+       /* rankbackcolor:{
+          type:String,
+          default:' background-color:#a1a1a6'
+        }*/
       }
     }
   }
@@ -78,7 +99,7 @@
     .imgs-a {
         width: 100%;
         display: block;
-        height: 250px;
+        height: 513px;
     }
 
     .imgs-button {
@@ -99,7 +120,7 @@
 
 
     .imgs-a:hover+.img-shade{
-      opacity: 1;
+        opacity: 1;
         transition: opacity 0.5s;
     }
     .img-shade{
@@ -112,14 +133,13 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         box-shadow: 10px 10px 10px 1px black inset;
-       /* background-image: linear-gradient(#bcbcbc, #ffffff);
-        filter: basicImage(0.5);*/
+        /* background-image: linear-gradient(#bcbcbc, #ffffff);
+         filter: basicImage(0.5);*/
     }
     .imgs-giveup{
         margin-right: 15px;
         color: white;
     }
-
 
 
 </style>

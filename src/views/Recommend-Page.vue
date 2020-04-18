@@ -4,12 +4,12 @@
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12" >
                     <water-fall-cute v-for="(item,index) in imgCute01">
-                        <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
+                        <el-avatar :size="40" :src="item.img_avatar" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">
-                            {{item.imgName}}
+                            {{item.img_name}}
                         </strong>
                         <span slot="img-text">
-                             {{item.imgText}}
+                             {{item.img_text}}
                          </span>
                         <img :src="item.img" slot="img" class="cute-img" alt="">
                         <el-button slot="img-tags"
@@ -19,17 +19,17 @@
                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
                             {{item2}}
                         </el-button>
-                        <span slot="img-collect">
-                             {{item.imgCollect}}
+                        <span slot="img-collect" >
+                             {{item.img_collect?'收藏':'未收藏'}}
                          </span>
                         <span slot="img-go">
-                             {{item.imgGo}}
+                             {{item.img_go}}
                          </span>
                         <span slot="img-comment">
-                             {{item.imgComment}}
+                             {{item.img_comment}}
                          </span>
                         <span slot="img-click">
-                             {{item.imgClick}}
+                             {{item.img_click}}
                          </span>
                     </water-fall-cute>
                     <water-fall-cute>
@@ -233,7 +233,7 @@
         scrollNowLoation:'',
         squareUrl:'2.jpg',
         imgCute01:[
-          {
+         /* {
             imgAvatar:'../2.jpg',
             imgName:'测试名称',
             imgText:'测试对象传入插槽',
@@ -265,7 +265,7 @@
             imgGo:45,
             imgComment:15,
             imgClick:4505,
-          },
+          },*/
         ],
         imgCute02:[
           {
@@ -341,6 +341,12 @@
           this.isFixed = false
         }
       }
+    },
+    created() {
+      axios.get("http://localhost:8090/showMain")
+      .then(res =>{
+        this.imgCute01 = res.data.list;
+      })
     }
 
   }

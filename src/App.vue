@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style>
-
+  @import "assets/css/public.css";
 
 
 </style>

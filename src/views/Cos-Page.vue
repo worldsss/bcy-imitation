@@ -218,7 +218,7 @@
                         <h3 class="small lunbo-big">{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
-                <!--                :class="{'fixedlunbo':isFixed}"-->
+<!--                                :class="{'fixedlunbo':isFixed}"-->
                 <el-card style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
                     <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
                     <el-carousel height="500px">
@@ -247,8 +247,17 @@
                 </el-card>
 
             </el-collapse>
-        </div>
 
+
+        </div>
+      <!--  <div class="right-fixed">
+            <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
+            <el-carousel height="500px">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <h3 class="small lunbo-small">{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+        </div>-->
     </div>
 </template>
 
@@ -398,10 +407,17 @@
         color: #999;
 
     }
+    .right-fixed{
+        width: 100%;
+
+        position: sticky !important;
+        top: 100px;
+    }
+    /*右边推荐条*/
     .fixedlunbo{
         width: 22%;
         position: fixed;
-        top: 20px;
+        top: 40px;
     }
     .cute-img{
         width: 90%;
