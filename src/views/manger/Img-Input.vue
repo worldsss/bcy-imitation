@@ -344,7 +344,7 @@
         })
 */
 
-        request01({
+     /*   request01({
           url: `/test`,
           params: {
             uid: 1,
@@ -360,24 +360,22 @@
           console.log(res)
         }).catch(err => {
           console.log(err)
-        })
+        })*/
 
-
-        /*   axios.get("http://localhost:8090/test",{
+        alert("发送请求")
+           axios.get("http://localhost:8090/test",{
                  params:{
                    uid: 1,
                    prid: 1,
                    cid: 1,
-                   pr_img: "11",
-                   pr_info:"哈哈哈",
+                   pr_img: this.uploadImgs,
+                   pr_info:this.textarea2,
                    pr_date:"123213",
-                   pr_givelike:200
+                   pr_givelike:0
                  },
-             headers: {'content-type': 'application/x-www-form-urlencoded'}
            }).then(res =>{
              console.log(res)
            })
- */
 
       },
       //删除页面中显示的上传图片

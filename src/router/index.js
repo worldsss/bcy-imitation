@@ -17,6 +17,7 @@ import UserSetting from '../views/user-page/User-setting'
 import UserMessage from '../views/user-page/User-message'
 import ImgUpload from '../views/Test-imgupload'
 import NewImgInput from '../views/manger/new-Img-Input'
+import NewImgTestInput from '../views/manger/New-Img-Test-Input'
 
 Vue.use(VueRouter)
 
@@ -155,8 +156,11 @@ const routes = [
     {
         path:'/new-img-input',
         component:NewImgInput
-    }
-
+    },
+    {
+        path:'/new-img-test-input',
+        component:NewImgTestInput
+    },
 ]
 
 const router = new VueRouter({

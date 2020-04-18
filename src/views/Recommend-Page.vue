@@ -345,6 +345,7 @@
     created() {
       axios.get("http://localhost:8090/showMain")
       .then(res =>{
+        console.log(res.data)
         this.imgCute01 = res.data.list;
       })
     }
