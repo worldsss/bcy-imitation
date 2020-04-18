@@ -9,7 +9,7 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
-              <!--  <div style="" class="addimg-div" v-for="(item,index) in proContent.pr_img">
+                <div style="" class="addimg-div" v-for="(item,index) in pr_img">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
                                class="my-uploadbutton-style"
@@ -17,8 +17,8 @@
                                @click="removeImg(index)"
                                circle>
                     </el-button>
-                </div>-->
-
+                </div>
+<!--
                 <div style="" class="addimg-div">
                     <img :src="proContent.pr_img" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
@@ -27,7 +27,7 @@
                                @click="removeImg(index)"
                                circle>
                     </el-button>
-                </div>
+                </div>-->
                 <el-upload
                         class="upload-file"
                         list-type="picture-card"
@@ -130,14 +130,12 @@
         //表单上传的对象
         proContent:{
           uid:"1",
-          prid:"1",
           cid:"1",
-          pr_info: '',
-          // pr_img: [],
-          pr_img: "",
-          pr_data: new Date(),
+          pr_info: "",
+          pr_date: "啊啊啊啊",
           pr_givelike:"0"
         },
+        pr_img: [],
         radio: 3,
         checkList: ['允许右键'],
         options: [{
@@ -164,21 +162,29 @@
 
 
         //在点击上传之后才会执行的异步操作
-        axios.post('/api/uploads', fd).then(function (res) {
-          alert('上传成功');
+        axios.post('/api/uploads', fd).then(res =>{
+            alert("上传成功")
+
         }).catch(err => {
 
         })
 
       },
       change(file){
-        this.proContent.pr_img = file.url
+        this.pr_img.push(file.url)
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
+
+        this.proContent.pr_date =  new Date().toLocaleString()+"";
+        alert(this.proContent.pr_date)
         this.$refs.newupload.submit();
         axios.post("/api/test",this.proContent).then(res =>{
-          alert(res.data)
+          console.log(res)
+          //在这里发送插入图片的请求就好了
+
+        }).catch(err =>{
+
         })
 
 
@@ -189,7 +195,11 @@
         this.dialogVisible = true;
       }
 
+    },
+    created() {
+      // this.proContent.pr_date = new Date().toLocaleString()+"";
     }
+
   }
 </script>
 
