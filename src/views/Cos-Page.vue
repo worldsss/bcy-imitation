@@ -11,7 +11,13 @@
                     </page-all-rank>
 
                 </el-tab-pane>
-                <el-tab-pane label="COS日榜">绘画日榜</el-tab-pane>
+                <el-tab-pane label="COS日榜">
+                    <page-all-rank :rankbig="rankbig"
+                                   :ranksinto01="ranksinto01"
+                                   :ranksinto02="ranksinto02">
+
+                    </page-all-rank>
+                </el-tab-pane>
                 <el-tab-pane label="COS新人榜">绘画新人榜</el-tab-pane>
 
             </el-tabs>

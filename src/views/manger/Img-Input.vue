@@ -23,7 +23,7 @@
                     <el-button type="danger"
                                class="my-uploadbutton-style"
                                icon="el-icon-delete"
-                               @click="removeImg(index)"
+                               @click="removeImg"
                                circle>
                     </el-button>
                 </div>
@@ -179,7 +179,7 @@
         this.img = file.url
 
         this.proContent.pr_img = "http://localhost:8090/static/img/" + file.name
-        alert(this.proContent.pr_img)
+        // alert(this.proContent.pr_img)
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
@@ -187,9 +187,9 @@
         this.proContent.pr_date = new Date().toLocaleString() + "";
 
         this.$refs.newupload.submit();
-        alert(this.proContent.pr_img)
+        // alert(this.proContent.pr_img)
         axios.post("/api/test", this.proContent).then(res => {
-          alert(res.data)
+          // alert(res.data)
           //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
           /* for (var i = 0; i < this.img.length; i++) {
 
@@ -211,7 +211,10 @@
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
-      }
+      },
+      removeImg(){
+        this.img = ""
+      },
 
     },
     created() {
