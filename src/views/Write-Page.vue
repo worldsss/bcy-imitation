@@ -3,7 +3,7 @@
         <div class="main-left">
 
             <el-tabs type="border-card">
-                <el-tab-pane label="COS周榜">
+                <!--<el-tab-pane label="COS周榜">
                     <el-row>
                         <page-tag-big v-for="(item,index) in rankbig">
                             <img slot="img"
@@ -16,7 +16,7 @@
                             <span slot="img-counts">{{item.counts}}</span>
                             <span slot="img-giveup">{{item.giveup}}</span>
                         </page-tag-big>
-                        <!--                        <el-col :span="16">-->
+                        &lt;!&ndash;                        <el-col :span="16">&ndash;&gt;
                         <el-col :span="15">
                             <el-row>
                                 <page-ranks :rankinto="ranksinto01"></page-ranks>
@@ -28,7 +28,14 @@
                     </el-row>
 
 
+                </el-tab-pane>-->
+
+                <el-tab-pane label="cos最热">
+                    <page-all-rank :rankbig="rankbig" :ranksinto01="ranksinto01" :ranksinto02="ranksinto02"></page-all-rank>
                 </el-tab-pane>
+
+
+
                 <el-tab-pane label="COS日榜">绘画日榜</el-tab-pane>
                 <el-tab-pane label="COS新人榜">绘画新人榜</el-tab-pane>
 
@@ -207,6 +214,7 @@
   import PageTags from '../components/public-page/Page-Tags'
   import PageRanks from '../components/public-page/Page-Rankings'
   import PageTagBig from '../components/public-page/Page-TagBig'
+  import PageAllRank from '../components/public-page/Page-AllRank'
 
 
   export default {
@@ -218,6 +226,7 @@
       PageTags, //榜单最小模块
       PageRanks,
       PageTagBig,
+      PageAllRank,
     },
     data() {
       return {
@@ -226,9 +235,7 @@
         scrollNowLoation: '',
         circleUrl: '',
         activeNames: '',
-        rankbig: [
-          {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1, giveup: 548, back: 'background-color:#fa5757'},
-        ],
+        rankbig: {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1, giveup: 548, back: 'background-color:#fa5757'},
         ranksinto01: [
           {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2, giveup: 548, back: 'background-color:#ffa008'},
           {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3, giveup: 1520, back: 'background-color:#fad73c'},

@@ -4,7 +4,7 @@
 
             <el-tabs type="border-card">
                 <el-tab-pane label="COS周榜">
-                    <el-row>
+               <!--     <el-row>
                         <el-col :span="8">
                             <el-card :body-style="{ padding: '0px' }" >
                                 <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-big">
@@ -105,8 +105,9 @@
                         </el-col>
 
                     </el-row>
-
-
+-->                 <page-all-rank :rankbig="rankbig"
+                                   :ranksinto01="ranksinto01"
+                                   :ranksinto02="ranksinto02"></page-all-rank>
 
                 </el-tab-pane>
                 <el-tab-pane label="COS日榜">绘画日榜</el-tab-pane>
@@ -208,58 +209,8 @@
         </div>
         <right-ranking-carousel></right-ranking-carousel>
 
-        <!-- <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
-           - <el-collapse>
-                <el-collapse-item title="一致性 Consistency" name="1">
-                    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-                </el-collapse-item>
 
-                <el-carousel height="150px">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3 class="small lunbo-big">{{ item }}</h3>
-                    </el-carousel-item>
-                </el-carousel>
-&lt;!&ndash;                                :class="{'fixedlunbo':isFixed}"&ndash;&gt;
-                <el-card style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
-                    <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
-                    <el-carousel height="500px">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <h3 class="small lunbo-small">{{ item }}</h3>
-                        </el-carousel-item>
-                    </el-carousel>
-                    <p>
-                        © 2020 bcy.net 版权所有
 
-                        ICP证：浙ICP备14021595号-1
-
-                        浙网文[2014]0701-051号
-
-                        浙公网安备 33010802002901号
-                        信息产业部备案管理系统
-                        浙江省互联网违法和不良信息举报中心
-                        12318全国文化市场举报网站
-
-                        关于我们·商务合作
-
-                        举报指引·营业执照
-
-                        帮助中心·知乎
-                    </p>
-                </el-card>
-
-            </el-collapse>
-
-        </div>
-        <div class="right-fixed">
-            <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
-            <el-carousel height="500px">
-                <el-carousel-item v-for="item in 4" :key="item">
-                    <h3 class="small lunbo-small">{{ item }}</h3>
-                </el-carousel-item>
-            </el-carousel>
-        </div>
-        -->
     </div>
 
 
@@ -269,6 +220,7 @@
   import WaterFallCute from '../components/WaterFall-cute-img'
   import WaterFallTextCute from '../components/WaterFall-cute-text'
   import RightRankingCarousel from '../components/public-page/Right-Ranking-Carousel'
+  import PageAllRank from '../components/public-page/Page-AllRank'
 
 
   export default {
@@ -278,6 +230,8 @@
       WaterFallCute,
       WaterFallTextCute,
       RightRankingCarousel,
+      PageAllRank,
+
     },
     data(){
       return{
@@ -285,7 +239,17 @@
         isFixed:false,
         scrollNowLoation:'',
         circleUrl:'3.jpg',
-
+        rankbig: {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1, giveup: 548, back: 'background-color:#fa5757'},
+        ranksinto01: [
+          {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2, giveup: 548, back: 'background-color:#ffa008'},
+          {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3, giveup: 1520, back: 'background-color:#fad73c'},
+          {img: '31.jpg', avator: '6.jpg', name: '测试3', counts: 4, giveup: 687},
+        ],
+        ranksinto02: [
+          {img: '16.jpg', avator: '4.jpg', name: '测试1', counts: 5, giveup: 578},
+          {img: '20.jpg', avator: '5.jpg', name: '测试2', counts: 6, giveup: 784},
+          {img: '23.jpg', avator: '6.jpg', name: '测试3', counts: 7, giveup: 231},
+        ],
         imgCute01:[
           {
             imgAvatar:'1.jpg',

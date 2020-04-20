@@ -1,5 +1,38 @@
 <template>
     <div>
+        <el-card :body-style="{ padding: '5px' }" class="card-class">
+            <!-- 插槽图片-->
+            <a href="#" class="imgs-a">
+                <slot name="img"></slot>
+            </a>
+            <div class="img-shade">
+                    <span class="imgs-giveup">
+                        <i class="el-icon-lollipop"></i>
+                        <slot name="img-giveup"></slot>
+                    </span>
+            </div>
+            <div class="imgs-button" :style="rankbackcolor">
+                    <span class="imgs-span">
+                        <slot name="img-counts"></slot>
+                    </span>
+            </div>
+            <!--                <slot name="img"></slot>-->
+            <!-- <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+                  class="image-big">-->
+            <div class="img-avator-div">
+                <!--                    插槽头像-->
+                <slot name="avatar"></slot>
+
+                <!--                    <el-avatar :size="40" :src="circleUrl" style="float: left"></el-avatar>-->
+                <!--                    <el-avatar :size="40" :src="circleUrl" slot="srcs" style="float: left"></el-avatar>-->
+                <p class="img-p">
+                    <!--                        插槽用户名-->
+                    <slot name="name"></slot>
+                </p>
+            </div>
+
+        </el-card>
+    </div>
 <!--
 
         <el-col :span="8">
@@ -19,41 +52,9 @@
 -->
 
 <!--        <el-col :span="8">-->
-        <el-col :span="9">
-            <el-card :body-style="{ padding: '5px' }" class="card-class">
-                <!-- 插槽图片-->
-                <a href="#" class="imgs-a">
-                    <slot name="img"></slot>
-                </a>
-                <div class="img-shade">
-                    <span class="imgs-giveup">
-                        <i class="el-icon-lollipop"></i>
-                        <slot name="img-giveup"></slot>
-                    </span>
-                </div>
-                <div class="imgs-button" :style="rankbackcolor">
-                    <span class="imgs-span">
-                        <slot name="img-counts"></slot>
-                    </span>
-                </div>
-                <!--                <slot name="img"></slot>-->
-                <!-- <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-                      class="image-big">-->
-                <div class="img-avator-div">
-                    <!--                    插槽头像-->
-                    <slot name="avatar"></slot>
+<!--        <el-col :span="9">-->
 
-                    <!--                    <el-avatar :size="40" :src="circleUrl" style="float: left"></el-avatar>-->
-                    <!--                    <el-avatar :size="40" :src="circleUrl" slot="srcs" style="float: left"></el-avatar>-->
-                    <p class="img-p">
-                        <!--                        插槽用户名-->
-                        <slot name="name"></slot>
-                    </p>
-                </div>
-
-            </el-card>
-        </el-col>
-    </div>
+<!--        </el-col>-->
 </template>
 
 <script>
