@@ -3,68 +3,9 @@
         <div class="main-left">
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12">
-                    <!-- <water-fall-cute v-for="(item,index) in imgCute01">
-                         <el-avatar :size="40" :src="item.img_avatar" slot="img-avatar"></el-avatar>
-                         <strong slot="img-name">
-                             {{item.img_name}}
-                         </strong>
-                         <span slot="img-text">
-                              {{item.img_text}}
-                          </span>
-                         <img :src="item.img" slot="img" class="cute-img" alt="">
-                         <el-button slot="img-tags"
-                                    type="info"
-                                    size="mini"
-                                    :plain="true"
-                                    :autofocus="false" v-for="(item2,index) in item.imgTags">
-                             {{item2}}
-                         </el-button>
-                         <span slot="img-collect" >
-                              {{item.img_collect?'收藏':'未收藏'}}
-                          </span>
-                         <span slot="img-go">
-                              {{item.img_go}}
-                          </span>
-                         <span slot="img-comment">
-                              {{item.img_comment}}
-                          </span>
-                         <span slot="img-click">
-                              {{item.img_click}}
-                          </span>
-                     </water-fall-cute>-->
+                    <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>
 
-
-                    <water-fall-cute v-for="(item,index) in imgCute01">
-                        <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
-                        <strong slot="img-name">
-                            {{item.user_name}}
-                        </strong>
-                        <span slot="img-text">
-                             {{item.pr_info}}
-                         </span>
-                        <img :src="item.pr_img" slot="img" class="cute-img" alt="">
-                        <el-button slot="img-tags"
-                                   type="info"
-                                   size="mini"
-                                   :plain="true"
-                                   :autofocus="false" v-for="(item2,index) in item.imgTags">
-                            <!--                            {{item2}}-->
-                        </el-button>
-                        <span slot="img-collect">
-<!--                             {{item.img_collect?'收藏':'未收藏'}}-->
-                         </span>
-                        <span slot="img-go">
-                             {{item.pr_go}}
-                         </span>
-                        <span slot="img-comment">
-<!--                             {{item.}}-->
-                         </span>
-                        <span slot="img-click">
-                             {{item.pr_click}}
-                         </span>
-                    </water-fall-cute>
-
-                    <water-fall-cute>
+                    <!--<water-fall-cute>
                         <span slot="img-text">测试插槽的使用</span>
                         <img src="11.jpg" slot="img" class="cute-img" alt="">
                         <el-button slot="img-tags" type="info" size="mini" :plain="true" :autofocus="false">武汉加油
@@ -72,8 +13,8 @@
                         <span slot="img-go">10</span>
                         <span slot="img-comment">50</span>
                         <span slot="img-click">870</span>
-                    </water-fall-cute>
-                    <water-fall-imgs>
+                    </water-fall-cute>-->
+                    <!--<water-fall-imgs>
                         <el-avatar :size="40" src="10.jpg" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">fdsfds</strong>
                         <span slot="img-text">fdsfds</span>
@@ -90,36 +31,16 @@
                         <span slot="img-click">
                              123
                          </span>
-                    </water-fall-imgs>
+                    </water-fall-imgs>-->
+
+                    <water-fall-all-imgs></water-fall-all-imgs>
 
                 </el-col>
                 <el-col :span="12">
-                    <water-fall-cute v-for="(item,index) in imgCute02">
-                        <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
-                        <strong slot="img-name">{{item.imgName}}</strong>
-                        <span slot="img-text">{{item.imgText}}</span>
-                        <img :src="item.img" slot="img" class="cute-img" alt="">
-                        <el-button slot="img-tags"
-                                   type="info"
-                                   size="mini"
-                                   :plain="true"
-                                   :autofocus="false" v-for="(item2,index) in item.imgTags">
-                            {{item2}}
-                        </el-button>
-                        <span slot="img-collect">
-                             {{item.imgCollect}}
-                         </span>
-                        <span slot="img-go">
-                             {{item.imgGo}}
-                         </span>
-                        <span slot="img-comment">
-                             {{item.imgComment}}
-                         </span>
-                        <span slot="img-click">
-                             {{item.imgClick}}
-                         </span>
-                    </water-fall-cute>
-                    <water-fall-text-cute v-for="(item,index) in TestCute01">
+
+                    <water-fall-all-img></water-fall-all-img>
+
+                   <!-- <water-fall-text-cute v-for="(item,index) in TestCute01">
                         <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
                         <strong slot="img-name">{{item.imgName}}</strong>
                         <span slot="img-text">{{item.imgText}}</span>
@@ -145,101 +66,18 @@
                         <span slot="img-click">
                              {{item.imgClick}}
                          </span>
-                    </water-fall-text-cute>
+                    </water-fall-text-cute>-->
+
+                    <water-fall-all-text></water-fall-all-text>
+
+
                 </el-col>
             </el-row>
 
         </div>
-        <!--   <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
 
-               <el-collapse>
-                   <el-collapse-item title="一致性 Consistency" name="1">
-                       <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                       <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
-                   </el-collapse-item>
-                   <br>
-
-                   &lt;!&ndash;                :class="{'fixedlunbo':isFixed}"&ndash;&gt;
-                   <div style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
-                       <div  @change="handleScroll">
-                           <div  :class="{'fixedlunbo':isFixed}">
-                               <el-card class="box-card">
-                                   <div slot="header" class="clearfix">
-                                       <span>我关注的圈子</span>
-                                       &lt;!&ndash;                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>&ndash;&gt;
-                                   </div>
-                                   <div v-for="o in 4" :key="o" class="text item">
-                                       &lt;!&ndash;                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>&ndash;&gt;
-                                       <el-row :gutter="10" style="line-height: 30px">
-                                           <el-col :span="2">
-                                               <el-link :underline="false">
-                                                   <el-avatar shape="square" :size="20" :src="squareUrl"></el-avatar>
-                                               </el-link>
-                                           </el-col>
-                                           <el-col :span="16">
-                                               <el-link> {{'列表内容 ' + o }}</el-link>
-
-                                           </el-col>
-                                           <el-col :span="6">
-                                               <span style="float: right;opacity: 0.6;">6分钟前</span>
-                                           </el-col>
-                                       </el-row>
-                                   </div>
-                                   <br>
-                                   <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
-                               </el-card>
-                               <br>
-                               <el-card class="box-card">
-                                   <div slot="header" class="clearfix">
-                                       <span>我关注的用户</span>
-                                       &lt;!&ndash;                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>&ndash;&gt;
-                                   </div>
-                                   <div v-for="o in 4" :key="o" class="text item">
-                                       &lt;!&ndash;                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>&ndash;&gt;
-                                       <el-row :gutter="10" style="line-height: 30px">
-                                           <el-col :span="2">
-                                               <el-link :underline="false">
-                                                   <el-avatar shape="circle" :size="20" :src="squareUrl"></el-avatar>
-                                               </el-link>
-                                           </el-col>
-                                           <el-col :span="17">
-                                               <el-link> {{'列表内容 ' + o }}</el-link>
-
-                                           </el-col>
-                                       </el-row>
-                                   </div>
-                                   <br>
-                                   <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
-                               </el-card>
-
-                               <p>
-                                   © 2020 bcy.net 版权所有
-
-                                   ICP证：浙ICP备14021595号-1
-
-                                   浙网文[2014]0701-051号
-
-                                   浙公网安备 33010802002901号
-                                   信息产业部备案管理系统
-                                   浙江省互联网违法和不良信息举报中心
-                                   12318全国文化市场举报网站
-
-                                   关于我们·商务合作
-
-                                   举报指引·营业执照
-
-                                   帮助中心·知乎
-                               </p>
-                           </div>
-
-
-                       </div>
-
-                   </div>
-
-               </el-collapse>
-           </div>-->
-        <right-ranking-tags :rank-tags="rankTags" :rank-name="rankName" :active-rank="activeRank" :rank-tags01="rankTags">
+        <right-ranking-tags :rank-tags="rankTags" :rank-name="rankName" :active-rank="activeRank"
+                            :rank-tags01="rankTags">
 
         </right-ranking-tags>
 
@@ -251,7 +89,9 @@
   import WaterFallTextCute from '../components/WaterFall-cute-text'
   import WaterFallImgs from '../components/WaterFall-cute-imgs'
   import RightRankingTags from '../components/public-page/Right-Ranking-Tags'
-
+  import WaterFallAllImg from '../components/waterFall-component/WaterFall-All-Img'
+  import WaterFallAllText from '../components/waterFall-component/WaterFall-All-Text'
+  import WaterFallAllImgs from '../components/waterFall-component/WaterFall-All-Imgs'
 
   export default {
     name: "RecommendPage",
@@ -261,58 +101,59 @@
       WaterFallTextCute,
       WaterFallImgs,
       RightRankingTags,
+      WaterFallAllImg,
+      WaterFallAllText,
+      WaterFallAllImgs,
 
 
     },
     data() {
       return {
-        rankName:'我关注的用户',
+        rankName: '我关注的用户',
         rankTags: [
-          {rankImg:'3.jpg',rankName:'用户1',rankTime:'3分钟前',rankLink:'http://www.baidu.com'},
-          {rankImg:'4.jpg',rankName:'用户2',rankTime:'5分钟前',rankLink:'http://www.baidu.com'},
-          {rankImg:'5.jpg',rankName:'用户3',rankTime:'6分钟前',rankLink:'http://www.baidu.com'},
-          {rankImg:'4.jpg',rankName:'用户2',rankTime:'5分钟前',rankLink:'http://www.baidu.com'},
-          {rankImg:'5.jpg',rankName:'用户3',rankTime:'6分钟前',rankLink:'http://www.baidu.com'},
+          {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
         ],
-        activeRank:["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"],
+        activeRank: ["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"],
         fill: 'fill',
         isFixed: false,
         scrollNowLoation: '',
         squareUrl: '2.jpg',
         imgCute01: [
-          /* {
-             imgAvatar:'../2.jpg',
-             imgName:'测试名称',
-             imgText:'测试对象传入插槽',
-             img:'20.jpg',
-             imgTags:['崩坏','明日方舟','二次元','cos'],
-             imgCollect:'收藏',
-             imgGo:45,
-             imgComment:15,
-             imgClick:4505,
-           },
-           {
-             imgAvatar:'1.jpg',
-             imgName:'测试名称',
-             imgText:'测试对象传入插槽',
-             img:'21.jpg',
-             imgTags:['崩坏','哈哈','二次元','cos'],
-             imgCollect:'已收藏',
-             imgGo:45,
-             imgComment:15,
-             imgClick:4505,
-           },
-           {
-             imgAvatar:'1.jpg',
-             imgName:'测试名称',
-             imgText:'测试对象传入插槽',
-             img:'22.jpg',
-             imgTags:['崩坏','明日方舟','二次元','cos'],
-             imgCollect:'收藏',
-             imgGo:45,
-             imgComment:15,
-             imgClick:4505,
-           },*/
+          {
+            user_avatar: '1.jpg',
+            user_name: '测试名称',
+            pr_info: '测试对象传入插槽',
+            pr_img: '37.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            pr_go: 45,
+            pr_click: 4505,
+          },
+          {
+            user_avatar: '3.jpg',
+            user_name: '测试名称',
+            pr_info: '测试对象传入插槽',
+            pr_img: '36.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            pr_go: 45,
+            pr_click: 4505,
+          },
+          {
+            user_avatar: '4.jpg',
+            user_name: '测试名称',
+            pr_info: '测试对象传入插槽',
+            pr_img: '34.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            pr_go: 45,
+            pr_click: 4505,
+          },
+
         ],
         imgCute02: [
           {

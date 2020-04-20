@@ -3,9 +3,9 @@
         <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
             <el-header style="padding-top: 10px">
                 <el-col :span="3">
-                    <!--                   头像插槽-->
+                    <!--   头像插槽-->
                     <slot name="img-avatar"></slot>
-                    <!--                    <el-avatar :size="40" :src="circleUrl"></el-avatar>-->
+                    <!-- <el-avatar :size="40" :src="circleUrl"></el-avatar>-->
                 </el-col>
                 <el-col :span="5">
                     <p style="margin-top: 10px">
@@ -19,24 +19,28 @@
                 <slot name="img-text"></slot>
             </p>
             <div>
-                <a href="" target="_blank">
+<!--                <slot name="img-link">-->
+                <a :href="imgLinks" target="_blank">
                     <el-row :gutter="5" style="height: 300px;width: 95%;margin:0 auto">
-                     <el-col :span="14" style="height: 100%">
-                         <img src="16.jpg" alt="" class="imgs-width">
-                     </el-col>
-                     <el-col :span="10" style="height: 300px">
-                        <div style="height: 48%;margin-bottom: 12px;overflow: hidden;border-radius: 5px">
-                            <img src="20.jpg" alt="" class="cute-text-img">
-                        </div>
-                         <div style="height: 48%;margin-bottom: 10px;overflow:hidden;border-radius: 5px">
-                             <img src="25.jpg" alt="" class="cute-text-img">
-                         </div>
-                     </el-col>
+                        <el-col :span="14" style="height: 100%">
+                            <!--                         <img src="16.jpg" alt="" class="imgs-width">-->
+                            <slot name="0"></slot>
+                        </el-col>
+                        <el-col :span="10" style="height: 300px">
+                            <div style="height: 48%;margin-bottom: 12px;overflow: hidden;border-radius: 5px">
+                                <slot name="1"></slot>
+                                <!--                            <img src="20.jpg" alt="" class="cute-text-img">-->
+                            </div>
+                            <div style="height: 48%;margin-bottom: 10px;overflow:hidden;border-radius: 5px">
+                                <slot name="2"></slot>
+                                <!--                             <img src="25.jpg" alt="" class="cute-text-img">-->
+                            </div>
+                        </el-col>
                     </el-row>
-
-
-
                 </a>
+<!--                </slot>-->
+
+
             </div>
 
             <div style="text-align: left;width: 90%;margin: 5px auto;">
@@ -80,16 +84,23 @@
 
 <script>
   export default {
-    name: ""
+    name: "",
+    props:{
+      imgLinks:{
+        type:String,
+        default:'http://www.baidu.com'
+      }
+    }
   }
 </script>
 
 <style scoped>
-    .imgs-width{
+    .imgs-width {
         width: 100%;
         height: 100%;
         border-radius: 5px;
     }
+
     .cute-text-img {
         /* width: 90%;
          height: 100%;

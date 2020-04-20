@@ -22,30 +22,6 @@
                 <div style="padding-top: 0px;margin-top: 10px" :class="{'fixedlunbo':isFixed}" id="so">
                     <div @change="handleScroll">
                         <div>
-                         <!--   <el-card class="box-card">
-                                <div slot="header" class="clearfix">
-                                    <span>我关注的圈子</span>
-                                </div>
-                                <div v-for="(item,index) in rankTags" :key="index" class="text item">
-                                    <el-row :gutter="10" style="line-height: 30px">
-                                        <el-col :span="2">
-                                            <el-link :underline="false" :href="item.rankLink">
-                                                <el-avatar shape="square" :size="20" :src="item.rankImg">
-
-                                                </el-avatar>
-                                            </el-link>
-                                        </el-col>
-                                        <el-col :span="16">
-                                            <el-link>{{item.rankName}}</el-link>
-                                        </el-col>
-                                        <el-col :span="6">
-                                            <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
-                                        </el-col>
-                                    </el-row>
-                                </div>
-                                <br>
-                                <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
-                            </el-card>-->
                             <right-list-tag :rank-name="rankName" :rank-tags="rankTags">
 
                             </right-list-tag>
@@ -53,40 +29,12 @@
                             <right-list-tag :rank-name="rankName" :rank-tags="rankTags01">
 
                             </right-list-tag>
-                           <!-- <el-card class="box-card">
-                                <div slot="header" class="clearfix">
-                                    <span>我关注的用户</span>
-                                    &lt;!&ndash;                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>&ndash;&gt;
-                                </div>
-                                <div v-for="o in 4" :key="o" class="text item">
-                                    &lt;!&ndash;                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>&ndash;&gt;
-                                    <el-row :gutter="10" style="line-height: 30px">
-                                        <el-col :span="2">
-                                            <el-link :underline="false">
-                                                <el-avatar shape="circle" :size="20" :src="squareUrl"></el-avatar>
-                                            </el-link>
-                                        </el-col>
-                                        <el-col :span="17">
-                                            <el-link> {{'列表内容 ' + o }}</el-link>
-
-                                        </el-col>
-                                    </el-row>
-                                </div>
-                                <br>
-                                <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
-                            </el-card>-->
-                          <!--  <right-list-tag :rank-tags="rankTags">
-                                <span slot="listName">我关注的用户</span>
-                            </right-list-tag>-->
-
-
                         </div>
 
-
                     </div>
+                    <!-- 公司信息-->
                     <company-info></company-info>
                 </div>
-
             </el-collapse>
         </div>
     </div>
@@ -103,28 +51,28 @@
       RightListTag,
 
     },
-    props:{
-      rankName:{
-        type:String,
-        default:'我关注的圈子'
+    props: {
+      rankName: {
+        type: String,
+        default: '我关注的圈子'
       },
-      rankTags:{
-        type:Array,
-        default(){
+      rankTags: {
+        type: Array,
+        default() {
           return [
-            {rankImg:'3.jpg',rankName:'用户1',rankTime:'3分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'4.jpg',rankName:'用户2',rankTime:'5分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'5.jpg',rankName:'用户3',rankTime:'6分钟前',rankLink:'http://www.baidu.com'},
+            {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
           ]
         }
       },
-      rankTags01:{
-        type:Array,
-        default(){
+      rankTags01: {
+        type: Array,
+        default() {
           return [
-            {rankImg:'3.jpg',rankName:'用户1',rankTime:'3分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'4.jpg',rankName:'用户2',rankTime:'5分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'5.jpg',rankName:'用户3',rankTime:'6分钟前',rankLink:'http://www.baidu.com'},
+            {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
           ]
         }
       },
@@ -137,23 +85,23 @@
     },
     data() {
       return {
-       /* activeRank: {
-          type: Array,
-          default() {
-            return ["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"]
-          }
-        },*/
-        isFixed:false,
+        /* activeRank: {
+           type: Array,
+           default() {
+             return ["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"]
+           }
+         },*/
+        isFixed: false,
       }
     },
-    mounted () {
+    mounted() {
       window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
-      handleScroll () {
-        if(window.scrollY>600){
+      handleScroll() {
+        if (window.scrollY > 600) {
           this.isFixed = true
-        }else {
+        } else {
           this.isFixed = false
         }
       }
@@ -167,17 +115,20 @@
         color: #999;
 
     }
-    .fixedlunbo{
+
+    .fixedlunbo {
         width: 20%;
         position: fixed;
         top: -100px;
     }
-    .cute-img{
+
+    .cute-img {
         width: 100%;
         height: auto;
         border-radius: 10px;
     }
-    .cute-text-img{
+
+    .cute-text-img {
         /* width: 90%;
          height: 100%;
          border-radius: 10px;*/
@@ -188,14 +139,15 @@
     }
 
 
-    .lunbo-big{
+    .lunbo-big {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
         line-height: 150px;
         margin: 0;
     }
-    .lunbo-small{
+
+    .lunbo-small {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
