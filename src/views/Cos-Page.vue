@@ -1,113 +1,14 @@
 <template>
     <div>
-        <div style="width: 70%;float: left;border: 1px solid #E6E6E6" >
+        <div class="main-left">
 
             <el-tabs type="border-card">
                 <el-tab-pane label="COS周榜">
-               <!--     <el-row>
-                        <el-col :span="8">
-                            <el-card :body-style="{ padding: '0px' }" >
-                                <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-big">
-                                <div style="position: absolute;left: 10px;bottom: 10px;display: inline-block">
-                                    <el-avatar :size="40"
-                                               :src="circleUrl"
-                                               style="float: left">
-                                        地理
-                                    </el-avatar>
-                                    <p style="color: white;float:right;margin: 10px">_Sheya</p>
-                                </div>
-
-                            </el-card>
-                        </el-col>
-                        <el-col :span="16">
-                            <el-row>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class">
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                            </el-row>
-                            <el-row>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                                <el-col :span="8">
-                                    <el-card :body-style="{ padding: '0px' }" class="card-class" >
-                                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image-small">
-                                        <div class="img-avator-div">
-                                            <el-avatar :size="30"
-                                                       :src="circleUrl"
-                                                       style="float: left">
-                                                地理
-                                            </el-avatar>
-                                            <p class="img-avator-name">_Sheya</p>
-                                        </div>
-                                    </el-card>
-                                </el-col>
-                            </el-row>
-                        </el-col>
-
-                    </el-row>
--->                 <page-all-rank :rankbig="rankbig"
+                    <page-all-rank :rankbig="rankbig"
                                    :ranksinto01="ranksinto01"
-                                   :ranksinto02="ranksinto02"></page-all-rank>
+                                   :ranksinto02="ranksinto02">
+
+                    </page-all-rank>
 
                 </el-tab-pane>
                 <el-tab-pane label="COS日榜">绘画日榜</el-tab-pane>
@@ -210,7 +111,6 @@
         <right-ranking-carousel></right-ranking-carousel>
 
 
-
     </div>
 
 
@@ -226,20 +126,27 @@
   export default {
     name: "CosPage",
     //注册组件
-    components:{
+    components: {
       WaterFallCute,
       WaterFallTextCute,
       RightRankingCarousel,
       PageAllRank,
 
     },
-    data(){
-      return{
-        fill:'fill',
-        isFixed:false,
-        scrollNowLoation:'',
-        circleUrl:'3.jpg',
-        rankbig: {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1, giveup: 548, back: 'background-color:#fa5757'},
+    data() {
+      return {
+        fill: 'fill',
+        isFixed: false,
+        scrollNowLoation: '',
+        circleUrl: '3.jpg',
+        rankbig: {
+          img: '20.jpg',
+          avator: '4.jpg',
+          name: '测试1',
+          counts: 1,
+          giveup: 548,
+          back: 'background-color:#fa5757'
+        },
         ranksinto01: [
           {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2, giveup: 548, back: 'background-color:#ffa008'},
           {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3, giveup: 1520, back: 'background-color:#fad73c'},
@@ -250,95 +157,95 @@
           {img: '20.jpg', avator: '5.jpg', name: '测试2', counts: 6, giveup: 784},
           {img: '23.jpg', avator: '6.jpg', name: '测试3', counts: 7, giveup: 231},
         ],
-        imgCute01:[
+        imgCute01: [
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'20.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '20.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'21.jpg',
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '21.jpg',
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'22.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-        ],
-        imgCute02:[
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'24.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'25.jpg',
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
-          },
-          {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'26.jpg',
-            imgTags:['崩坏','明日方舟','二次元','cos'],
-            imgCollect:'收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '22.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
         ],
-        TestCute01:[
+        imgCute02: [
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'测试对象传入插槽',
-            img:'25.jpg',
-            imgContent:`<b>测试文字的显示是什么样子</b>`,
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '24.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
           {
-            imgAvatar:'1.jpg',
-            imgName:'测试名称',
-            imgText:'发布文字',
-            img:'26.jpg',
-            imgContent:`<b>测试文字的显示是什么样子</b>
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '25.jpg',
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '26.jpg',
+            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
+            imgCollect: '收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+        ],
+        TestCute01: [
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '测试对象传入插槽',
+            img: '25.jpg',
+            imgContent: `<b>测试文字的显示是什么样子</b>`,
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
+          },
+          {
+            imgAvatar: '1.jpg',
+            imgName: '测试名称',
+            imgText: '发布文字',
+            img: '26.jpg',
+            imgContent: `<b>测试文字的显示是什么样子</b>
 
                                             <p><strong>在如今的互联网时代，人们越来越喜欢将自己的数据存放到互联网上，于是便诞生了很多类型的软件，比如360网盘，百度网盘，云盘之类的。所以说，文件上传和下载的功能是现在非常主流的一个功能，应用十分广泛。</strong><br>
 <strong>那现在，我们就来学习一下，在web中，如何去实现文件上传和下载！</strong><br>
@@ -346,23 +253,23 @@
 在web页面中添加上传输入项<br>
 
 `,
-            imgTags:['崩坏','哈哈','二次元','cos'],
-            imgCollect:'已收藏',
-            imgGo:45,
-            imgComment:15,
-            imgClick:4505,
+            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
+            imgCollect: '已收藏',
+            imgGo: 45,
+            imgComment: 15,
+            imgClick: 4505,
           },
         ]
       }
     },
-    mounted () {
+    mounted() {
       window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
-      handleScroll () {
-        if(window.scrollY>600){
+      handleScroll() {
+        if (window.scrollY > 600) {
           this.isFixed = true
-        }else {
+        } else {
           this.isFixed = false
         }
       }
@@ -377,24 +284,28 @@
         color: #999;
 
     }
-    .right-fixed{
+
+    .right-fixed {
         width: 100%;
 
         position: sticky !important;
         top: 100px;
     }
+
     /*右边推荐条*/
-    .fixedlunbo{
+    .fixedlunbo {
         width: 22%;
         position: fixed;
         top: 40px;
     }
-    .cute-img{
+
+    .cute-img {
         width: 90%;
         height: auto;
         border-radius: 10px;
     }
-    .cute-text-img{
+
+    .cute-text-img {
         /* width: 90%;
          height: 100%;
          border-radius: 10px;*/
@@ -420,28 +331,39 @@
         height: 500px;
         border-radius: 10px;
     }
+
     .image-small {
         width: 100%;
         display: block;
         height: 250px;
         border-radius: 10px;
     }
-    .img-avator-samll{
+
+    .img-avator-samll {
 
     }
 
-    .card-class{
+    .card-class {
         position: relative;
     }
-    .img-avator-div{
-        position: absolute;left: 5px;bottom: 0px;display: inline
+
+    .img-avator-div {
+        position: absolute;
+        left: 5px;
+        bottom: 0px;
+        display: inline
     }
-    .img-avator-img{
+
+    .img-avator-img {
 
     }
-    .img-avator-name{
-        color: white;float:right;margin: 10px 0px 10px 5px
+
+    .img-avator-name {
+        color: white;
+        float: right;
+        margin: 10px 0px 10px 5px
     }
+
     .clearfix:before,
     .clearfix:after {
         display: table;
@@ -451,14 +373,16 @@
     .clearfix:after {
         clear: both
     }
-    .lunbo-big{
+
+    .lunbo-big {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
         line-height: 150px;
         margin: 0;
     }
-    .lunbo-small{
+
+    .lunbo-small {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;

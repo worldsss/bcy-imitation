@@ -143,10 +143,10 @@
             </el-row>
 
         </div>
-        <div class="main-right" id="rights">
+       <!-- <div class="main-right" id="rights">
             <el-collapse v-model="activeNames" @change="handleChange">
 
-<!--                xx活动-->
+&lt;!&ndash;                xx活动&ndash;&gt;
                 <el-collapse-item>
                     <template slot="title">
                         <span class="my-opacity my-margin-left-mini">COS活动：</span>
@@ -161,15 +161,15 @@
                     <br>
                 </el-collapse-item>
 
-<!--                活动推荐-->
+&lt;!&ndash;                活动推荐&ndash;&gt;
                 <el-carousel height="150px" style="margin: 10px 0px">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small lunbo-big">{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
 
-<!--                优秀coser/绘画推荐-->
-                <div  :class="{'fixedlunbo':isFixed}" > <!-- :class="{'fixedlunbo':isFixed}"-->
+&lt;!&ndash;                优秀coser/绘画推荐&ndash;&gt;
+                <div  :class="{'fixedlunbo':isFixed}" > &lt;!&ndash; :class="{'fixedlunbo':isFixed}"&ndash;&gt;
                     <el-card style="padding-top: 0px" id="so">
                         <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
                         <el-carousel height="450px" indicator-position="outside">
@@ -203,7 +203,9 @@
 
 
             </el-collapse>
-        </div>
+        </div>-->
+        <right-ranking-carousel></right-ranking-carousel>
+
 
     </div>
 </template>
@@ -215,6 +217,7 @@
   import PageRanks from '../components/public-page/Page-Rankings'
   import PageTagBig from '../components/public-page/Page-TagBig'
   import PageAllRank from '../components/public-page/Page-AllRank'
+  import RightRankingCarousel from '../components/public-page/Right-Ranking-Carousel'
 
 
   export default {
@@ -227,6 +230,7 @@
       PageRanks,
       PageTagBig,
       PageAllRank,
+      RightRankingCarousel
     },
     data() {
       return {

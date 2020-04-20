@@ -31,3 +31,27 @@ body{
     opacity: 0.5;
 }
 
+.m-mar-t-b-mini {
+    margin: 10px 0px;
+}
+
+.my-padding-top-none {
+    padding-top: 0;
+}
+
+.my-margin-left-mini {
+    margin-left: 10px;
+}
+
+.my-margin-right-mini {
+    margin-right: 10px;
+}
+
+.company-info {
+    font-size: 14px;
+    margin-top: 5px
+}
+.p-nomargin {
+    margin: 0px;
+    opacity: 0.5;
+}
