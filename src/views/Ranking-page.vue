@@ -21,7 +21,7 @@
         <rank-cute></rank-cute>
         <rank-cute></rank-cute>
         <rank-cute></rank-cute>
-        <rank-cute></rank-cute>
+
 
     </div>
 </template>
