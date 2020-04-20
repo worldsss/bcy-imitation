@@ -206,8 +206,10 @@
 
 
         </div>
-        <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
-            <el-collapse>
+        <right-ranking-carousel></right-ranking-carousel>
+
+        <!-- <div style="width: 29%;float: right;border: 1px solid #e6e6e6">
+           - <el-collapse>
                 <el-collapse-item title="一致性 Consistency" name="1">
                     <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
                     <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
@@ -218,7 +220,7 @@
                         <h3 class="small lunbo-big">{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
-<!--                                :class="{'fixedlunbo':isFixed}"-->
+&lt;!&ndash;                                :class="{'fixedlunbo':isFixed}"&ndash;&gt;
                 <el-card style="padding-top: 0px"  :class="{'fixedlunbo':isFixed}" id="so">
                     <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
                     <el-carousel height="500px">
@@ -248,22 +250,25 @@
 
             </el-collapse>
 
-
         </div>
-      <!--  <div class="right-fixed">
+        <div class="right-fixed">
             <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
             <el-carousel height="500px">
                 <el-carousel-item v-for="item in 4" :key="item">
                     <h3 class="small lunbo-small">{{ item }}</h3>
                 </el-carousel-item>
             </el-carousel>
-        </div>-->
+        </div>
+        -->
     </div>
+
+
 </template>
 
 <script>
   import WaterFallCute from '../components/WaterFall-cute-img'
   import WaterFallTextCute from '../components/WaterFall-cute-text'
+  import RightRankingCarousel from '../components/public-page/Right-Ranking-Carousel'
 
 
   export default {
@@ -271,7 +276,8 @@
     //注册组件
     components:{
       WaterFallCute,
-      WaterFallTextCute
+      WaterFallTextCute,
+      RightRankingCarousel,
     },
     data(){
       return{

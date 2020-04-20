@@ -5,7 +5,7 @@
                 <input-nav></input-nav>
 
             </el-header>
-            <el-main style="width: 80%;margin: 0 auto;">
+            <el-main class="all-main">
                 <el-carousel :interval="5000" arrow="always">
                     <el-carousel-item v-for="item in lunboImg" :key="item">
                         <img :src="item" alt="" style="width: 100%;height: 100%">

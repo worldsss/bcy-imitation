@@ -1,18 +1,33 @@
+body{
+    background: #f5f5fa;
+}
+
+
+
 .cute-img {
     width: 100% !important;
     height: auto;
     border-radius: 10px;
 }
-
-
+/*整个大的页面布局*/
+.all-main{
+    width: 80%;
+    margin: 0 auto;
+}
+/*左侧页面布局*/
 .main-left {
     width: 73%;
     float: left;
     /*border: 1px solid #E6E6E6*/
 }
-
+/*右侧页面布局*/
 .main-right {
     width: 26%;
     float: right;
     /*border: 1px solid #e6e6e6*/
 }
+/*半透明效果*/
+.my-opacity{
+    opacity: 0.5;
+}
+

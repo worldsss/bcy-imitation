@@ -18,7 +18,8 @@
             </el-card>
 -->
 
-        <el-col :span="8">
+<!--        <el-col :span="8">-->
+        <el-col :span="9">
             <el-card :body-style="{ padding: '5px' }" class="card-class">
                 <!-- 插槽图片-->
                 <a href="#" class="imgs-a">

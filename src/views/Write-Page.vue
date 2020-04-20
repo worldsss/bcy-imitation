@@ -5,7 +5,7 @@
             <el-tabs type="border-card">
                 <el-tab-pane label="COS周榜">
                     <el-row>
-                        <page-tag-big v-for="(item,index) in rankbig" >
+                        <page-tag-big v-for="(item,index) in rankbig">
                             <img slot="img"
                                  :src="item.img"
                                  class="image-big">
@@ -16,7 +16,8 @@
                             <span slot="img-counts">{{item.counts}}</span>
                             <span slot="img-giveup">{{item.giveup}}</span>
                         </page-tag-big>
-                        <el-col :span="16">
+                        <!--                        <el-col :span="16">-->
+                        <el-col :span="15">
                             <el-row>
                                 <page-ranks :rankinto="ranksinto01"></page-ranks>
                             </el-row>
@@ -135,32 +136,64 @@
             </el-row>
 
         </div>
-        <div class="main-right">
+        <div class="main-right" id="rights">
             <el-collapse v-model="activeNames" @change="handleChange">
-                <el-collapse-item title="一致性 Consistency" name="1">
-                    <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
-                    <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+
+<!--                xx活动-->
+                <el-collapse-item>
+                    <template slot="title">
+                        <span class="my-opacity my-margin-left-mini">COS活动：</span>
+
+                        <el-link type="primary" :underline="false">男女装cos对抗赛</el-link>
+                    </template>
+                    <i class="el-icon-s-flag my-margin-right-mini my-margin-left-mini"></i>
+                    <el-link type="primary" :underline="false">男女装cos对抗赛</el-link>
+                    <br>
+                    <i class="el-icon-s-flag my-margin-right-mini my-margin-left-mini"></i>
+                    <el-link type="primary" :underline="false">男女装cos对抗赛</el-link>
+                    <br>
                 </el-collapse-item>
 
-                <el-carousel height="150px">
+<!--                活动推荐-->
+                <el-carousel height="150px" style="margin: 10px 0px">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3 class="small lunbo-big">{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
-                <el-card style="padding-top: 0px" :class="{'fixedlunbo':isFixed}" id="so">
-                    <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
-                    <el-carousel height="500px">
-                        <el-carousel-item v-for="item in 4" :key="item">
-                            <h3 class="small lunbo-small">{{ item }}</h3>
-                        </el-carousel-item>
-                    </el-carousel>
-                    <p class="p-nomargin"> © 2020 bcy.net 版权所有</p>
-                    <p class="p-nomargin"> ICP证：浙ICP备14021595号-1</p>
-                    <p class="p-nomargin"> 浙公网安备 33010802002901号</p>
-                    <p class="p-nomargin"> 信息产业部备案管理系统</p>
-                    <p class="p-nomargin"> 浙江省互联网违法和不良信息举报中心</p>
-                    <p class="p-nomargin"> 浙网文[2014]0701-051号</p>
-                </el-card>
+
+<!--                优秀coser/绘画推荐-->
+                <div  :class="{'fixedlunbo':isFixed}" > <!-- :class="{'fixedlunbo':isFixed}"-->
+                    <el-card style="padding-top: 0px" id="so">
+                        <h3 style="margin: 10px"><i class="el-icon-edit"></i>优秀Coser推荐</h3>
+                        <el-carousel height="450px" indicator-position="outside">
+                            <el-carousel-item v-for="item in 4" :key="item">
+                                <h3 class="small lunbo-small">{{ item }}</h3>
+                            </el-carousel-item>
+                        </el-carousel>
+
+
+                    </el-card>
+                    <div style="font-size: 14px;margin-top: 5px">
+                        <p class="p-nomargin"> © 2020 bcy.net 版权所有</p>
+                        <p class="p-nomargin"> ICP证：浙ICP备14021595号-1</p>
+                        <p class="p-nomargin"> 浙公网安备 33010802002901号</p>
+                        <p class="p-nomargin"> 浙网文[2014]0701-051号</p>
+                        <el-link type="primary">信息产业部备案管理系统</el-link>
+                        <el-link type="primary">浙江省互联网违法和不良信息举报中心</el-link>
+                        <el-link type="primary">12348全国文化市场举报网站</el-link>
+                        <br>
+                        <el-link type="primary" class="my-margin-right-mini">关于我们</el-link>
+                        <el-link type="primary">商务合作</el-link>
+                        <br>
+                        <el-link type="primary" class="my-margin-right-mini">举报指引</el-link>
+                        <el-link type="primary">营业执照</el-link>
+                        <br>
+                        <el-link type="primary" class="my-margin-right-mini">帮助中心</el-link>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <el-link type="primary">知乎</el-link>
+                    </div>
+                </div>
+
 
             </el-collapse>
         </div>
@@ -193,18 +226,18 @@
         scrollNowLoation: '',
         circleUrl: '',
         activeNames: '',
-        rankbig:[
-          {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1,giveup:548,back:'background-color:#fa5757'},
+        rankbig: [
+          {img: '20.jpg', avator: '4.jpg', name: '测试1', counts: 1, giveup: 548, back: 'background-color:#fa5757'},
         ],
         ranksinto01: [
-          {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2,giveup:548,back:'background-color:#ffa008'},
-          {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3,giveup:1520,back:'background-color:#fad73c'},
-          {img: '31.jpg', avator: '6.jpg', name: '测试3', counts: 4,giveup:687},
+          {img: '14.jpg', avator: '4.jpg', name: '测试1', counts: 2, giveup: 548, back: 'background-color:#ffa008'},
+          {img: '17.jpg', avator: '5.jpg', name: '测试2', counts: 3, giveup: 1520, back: 'background-color:#fad73c'},
+          {img: '31.jpg', avator: '6.jpg', name: '测试3', counts: 4, giveup: 687},
         ],
         ranksinto02: [
-          {img: '16.jpg', avator: '4.jpg', name: '测试1', counts: 5,giveup:578},
-          {img: '20.jpg', avator: '5.jpg', name: '测试2', counts: 6,giveup:784},
-          {img: '23.jpg', avator: '6.jpg', name: '测试3', counts: 7,giveup:231},
+          {img: '16.jpg', avator: '4.jpg', name: '测试1', counts: 5, giveup: 578},
+          {img: '20.jpg', avator: '5.jpg', name: '测试2', counts: 6, giveup: 784},
+          {img: '23.jpg', avator: '6.jpg', name: '测试3', counts: 7, giveup: 231},
         ],
         imgCute01: [
           {
@@ -337,10 +370,15 @@
 
     }
 
+    /* .fixedlunbo {
+         width: 22%;
+         position: fixed;
+         top: 20px;
+     }*/
     .fixedlunbo {
-        width: 22%;
+        width: 20%;
         position: fixed;
-        top: 20px;
+        top: 15px;
     }
 
     /*
@@ -373,6 +411,14 @@
     .button {
         padding: 0;
         float: right;
+    }
+
+    .my-margin-left-mini {
+        margin-left: 10px;
+    }
+
+    .my-margin-right-mini{
+        margin-right: 10px;
     }
 
     .p-nomargin {
@@ -444,5 +490,21 @@
         line-height: 500px;
         margin: 0;
     }
+
+</style>
+
+<style>
+    .main-left .el-tabs--border-card > .el-tabs__content {
+        padding: 0px;
+    }
+
+    #rights .el-collapse-item__header {
+        border-radius: 10px;
+    }
+
+    #rights .el-card__body {
+        padding: 10px;
+    }
+
 
 </style>
