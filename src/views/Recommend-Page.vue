@@ -5,68 +5,14 @@
                 <el-col :span="12">
                     <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>
 
-                    <!--<water-fall-cute>
-                        <span slot="img-text">测试插槽的使用</span>
-                        <img src="11.jpg" slot="img" class="cute-img" alt="">
-                        <el-button slot="img-tags" type="info" size="mini" :plain="true" :autofocus="false">武汉加油
-                        </el-button>
-                        <span slot="img-go">10</span>
-                        <span slot="img-comment">50</span>
-                        <span slot="img-click">870</span>
-                    </water-fall-cute>-->
-                    <!--<water-fall-imgs>
-                        <el-avatar :size="40" src="10.jpg" slot="img-avatar"></el-avatar>
-                        <strong slot="img-name">fdsfds</strong>
-                        <span slot="img-text">fdsfds</span>
 
-                        <span slot="img-collect">
-                             46
-                         </span>
-                        <span slot="img-go">
-                            645
-                         </span>
-                        <span slot="img-comment">
-                            645
-                         </span>
-                        <span slot="img-click">
-                             123
-                         </span>
-                    </water-fall-imgs>-->
 
                     <water-fall-all-imgs></water-fall-all-imgs>
 
                 </el-col>
                 <el-col :span="12">
 
-                    <water-fall-all-img></water-fall-all-img>
-
-                   <!-- <water-fall-text-cute v-for="(item,index) in TestCute01">
-                        <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
-                        <strong slot="img-name">{{item.imgName}}</strong>
-                        <span slot="img-text">{{item.imgText}}</span>
-                        <span slot="img-content" v-html="item.imgContent">
-                         </span>
-                        <img :src="item.img" slot="img" class="cute-text-img" alt="">
-                        <el-button slot="img-tags"
-                                   type="info"
-                                   size="mini"
-                                   :plain="true"
-                                   :autofocus="false" v-for="(item2,index) in item.imgTags">
-                            {{item2}}
-                        </el-button>
-                        <span slot="img-collect">
-                             {{item.imgCollect}}
-                         </span>
-                        <span slot="img-go">
-                             {{item.imgGo}}
-                         </span>
-                        <span slot="img-comment">
-                             {{item.imgComment}}
-                         </span>
-                        <span slot="img-click">
-                             {{item.imgClick}}
-                         </span>
-                    </water-fall-text-cute>-->
+                    <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>
 
                     <water-fall-all-text></water-fall-all-text>
 
@@ -231,10 +177,16 @@
       }
     },
     created() {
-      axios.get("http://localhost:8090/showPro")
+     /* axios.get("http://localhost:8090/showPro")
           .then(res => {
             console.log(res.data)
             this.imgCute01 = res.data.list;
+          })*/
+
+      axios.get("http://localhost:8090/showIndex")
+          .then(res => {
+            console.log(res.data)
+            this.imgCute02 = res.data.list;
           })
     }
 

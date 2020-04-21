@@ -14,7 +14,7 @@
                         </el-link>
                     </el-col>
                     <el-col :span="16" style="padding-left: 10px">
-                        <el-link>{{item.rankName}}</el-link>
+                        <el-link :href="item.rankLink">{{item.rankName}}</el-link>
                     </el-col>
                     <el-col :span="6">
                         <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>

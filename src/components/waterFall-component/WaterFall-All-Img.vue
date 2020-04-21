@@ -5,9 +5,7 @@
             <strong slot="img-name">
                 {{item.user_name}}
             </strong>
-            <span slot="img-text">
-                             {{item.pr_info}}
-                         </span>
+            <span slot="img-text">{{item.pr_info}}</span>
             <img :src="item.pr_img" slot="img" class="cute-img" alt="">
             <!--<el-button slot="img-tags"
                        type="info"
@@ -22,11 +20,11 @@
             <span slot="img-go">
                 {{item.pr_go}}
             </span>
-           <!-- <span slot="img-comment">
-                {{item}}
-            </span>-->
+            <span slot="img-comment">
+                {{item.pr_comment_count}}
+            </span>
             <span slot="img-click">
-                {{item.pr_click}}
+                {{item.pr_givelike}}
             </span>
         </water-fall-cute>
 

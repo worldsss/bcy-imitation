@@ -26,9 +26,9 @@
             >
             </el-input>
             <br>
-<!--            mavon的markdown编辑器-->
-            <div id="main" >
-                <mavon-editor v-model="value" style="height: 500px" placeholder="输入正文,15000字以内，搬运他人作品不注明作者，会被关小黑屋哦~" />
+            <!--            mavon的markdown编辑器-->
+            <div id="main">
+                <mavon-editor v-model="value" style="height: 500px" placeholder="输入正文,15000字以内，搬运他人作品不注明作者，会被关小黑屋哦~"/>
             </div>
         </el-card>
         <br>
@@ -45,7 +45,7 @@
             </el-select>
             <el-link type="primary">创建合集</el-link>
             <br><br>
-
+            <!-- 标签选择-->
             <input-tag></input-tag>
 
 
@@ -64,40 +64,40 @@
 
 
 <script>
-    import Vue from 'vue'
-    import mavonEditor from 'mavon-editor'
-    import 'mavon-editor/dist/css/index.css'
-    import InputNavMenu from '../../components/public-page/Input-NavMenu'
-    import InputTag from '../../components/public-page/Input-Tag'
-    import InputJurs from '../../components/public-page/Input-Jurisdiction'
+  import Vue from 'vue'
+  import mavonEditor from 'mavon-editor'
+  import 'mavon-editor/dist/css/index.css'
+  import InputNavMenu from '../../components/public-page/Input-NavMenu'
+  import InputTag from '../../components/public-page/Input-Tag'
+  import InputJurs from '../../components/public-page/Input-Jurisdiction'
 
-    Vue.use(mavonEditor)
-    Vue.component("input-nav",InputNavMenu)
-    Vue.component("input-tag",InputTag)
-    Vue.component("input-jurs",InputJurs)
-    export default {
-        name: "TestInput",
-        data(){
-            return{
-                value:'',
-                text: '',
-                textarea: '',
-                inputVisible: false,
-                inputValue: '',
-                options:[1,2,3,4]
-            }
-        },
-        methods:{
-            showInput() {
-                this.inputVisible = true;
-                this.$nextTick(_ => {
-                    this.$refs.saveTagInput.$refs.input.focus();
-                });
-            },
-
-        }
+  Vue.use(mavonEditor)
+  Vue.component("input-nav", InputNavMenu)
+  Vue.component("input-tag", InputTag)
+  Vue.component("input-jurs", InputJurs)
+  export default {
+    name: "TestInput",
+    data() {
+      return {
+        value: '', //markdown的编辑器
+        text: '', //标题
+        textarea: '', //描述
+        inputVisible: false,
+        inputValue: '',
+        options: [1, 2, 3, 4]
+      }
+    },
+    methods: {
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
 
     }
+
+  }
 </script>
 <link rel="stylesheet" href="G:\Vue-project\bcy-imitation\node_modules\editor.md\css\editormd.css">
 <style scoped>

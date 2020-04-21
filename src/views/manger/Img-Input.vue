@@ -163,11 +163,19 @@
         let fd = new FormData();
         fd.append('file', file);//传文件
         // fd.append('srid', this.aqForm.srid);//传其他参数
+        alert(fd)
 
-
-        //在点击上传之后才会执行的异步操作
+      /*  //在点击上传之后才会执行的异步操作
         axios.post('/api/uploads', fd).then(res => {
-          // alert("上传成功")
+          alert("上传成功")
+
+        }).catch(err => {
+
+        })*/
+        //在点击上传之后才会执行的异步操作
+        axios.post("http://127.0.0.1:8090/uploads", fd).then(res => {
+          alert("上传成功")
+          console.log(res.data)
 
         }).catch(err => {
 
@@ -201,6 +209,8 @@
                    console.log(res)
                  })
            }*/
+          this.$router.replace("/")
+
         }).catch(err => {
 
         })
