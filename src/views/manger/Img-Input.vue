@@ -58,7 +58,9 @@
                         v-model="proContent.pr_info">
                 </el-input>
 
-                <input-tag></input-tag>
+                <input-tag :model-tags="modelTags" :dynamic-tags="dynamicTags">
+
+                </input-tag>
 
             </el-card>
             <br>
@@ -122,11 +124,16 @@
     data() {
       return {
         disabled: false,
-        modelTags: ['限定捏土', 'jk', '汉服', 'Lolita', '手写', 'cos'],
+        modelTags: ['限定捏土', 'jk', '汉服', 'Lolita', '手写', 'cos'],//推荐添加的标签
+        dynamicTags:[ /*{
+          "tid": 0,
+          "tags_name": "",
+          "proIndexList": null
+        }*/], //当前选择的标签
+
         doUpload: 'http://l/uploads',
         dialogImageUrl: '',
         dialogVisible: false, //是否显示模态框
-
         //表单上传值的对象
         proContent: {
           uid: "1",
@@ -134,7 +141,7 @@
           pr_img: "",
           pr_info: "",
           pr_date: "啊啊啊啊",
-          pr_givelike: "0"
+          pr_givelike: "0",
         },
 
         //上传单个图片的对象
@@ -163,7 +170,6 @@
         let fd = new FormData();
         fd.append('file', file);//传文件
         // fd.append('srid', this.aqForm.srid);//传其他参数
-        alert(fd)
 
       /*  //在点击上传之后才会执行的异步操作
         axios.post('/api/uploads', fd).then(res => {
@@ -191,6 +197,9 @@
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
+
+        console.log(this.dynamicTags)
+
         //格式化日期
         this.proContent.pr_date = new Date().toLocaleString() + "";
 
@@ -228,7 +237,14 @@
 
     },
     created() {
-      // this.proContent.pr_date = new Date().toLocaleString()+"";
+      axios.get("http://localhost:8090/showTags")
+           .then(res=>{
+             // alert("获取成功")
+             console.log(res.data)
+             this.modelTags = res.data
+           })
+
+
     }
 
   }
