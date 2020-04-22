@@ -11,10 +11,10 @@
 
                 </el-col>
                 <el-col :span="12">
-
+                    <!--单图片显示瀑布流-->
                     <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>
-
-                    <water-fall-all-text></water-fall-all-text>
+<!--                    文字显示瀑布流-->
+                    <water-fall-all-text :test-cute01="textCute"></water-fall-all-text>
 
 
                 </el-col>
@@ -68,6 +68,7 @@
         isFixed: false,
         scrollNowLoation: '',
         squareUrl: '2.jpg',
+        textCute:[],
         imgCute01: [
           {
             user_avatar: '1.jpg',
@@ -188,11 +189,17 @@
             console.log(res.data)
             this.imgCute02 = res.data.list;
           })
+      axios.get("http://localhost:8090/showPcIndex")
+          .then(res => {
+            console.log(res.data)
+            this.textCute = res.data.list;
+          })
+
     }
 
   }
 </script>
-
+<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">
 <style scoped>
     .time {
         font-size: 13px;

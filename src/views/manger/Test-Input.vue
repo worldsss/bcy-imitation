@@ -73,6 +73,8 @@
   import InputNavMenu from '../../components/public-page/Input-NavMenu'
   import InputTag from '../../components/public-page/Input-Tag'
   import InputJurs from '../../components/public-page/Input-Jurisdiction'
+  import marked from 'marked'
+
 
   Vue.use(mavonEditor)
   Vue.component("input-nav", InputNavMenu)
@@ -88,6 +90,7 @@
         inputVisible: false,
         inputValue: '',
         options: [1, 2, 3, 4],
+
         Pc_content:{
           pc_content:'',
           pc_title:'',
@@ -95,6 +98,7 @@
         },
         img_file:[],
         file_url:'',
+        content:'',
       }
     },
     methods: {
@@ -106,6 +110,11 @@
       },
       //提交整个文字内容
       submits(){
+        //这里是Markdown的语法转换成html后的内容
+        let markdown = this.$refs.md.d_render;
+        alert(markdown)
+        this.Pc_content.pc_content = markdown
+
         axios.post("http://localhost:8090/insertPcContent", this.Pc_content)
             .then(res =>{
               console.log(res)
@@ -128,18 +137,22 @@
           let _res = res.data;
           console.log(res)
           // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
-          this.$refs.md.$img2Url(pos, this.file_url);
+          // this.$refs.md.$img2Url(pos, "<img src='"+this.file_url+"'/>");
+          this.$refs.md.$imgUpdateByUrl(pos, this.file_url);
+
+
         })
       },
       $imgDel(pos) {
         delete this.img_file[pos];
       }
 
+    },
+    created() {
     }
-
   }
 </script>
-<link rel="stylesheet" href="G:\Vue-project\bcy-imitation\node_modules\editor.md\css\editormd.css">
+
 <style scoped>
 
 </style>

@@ -1,38 +1,29 @@
 <template>
-    <div>
+    <div class="markdown-body">
         <water-fall-text-cute v-for="(item,index) in TestCute01">
-            <el-avatar :size="40" :src="item.imgAvatar" slot="img-avatar"></el-avatar>
-            <strong slot="img-name">{{item.imgName}}</strong>
-            <span slot="img-text">{{item.imgText}}</span>
-            <span slot="img-content" v-html="item.imgContent">
-                         </span>
+            <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
+            <strong slot="img-name">{{item.user_name}}</strong>
+            <span slot="img-text">{{item.pc_title}}</span>
+            <span slot="img-content" v-html="item.pc_content"></span>
             <img :src="item.img" slot="img" class="cute-text-img" alt="">
-            <el-button slot="img-tags"
+          <!--  <el-button slot="img-tags"
                        type="info"
                        size="mini"
                        :plain="true"
                        :autofocus="false" v-for="(item2,index) in item.imgTags">
                 {{item2}}
-            </el-button>
-            <span slot="img-collect">
-                             {{item.imgCollect}}
-                         </span>
-            <span slot="img-go">
-                             {{item.imgGo}}
-                         </span>
-            <span slot="img-comment">
-                             {{item.imgComment}}
-                         </span>
-            <span slot="img-click">
-                             {{item.imgClick}}
-                         </span>
+            </el-button>-->
+            <span slot="img-collect">{{item.pc_collect}}</span>
+            <span slot="img-go">{{item.pc_go}}</span>
+            <span slot="img-comment">{{item.pc_comment}}</span>
+            <span slot="img-click">{{item.pc_click}}</span>
         </water-fall-text-cute>
     </div>
 </template>
 
 <script>
   import WaterFallTextCute from '../WaterFall-cute-text'
-
+  import "mavon-editor/dist/css/index.css"
 
   export default {
     name: "",
@@ -75,6 +66,9 @@
     }
   }
 </script>
+
+
+<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">
 
 <style scoped>
     .time {
