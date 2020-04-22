@@ -9,7 +9,7 @@
             <el-input
                     type="text"
                     placeholder="有趣的标题更吸引人(30字以内)"
-                    v-model="text"
+                    v-model="Pc_content.pc_title"
                     maxlength="30"
                     show-word-limit
             >
@@ -18,7 +18,7 @@
             <el-input
                     type="textarea"
                     placeholder="作者有话说：介绍一下你的作品设定，阅读提示吧"
-                    v-model="textarea"
+                    v-model="Pc_content.pc_info"
                     maxlength="300"
                     :autosize="{ minRows: 3, maxRows: 4}"
                     show-word-limit
@@ -28,7 +28,10 @@
             <br>
             <!--            mavon的markdown编辑器-->
             <div id="main">
-                <mavon-editor v-model="value" style="height: 500px" placeholder="输入正文,15000字以内，搬运他人作品不注明作者，会被关小黑屋哦~"/>
+                <mavon-editor v-model="Pc_content.pc_content"
+                              style="height: 500px"
+                              placeholder="输入正文,15000字以内，搬运他人作品不注明作者，会被关小黑屋哦~"
+                              ref=md @imgAdd="$imgAdd" @imgDel="$imgDel"/>
             </div>
         </el-card>
         <br>
@@ -54,7 +57,7 @@
         <input-jurs></input-jurs>
         <br>
         <div style="text-align: center">
-            <el-button type="danger">
+            <el-button type="danger" @click="submits()">
                 <i class="el-icon-edit-outline"></i>&nbsp;发布
             </el-button>
         </div>
@@ -84,7 +87,14 @@
         textarea: '', //描述
         inputVisible: false,
         inputValue: '',
-        options: [1, 2, 3, 4]
+        options: [1, 2, 3, 4],
+        Pc_content:{
+          pc_content:'',
+          pc_title:'',
+          pc_info:'',
+        },
+        img_file:[],
+        file_url:'',
       }
     },
     methods: {
@@ -94,6 +104,36 @@
           this.$refs.saveTagInput.$refs.input.focus();
         });
       },
+      //提交整个文字内容
+      submits(){
+        axios.post("http://localhost:8090/insertPcContent", this.Pc_content)
+            .then(res =>{
+              console.log(res)
+
+            })
+      },
+      // 绑定@imgAdd event
+      $imgAdd(pos, $file) {
+        // 第一步.将图片上传到服务器.
+        var formdata = new FormData();
+        formdata.append('file', $file);
+        // this.img_file[pos] = "http://127.0.0.1:8090/static/img"+$file.name;
+        this.file_url = "http://127.0.0.1:8090/static/img/"+$file.name;
+        axios({
+          url: 'http://127.0.0.1:8090/uploadsTextImg',
+          method: 'post',
+          data: formdata,
+          // headers: { 'Content-Type': 'multipart/form-data' },
+        }).then((res) => {
+          let _res = res.data;
+          console.log(res)
+          // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)
+          this.$refs.md.$img2Url(pos, this.file_url);
+        })
+      },
+      $imgDel(pos) {
+        delete this.img_file[pos];
+      }
 
     }
 
