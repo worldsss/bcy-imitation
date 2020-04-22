@@ -24,7 +24,15 @@
                     <slot name="img"></slot>
                 </a>
             </div>
-            <div style="text-align: left;width: 90%;margin: 5px auto;">
+            <!--标题插槽-->
+            <div style="width: 90%;margin: 0 auto">
+                <h3>
+                    <slot name="img-title"></slot>
+                </h3>
+            </div>
+
+<!--            内容插槽-->
+            <div style="text-align: left;width: 90%;margin: 5px auto;" class="index-text">
               <slot name="img-content"></slot>
             </div>
 
@@ -73,6 +81,52 @@
     }
 </script>
 
-<style scoped>
+<style>
+    .index-text img{
+        display: none !important;
+    }
+    .time {
+        font-size: 13px;
+        color: #999;
 
+    }
+
+    .fixedlunbo {
+        width: 22%;
+        position: fixed;
+        top: 20px;
+    }
+
+    .cute-img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .cute-text-img {
+        /* width: 90%;
+         height: 100%;
+         border-radius: 10px;*/
+        width: 100%;
+        position: relative;
+        bottom: 25%;
+        border-radius: 10px;
+    }
+
+
+    .lunbo-big {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 150px;
+        margin: 0;
+    }
+
+    .lunbo-small {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 500px;
+        margin: 0;
+    }
 </style>

@@ -3,9 +3,10 @@
         <water-fall-text-cute v-for="(item,index) in TestCute01">
             <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
             <strong slot="img-name">{{item.user_name}}</strong>
-            <span slot="img-text">{{item.pc_title}}</span>
+            <span slot="img-text">{{item.pc_info}}</span>
             <span slot="img-content" v-html="item.pc_content"></span>
-            <img :src="item.img" slot="img" class="cute-text-img" alt="">
+            <span slot="img-title" v-html="item.pc_title"></span>
+            <img :src="item.pc_firstImg" slot="img" class="cute-text-img" alt="">
           <!--  <el-button slot="img-tags"
                        type="info"
                        size="mini"
@@ -13,7 +14,7 @@
                        :autofocus="false" v-for="(item2,index) in item.imgTags">
                 {{item2}}
             </el-button>-->
-            <span slot="img-collect">{{item.pc_collect}}</span>
+            <span slot="img-collect">{{item.pc_collect == false?'已收藏':'收藏'}}</span>
             <span slot="img-go">{{item.pc_go}}</span>
             <span slot="img-comment">{{item.pc_comment}}</span>
             <span slot="img-click">{{item.pc_click}}</span>
