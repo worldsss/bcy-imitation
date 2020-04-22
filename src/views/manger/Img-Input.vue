@@ -125,7 +125,7 @@
       return {
         disabled: false,
         modelTags: ['限定捏土', 'jk', '汉服', 'Lolita', '手写', 'cos'],//推荐添加的标签
-        dynamicTags:[ /*{
+        dynamicTags: [ /*{
           "tid": 0,
           "tags_name": "",
           "proIndexList": null
@@ -162,7 +162,12 @@
           value: '禁止修改',
           label: '禁止修改'
         }],
-        value: []
+        value: [],
+        pro_tags: {
+          tid: 0,
+          prid: 0,
+        },
+        newPrid:0,
       }
     },
     methods: {
@@ -171,13 +176,13 @@
         fd.append('file', file);//传文件
         // fd.append('srid', this.aqForm.srid);//传其他参数
 
-      /*  //在点击上传之后才会执行的异步操作
-        axios.post('/api/uploads', fd).then(res => {
-          alert("上传成功")
+        /*  //在点击上传之后才会执行的异步操作
+          axios.post('/api/uploads', fd).then(res => {
+            alert("上传成功")
 
-        }).catch(err => {
+          }).catch(err => {
 
-        })*/
+          })*/
         //在点击上传之后才会执行的异步操作
         axios.post("http://127.0.0.1:8090/uploads", fd).then(res => {
           alert("上传成功")
@@ -203,26 +208,114 @@
         //格式化日期
         this.proContent.pr_date = new Date().toLocaleString() + "";
 
+        //提交上传事件
         this.$refs.newupload.submit();
         // alert(this.proContent.pr_img)
-        axios.post("/api/test", this.proContent).then(res => {
-          // alert(res.data)
-          //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
-          /* for (var i = 0; i < this.img.length; i++) {
 
-             axios.post("/api/insertImgs", {
-               prid: dass,
-               img: this.img[i]
-             })
-                 .then(res => {
-                   console.log(res)
+        //把标签和当前作品的关系上传到pro_tags表中
+
+
+        axios.post("/api/test", this.proContent)
+            .then(res => {
+              // alert(res)
+              console.log(res.data)
+              //把获得到的prid先存起来
+
+              this.pro_tags.prid = res.data;
+              //用递归代替for循环，可以保证正常执行顺序
+              const _this = this
+              function recurTest(j, length){
+                console.log(_this.dynamicTags)
+                _this.pro_tags.tid =  _this.dynamicTags[j].tid
+                axios.post("http://localhost:8090/insertProTags", _this.pro_tags)
+                    .then(res =>{
+                      console.log("第"+(j+1)+"次循环");
+                      if(++j < length){
+                        recurTest(j, length);
+                      }
+                    })
+
+              }
+              recurTest(0, this.dynamicTags.length);
+
+
+
+              //使用for循环不能解决异步请求最后的值都变为最后一个值的情况
+/*
+              for (var i=0;i<this.dynamicTags.length;i++){
+                this.pro_tags.tid = this.dynamicTags[i].tid
+                axios.post("http://localhost:8090/insertProTags", this.pro_tags)
+                    .then(res => {
+                      console.log(res)
+                    })
+              }*/
+            /*  this.pro_tags.tid = 1;
+              console.log(this.pro_tags)
+              axios.post("http://localhost:8090/insertProTags", this.pro_tags)
+                  .then(res => {
+                    console.log(res)
+                  })*/
+
+
+              //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
+              /* for (var i = 0; i < this.img.length; i++) {
+
+                 axios.post("/api/insertImgs", {
+                   prid: dass,
+                   img: this.img[i]
                  })
-           }*/
-          this.$router.replace("/")
+                     .then(res => {
+                       console.log(res)
+                     })
+               }*/
 
-        }).catch(err => {
+
+              //跳转到推荐页面
+              // this.$router.replace("/")
+
+            }).catch(err => {
 
         })
+
+
+        //把刚刚获取到的prid准备插入到pro_tags中
+        // this.pro_tags.prid = res.data
+        /*console.log(this.dynamicTags)*/
+/*
+        this.pro_tags.prid = this.newPrid;
+        function postTags() {
+          var i=0;
+
+          this.pro_tags.tid =  this.dynamicTags[i].tid
+          i++;
+          axios.post("http://localhost:8090/insertProTags", this.pro_tags)
+              .then(res => {
+                console.log(res)
+                if(i<this.dynamicTags.length){
+                  postTags()
+                }
+
+              })
+
+        }
+        postTags()*/
+      /*  this.pro_tags.prid = this.newPrid;
+        //用递归代替for循环，可以保证正常执行顺序
+        const _this = this
+        function recurTest(j, length){
+          console.log(_this.dynamicTags)
+          _this.pro_tags.tid =  _this.dynamicTags[j].tid
+          axios.post("http://localhost:8090/insertProTags", _this.pro_tags)
+            .then(res =>{
+              console.log("第"+(j+1)+"次循环");
+              if(++j < length){
+                recurTest(j, length);
+              }
+            })
+
+        }
+        recurTest(0, this.dynamicTags.length);
+*/
 
 
       },
@@ -231,18 +324,18 @@
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       },
-      removeImg(){
+      removeImg() {
         this.img = ""
       },
 
     },
     created() {
       axios.get("http://localhost:8090/showTags")
-           .then(res=>{
-             // alert("获取成功")
-             console.log(res.data)
-             this.modelTags = res.data
-           })
+          .then(res => {
+            // alert("获取成功")
+            console.log(res.data)
+            this.modelTags = res.data
+          })
 
 
     }
