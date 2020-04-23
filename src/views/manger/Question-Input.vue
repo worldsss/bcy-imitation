@@ -79,7 +79,6 @@
       return {
         //上传到服务器中提交文字的对象
         quContent: {
-          quid: 1,
           qu_text: '',
           qu_info: '',
           qu_date: '',
@@ -88,7 +87,7 @@
           quid: 1,
           img: "",
         },
-        quimg:[],//用于保存当前上传的图片数组，上传之前循环赋值给要上传的字段
+        quimg: [],//用于保存当前上传的图片数组，上传之前循环赋值给要上传的字段
         img: '',//这里是上传图片的显示
         doUpload: '',//这里是错误的上传地址，用来阻断默认的上传事件
         dialogVisible: false,//是否显示模态框，用来显示大图
@@ -124,7 +123,7 @@
       newSubmitForm() {//确定上传
 
 
-        //把当前要上传的quid赋值给qu_imgs中的外键约束
+     /*   //把当前要上传的quid赋值给qu_imgs中的外键约束
         this.quImgs.quid = this.quContent.quid
 
         const _this = this
@@ -143,6 +142,28 @@
         }
 
         recurTest(0, this.quimg.length);
+*/
+        const _this = this
+        axios.post("http://127.0.0.1:8090/insertQuContent", this.quContent)
+            .then(res => {
+              console.log(res)
+              //把当前要上传的quid赋值给qu_imgs中的外键约束
+
+              function recurTest(j, length) {
+                _this.quImgs.img = _this.quimg[j]
+                axios.post("http://127.0.0.1:8090/insertQuImg", _this.quImgs)
+                    .then(res => {
+                      console.log("第" + (j + 1) + "次循环");
+                      if (++j < length) {
+                        recurTest(j, length);
+                      }
+                    })
+
+              }
+
+              recurTest(0, this.quimg.length);
+            })
+
 
         //提交上传事件
         this.$refs.newupload.submit();
