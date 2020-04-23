@@ -212,18 +212,15 @@
       },
       imgOne: {
         type: Boolean,
-        // default: false
-        default: true
+        default: false
       },
       imgTwo: {
         type: Boolean,
-        // default: false
         default: false
       },
       imgThree: {
         type: Boolean,
-        // default: true
-        default: false
+        default: true
       }
     }
   }
