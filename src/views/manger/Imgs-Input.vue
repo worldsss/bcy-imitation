@@ -193,7 +193,7 @@
         // console.log(this.img)
         // alert(this.proContent.pr_img)
 
-        console.log(this.imgName)
+        console.log(this.imgName )
       },
       //真正的上传事件
       newSubmitForm() {//确定上传

@@ -1,5 +1,44 @@
 <template>
     <div>
+     <!--   <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks">
+            <el-avatar :size="40" :src="item.ImgsAvator" slot="img-avatar"></el-avatar>
+            <strong slot="img-name">
+                {{item.ImgsName}}
+            </strong>
+            <span slot="img-text">
+                {{item.ImgsText}}
+            </span>
+
+            <img v-for="(item1,index1) in item.Imgs"  :slot="index1" :src="item1" alt="" class="imgs-width">
+
+&lt;!&ndash;            <img slot="0" src="3.jpg" alt="" class="imgs-width">&ndash;&gt;
+
+          &lt;!&ndash;  <div v-for="(item1,index) in item.Imgs">
+
+                <img :slot="index" :src="item1"  alt="">
+
+              &lt;!&ndash;  <slot name="imgs02"></slot>
+                <slot name="imgs03"></slot>&ndash;&gt;
+            </div>
+&ndash;&gt;
+            <span slot="img-collect">
+                {{item.ImgsCollect}}
+            </span>
+            <span slot="img-go">
+                {{item.ImgsGO}}
+            </span>
+            <span slot="img-comment">
+                {{item.ImgsComment}}
+            </span>
+            <span slot="img-click">
+                {{item.ImgsClick}}
+            </span>
+        </water-fall-imgs>
+
+-->
+
+
+
         <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks">
             <el-avatar :size="40" :src="item.ImgsAvator" slot="img-avatar"></el-avatar>
             <strong slot="img-name">
@@ -11,16 +50,6 @@
 
             <img v-for="(item1,index1) in item.Imgs"  :slot="index1" :src="item1" alt="" class="imgs-width">
 
-<!--            <img slot="0" src="3.jpg" alt="" class="imgs-width">-->
-
-          <!--  <div v-for="(item1,index) in item.Imgs">
-
-                <img :slot="index" :src="item1"  alt="">
-
-              &lt;!&ndash;  <slot name="imgs02"></slot>
-                <slot name="imgs03"></slot>&ndash;&gt;
-            </div>
--->
             <span slot="img-collect">
                 {{item.ImgsCollect}}
             </span>

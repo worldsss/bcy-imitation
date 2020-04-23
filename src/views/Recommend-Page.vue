@@ -3,17 +3,20 @@
         <div class="main-left">
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12">
+                    <!--单图片-->
                     <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>
 
 
+                    <!--多图片-->
+                    <water-fall-all-imgs :water-imgs="imgsContent">
 
-                    <water-fall-all-imgs></water-fall-all-imgs>
+                    </water-fall-all-imgs>
 
                 </el-col>
                 <el-col :span="12">
                     <!--单图片显示瀑布流-->
                     <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>
-<!--                    文字显示瀑布流-->
+                    <!-- 文字显示瀑布流-->
                     <water-fall-all-text :test-cute01="textCute"></water-fall-all-text>
 
 
@@ -22,7 +25,10 @@
 
         </div>
 
-        <right-ranking-tags :rank-tags="rankTags" :rank-name="rankName" :active-rank="activeRank"
+        <!--     右侧关注的用户和圈子-->
+        <right-ranking-tags :rank-tags="rankTags"
+                            :rank-name="rankName"
+                            :active-rank="activeRank"
                             :rank-tags01="rankTags">
 
         </right-ranking-tags>
@@ -68,7 +74,7 @@
         isFixed: false,
         scrollNowLoation: '',
         squareUrl: '2.jpg',
-        textCute:[],
+        textCute: [],
         imgCute01: [
           {
             user_avatar: '1.jpg',
@@ -162,7 +168,8 @@
             imgComment: 15,
             imgClick: 4505,
           },
-        ]
+        ],
+        imgsContent:[],
       }
     },
     mounted() {
@@ -178,11 +185,11 @@
       }
     },
     created() {
-     /* axios.get("http://localhost:8090/showPro")
-          .then(res => {
-            console.log(res.data)
-            this.imgCute01 = res.data.list;
-          })*/
+      /* axios.get("http://localhost:8090/showPro")
+           .then(res => {
+             console.log(res.data)
+             this.imgCute01 = res.data.list;
+           })*/
 
       axios.get("http://localhost:8090/showIndex")
           .then(res => {
