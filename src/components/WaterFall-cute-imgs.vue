@@ -71,26 +71,48 @@
             -->
 
 
-              <a href="#" target="_blank">
+            <!--  <a href="#" target="_blank">
                   <div :class="imgThree==true?'img-cute':'img-two-cute'">
-                      <!--                    <div :class="imgThree==true?img-three-left:imgTwo==true?img-two-left:img-one">-->
+                      &lt;!&ndash;                    <div :class="imgThree==true?img-three-left:imgTwo==true?img-two-left:img-one">&ndash;&gt;
                       <div :class="imgThree==true?'img-three-left':imgTwo==true?'img-two-left':img-one">
                           <slot name="0"></slot>
-                          <!-- <el-image></el-image>-->
+                          &lt;!&ndash; <el-image></el-image>&ndash;&gt;
                       </div>
                       <div :class="imgThree==true?'img-three-cute':imgTwo==true?'img-two-right':''">
                           <div :class="imgThree==true?'img-three-right-top':imgTwo==true?'img-two-right-img':''" v-show="!imgOne">
                               <slot name="1"></slot>
-                              <!--<el-image></el-image>-->
+                              &lt;!&ndash;<el-image></el-image>&ndash;&gt;
                           </div>
                           <div class="img-three-right-bottom" v-show="imgThree">
                               <slot name="2" v-show="imgThree"></slot>
 
-                              <!-- <el-image></el-image>-->
+                              &lt;!&ndash; <el-image></el-image>&ndash;&gt;
                           </div>
                       </div>
                   </div>
               </a>
+-->
+            <a href="#" target="_blank">
+                <div :class="imgCount==3?'img-cute':'img-two-cute'">
+                    <!--                    <div :class="imgThree==true?img-three-left:imgTwo==true?img-two-left:img-one">-->
+                    <div :class="imgCount==3?'img-three-left':imgCount==2?'img-two-left':img-one">
+                        <slot name="0"></slot>
+                        <!-- <el-image></el-image>-->
+                    </div>
+                    <div :class="imgCount==3?'img-three-cute':imgCount==2?'img-two-right':''">
+                        <div :class="imgCount==3?'img-three-right-top':imgCount==2?'img-two-right-img':''" v-if="imgCount!=1">
+                            <slot name="1"></slot>
+                            <!--<el-image></el-image>-->
+                        </div>
+                        <div class="img-three-right-bottom" v-if="imgCount==3">
+                            <slot name="2" v-if="imgCount==3"></slot>
+
+                            <!-- <el-image></el-image>-->
+                        </div>
+                    </div>
+                </div>
+            </a>
+
 
             <!-- 两种图片的情况-->
             <!-- <a href="#" target="_blank">
@@ -210,18 +232,18 @@
         type: String,
         default: '14'
       },
-      imgOne: {
-        type: Boolean,
-        default: false
+      imgCount: {
+        type: Number,
+        default: 3
       },
-      imgTwo: {
+    /*  imgTwo: {
         type: Boolean,
         default: false
       },
       imgThree: {
         type: Boolean,
         default: true
-      }
+      }*/
     }
   }
 </script>
