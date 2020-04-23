@@ -6,12 +6,12 @@
                 <h3>发布问题</h3>
                 <el-divider></el-divider>
 
-                <!--                问题标题-->
+                <!--  问题标题-->
                 <el-input placeholder="问题标题" v-model="quContent.qu_text">
 
                 </el-input>
                 <br><br>
-                <!--                问题简介-->
+                <!-- 问题简介-->
                 <el-input
                         type="textarea"
                         :autosize="{ minRows: 4, maxRows: 8}"
@@ -84,7 +84,7 @@
           qu_date: '',
         },
         quImgs: {
-          img: "",
+          img: "",//上传的图片
         },
         quimg: [],//用于保存当前上传的图片数组，上传之前循环赋值给要上传的字段
         img: '',//这里是上传图片的显示
@@ -100,7 +100,7 @@
         let fd = new FormData();
         fd.append('file', file);//传文件
 
-        //在点击上传之后才会执行的异步操作
+        //在点击上传之后才会执行的异步操作,这里把图片上传到服务器中
         axios.post("http://127.0.0.1:8090/uploadQuImgs", fd)
             .then(res => {
               console.log(res.data)
@@ -125,9 +125,8 @@
             .then(res => {
               console.log(res)
               //把当前要上传的quid赋值给qu_imgs中的外键约束
-
+               //这里使用递归把每次获取到的图片名称赋值给要上传的字段
               function recurTest(j, length) {
-
                 _this.quImgs.img = _this.quimg[j]
                 axios.post("http://127.0.0.1:8090/insertQuImg", _this.quImgs)
                     .then(res => {
