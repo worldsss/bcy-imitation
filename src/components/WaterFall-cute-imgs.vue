@@ -95,7 +95,7 @@
             <a href="#" target="_blank">
                 <div :class="imgCount==3?'img-cute':'img-two-cute'">
                     <!--                    <div :class="imgThree==true?img-three-left:imgTwo==true?img-two-left:img-one">-->
-                    <div :class="imgCount==3?'img-three-left':imgCount==2?'img-two-left':img-one">
+                    <div :class="imgCount==3?'img-three-left':imgCount==2?'img-two-left':'img-one'">
                         <slot name="0"></slot>
                         <!-- <el-image></el-image>-->
                     </div>

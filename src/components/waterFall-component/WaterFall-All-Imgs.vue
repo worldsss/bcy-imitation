@@ -39,7 +39,7 @@
 
 
 
-        <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" >
+        <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" :img-count="item.pr_img_count">
             <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
             <strong slot="img-name">
                 {{item.user_name}}

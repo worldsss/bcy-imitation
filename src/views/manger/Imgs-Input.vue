@@ -223,12 +223,21 @@
                       console.log("第" + (j + 1) + "次循环");
                       if (++j < length) {
                         recurTest(j, length);
+                      }else {
+                        //发送改变当前pro_content中的图片个数的字段，在图片上传完成之后发送
+                        axios.get("http://127.0.0.1:8090/updateProImgCount")
+                            .then(res =>{
+                              console.log("这里是1的话图片个数修改成功"+res)
+                            })
                       }
                     })
 
               }
 
               recurTest(0, this.imgName.length);
+
+
+
             })
 
               //使用for循环不能解决异步请求最后的值都变为最后一个值的情况
