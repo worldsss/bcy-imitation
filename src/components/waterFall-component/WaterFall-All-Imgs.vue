@@ -39,28 +39,38 @@
 
 
 
-        <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks">
-            <el-avatar :size="40" :src="item.ImgsAvator" slot="img-avatar"></el-avatar>
+        <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" >
+            <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
             <strong slot="img-name">
-                {{item.ImgsName}}
+                {{item.user_name}}
             </strong>
             <span slot="img-text">
-                {{item.ImgsText}}
+                {{item.pr_info}}
             </span>
 
-            <img v-for="(item1,index1) in item.Imgs"  :slot="index1" :src="item1" alt="" class="imgs-width">
+           <!-- <img v-for="(item1,index1) in item.pro_imgs"
+                 :slot="index1"
+                 :src="item1.img"
+                 alt=""
+                 class="imgs-width"  />-->
 
+            <el-image v-for="(item1,index1) in item.pro_imgs"
+                 :slot="index1"
+                 :src="item1.img"
+                 alt=""
+                 fit="cover"
+                 class="imgs-width"  />
             <span slot="img-collect">
-                {{item.ImgsCollect}}
+<!--                {{item.pr_}}-->
             </span>
             <span slot="img-go">
-                {{item.ImgsGO}}
+                {{item.pr_go}}
             </span>
             <span slot="img-comment">
-                {{item.ImgsComment}}
+                {{item.pr_comment_count}}
             </span>
             <span slot="img-click">
-                {{item.ImgsClick}}
+                {{item.pr_click}}
             </span>
         </water-fall-imgs>
     </div>
@@ -86,7 +96,12 @@
           ]
         }
       },
-      imgLinks:''
+      imgLinks:'',
+
+
+    },
+    created() {
+      // console.log(this.WaterImgs[0].pro_imgs.length);
     }
   }
 </script>

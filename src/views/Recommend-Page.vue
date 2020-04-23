@@ -195,12 +195,19 @@
           .then(res => {
             console.log(res.data)
             this.imgCute02 = res.data.list;
+            this.imgsContent = res.data.list;
           })
       axios.get("http://localhost:8090/showPcIndex")
           .then(res => {
             console.log(res.data)
             this.textCute = res.data.list;
           })
+
+      /*axios.get("http://localhost:8090/showIndex")
+          .then(res => {
+            console.log(res.data)
+            this.textCute = res.data.list;
+          })*/
 
     }
 
