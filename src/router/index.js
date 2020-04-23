@@ -20,6 +20,7 @@ import NewImgInput from '../views/manger/new-Img-Input'
 import NewImgTestInput from '../views/manger/New-Img-Test-Input'
 import Test02 from '../views/manger/Test02'
 import QuestionsPage from '../views/Questions-page'
+import ImgsPage from "../views/manger/Imgs-Input"
 
 
 Vue.use(VueRouter)
@@ -92,6 +93,7 @@ const routes = [
                   title:'问答'
               }
             },
+
         ]
     }, {
         path: '/test',
@@ -122,6 +124,13 @@ const routes = [
         meta:{
             title:'发布问题'
         },
+    },
+    {
+        path:'/imgs-input',
+        component:ImgsPage,
+        meta:{
+            title:'多图片上传'
+        }
     },
     {
         path: '/user-main',
