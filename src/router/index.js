@@ -19,6 +19,7 @@ import ImgUpload from '../views/Test-imgupload'
 import NewImgInput from '../views/manger/new-Img-Input'
 import NewImgTestInput from '../views/manger/New-Img-Test-Input'
 import Test02 from '../views/manger/Test02'
+import QuestionsPage from '../views/Questions-page'
 
 
 Vue.use(VueRouter)
@@ -83,6 +84,13 @@ const routes = [
                 meta:{
                     title:'写作'
                 }
+            },
+            {
+              path:'/question-page',
+              component:QuestionsPage,
+              meta:{
+                  title:'问答'
+              }
             },
         ]
     }, {

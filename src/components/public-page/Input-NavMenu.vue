@@ -16,7 +16,7 @@
         <el-menu-item index="/img-page">绘画</el-menu-item>
         <el-menu-item index="/cospage-page">COS</el-menu-item>
         <el-menu-item index="/write-page">写作</el-menu-item>
-        <el-menu-item index="8">问答</el-menu-item>
+        <el-menu-item index="/question-page">问答</el-menu-item>
 
         <!--        发布按钮的popover-->
         <el-popover
