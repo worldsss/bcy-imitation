@@ -9,7 +9,7 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
-<!--                图片的显示-->
+                <!--                图片的显示-->
                 <div style="" class="addimg-div" v-for="(item,index) in img">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
@@ -41,7 +41,7 @@
                 <p style="text-align: left">想说的话</p>
                 <div style="margin: 20px 0;"></div>
 
-<!--                图片简介-->
+                <!--                图片简介-->
                 <el-input
                         type="textarea"
                         :autosize="{ minRows: 4, maxRows: 4}"
@@ -50,9 +50,60 @@
                 </el-input>
 
                 <!-- 标签的标签-->
-                <input-tag :model-tags="modelTags" :dynamic-tags="dynamicTags">
+                <!--   <input-tag :model-tags="modelTags" :dynamic-tags="dynamicTags">
 
-                </input-tag>
+                   </input-tag>-->
+
+                <div>
+                    <p style="text-align: left">更多标签</p>
+                    <!--  <el-tag :key="tag"
+                              v-for="tag in dynamicTags"
+                              closable
+                              :disable-transitions="false"
+                              @close="handleClose(tag)"
+                              style="float: left">
+                          {{tag}}
+                      </el-tag>-->
+                    <el-tag :key="index"
+                            v-for="(tag,index) in dynamicTags"
+                            closable
+                            :disable-transitions="false"
+                            @close="handleClose(tag)"
+                            style="float: left">
+                        {{tag.tags_name}}
+                    </el-tag>
+
+                    <el-input
+                            class="input-new-tag"
+                            v-if="inputVisible"
+                            v-model="inputValue"
+                            ref="saveTagInput"
+                            size="small"
+                            @keyup.enter.native="handleInputConfirm"
+                            @blur="handleInputConfirm"
+                    >
+                    </el-input>
+                    <el-button v-else class="button-new-tag" style="float: left" size="small" @click="showInput">
+                        添加标签+
+                    </el-button>
+                    <br><br>
+                    <p style="opacity: 0.5;text-align: left">
+                        推荐标签（合适的标签能带来更多赞，COS、插画、绘画作品请打上‘COS’、‘插画’、‘绘画’标签哦)
+                    </p>
+                    <!--        :key="tag.index"-->
+                    <!-- <el-tag
+                             v-for="(tags,index) in modelTags"
+                             :disable-transitions="false"
+                             @click="addTags(tags)">
+                         {{tags}}
+                     </el-tag>-->
+                    <el-tag
+                            v-for="(tags,index) in modelTags"
+                            :disable-transitions="false"
+                            @click="addTags(tags)">
+                        {{tags.tags_name}}
+                    </el-tag>
+                </div>
 
             </el-card>
             <br>
@@ -90,9 +141,12 @@
             </el-card>
             <br>
             <div style="text-align: center">
-                <el-button type="danger" @click="newSubmitForm">
+<!--                <el-button type="danger" @click="newSubmitForm">-->
+              <!--  <el-button type="danger" @mousedown="newSubmitForm" @mouseup="insertTags">
                     <i class="el-icon-edit-outline"></i>&nbsp;发布
-                </el-button>
+                </el-button>-->
+
+                <button  @mousedown="newSubmitForm" @mouseleave="insertTags">发布</button>
             </div>
         </el-main>
     </div>
@@ -151,20 +205,28 @@
           label: '禁止修改'
         }],
         value: [],
-       /* dynamicTags: {
-          tid: 0,
-          // prid: 0,
-        },*/
+        /* dynamicTags: {
+           tid: 0,
+           // prid: 0,
+         },*/
         newPrid: 0,
         //上传的多个对象
         proImgs: {
           img: '',
         },
         imgName: [], //这里存放的是将要传入数据库中的路径
-        pro_tags:{
-
+        pro_tags: { //这里是真正要上传到服务器中的对象
+          tid: 0,
+          prid:0
         },
-
+        dialogImageUrl: '',
+        dialogVisible: false,
+        disabled: false,
+        textarea1: '',
+        textarea2: '',
+        inputVisible: false,
+        inputValue: '',
+        moretags: false,
 
 
       }
@@ -192,6 +254,7 @@
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
+        alert("点击鼠标")
         //格式化日期
         this.proContent.pr_date = new Date().toLocaleString() + "";
         //提交上传事件
@@ -227,35 +290,18 @@
 
 
 
-              function tagsUpload(j, length) {
-                console.log(_this.dynamicTags)
-                // _this.dynamicTags.tid = _this.dynamicTags[j].tid
-
-                axios.post("http://localhost:8090/insertProTags", _this.dynamicTags)
-                    .then(res => {
-                      console.log("第" + (j + 1) + "次循环");
-                      if (++j < length) {
-                        recurTest(j, length);
-                      }
-                    })
-
-              }
-
-              tagsUpload(0, this.dynamicTags.length);
-
-
-            /*  console.log(_this.dynamicTags)
-               axios({
-                 method:'POST',
-                 headers: {
-                   'Accept': 'application/json',
-                   'Content-Type': 'application/json'
-                 },
-                 url:'http://127.0.0.1:8090/insertForProTags'
-               },_this.dynamicTags)
-               .then(res =>{
-                 console.log(res)
-               })*/
+              /*  console.log(_this.dynamicTags)
+                 axios({
+                   method:'POST',
+                   headers: {
+                     'Accept': 'application/json',
+                     'Content-Type': 'application/json'
+                   },
+                   url:'http://127.0.0.1:8090/insertForProTags'
+                 },_this.dynamicTags)
+                 .then(res =>{
+                   console.log(res)
+                 })*/
 
               /*axios.post("http://127.0.0.1:8090/insertForProTags", _this.dynamicTags)
                   .then(res => {
@@ -270,11 +316,50 @@
             //跳转到推荐页面
             // this.$router.replace("/")
 
+
+
             .catch(err => {
 
             })
 
 
+      },
+      insertTags(){
+
+        alert("抬起鼠标")
+        var _this = this
+        function tagsUpload(j, length) {
+          console.log(_this.dynamicTags)
+          _this.pro_tags.tid = _this.dynamicTags[j].tid
+          axios.post("http://localhost:8090/insertProTags", _this.pro_tags)
+              .then(res => {
+                if (++j < length) {
+                  tagsUpload(j, length);
+                }
+
+              })
+
+        }
+
+        tagsUpload(0, this.dynamicTags.length);
+
+      },
+      handleClose(tag) {
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      },
+      showInput() {
+        this.inputVisible = true;
+        this.$nextTick(_ => {
+          this.$refs.saveTagInput.$refs.input.focus();
+        });
+      },
+      handleInputConfirm() {
+        let inputValue = this.inputValue;
+        if (inputValue) {
+          this.dynamicTags.push(inputValue);
+        }
+        this.inputVisible = false;
+        this.inputValue = '';
       },
       //在模态框中查看图片大图
       handlePictureCardPreview(file) {
@@ -285,30 +370,33 @@
         this.img.splice(index, 1)
 
       },
+      addTags(index) {
+        console.log(index.tags_name)
+        if (this.dynamicTags == "") {
+          // alert("第一次点击")
+          this.dynamicTags.push(index)
+          console.log(this.dynamicTags)
+        } else {
+          for (var i = 0; i < this.dynamicTags.length; i++) {
+            if (this.dynamicTags[i].tags_name == index.tags_name) {
+              this.moretags = false
+              alert("不能添加相同的标签")
+            } else {
+              this.moretags = true
 
-    },
-    addTags(index) {
-      console.log("点击")
-      if (this.dynamicTags == "") {
-        // alert("第一次点击")
-        this.dynamicTags.push(index)
-        console.log(this.dynamicTags)
-      } else {
-        for (var i=0;i<this.dynamicTags.length;i++){
-          if (this.dynamicTags[i].tags_name == index.tags_name){
-            this.moretags = false
-            alert("不能添加相同的标签")
-          }else {
-            this.moretags = true
-
+            }
+          }
+          if (this.moretags) {
+            this.dynamicTags.push(index)
+            console.log(this.dynamicTags)
           }
         }
-        if(this.moretags){
-          this.dynamicTags.push(index)
-        }
-      }
+
+      },
 
     },
+
+
     created() {
 
       //请求推荐的标签名称

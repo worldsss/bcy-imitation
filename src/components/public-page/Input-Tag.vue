@@ -118,8 +118,6 @@
         disabled: false,
         textarea1: '',
         textarea2: '',
-        // modelTags:['限定捏土','jk','汉服','Lolita','手写','cos'],
-        // dynamicTags: [], //这里是存放的数组
         inputVisible: false,
         inputValue: '',
         moretags: false,
