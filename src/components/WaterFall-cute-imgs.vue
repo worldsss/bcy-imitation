@@ -175,7 +175,8 @@
                  </div>
              </a>-->
 
-            <br><br>
+<!--            <br><br>-->
+<!--            <br>-->
             <!--
 
                         <br><br>
@@ -201,7 +202,12 @@
                        :autofocus="false" v-for="(item2,index) in item.imgTags">
                 {{item2}}
             </el-button>-->
-            <slot name="img-tags"></slot>
+            <div style="width: 90%;margin: 10px auto;">
+                <slot name="img-tags">
+
+                </slot>
+            </div>
+
 
             <el-row :gutter="10" style="width: 90%;margin: 0 auto;text-align: center">
                 <el-col :span="6">
