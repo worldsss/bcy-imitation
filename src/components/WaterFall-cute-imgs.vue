@@ -92,22 +92,59 @@
                   </div>
               </a>
 -->
-            <a href="#" target="_blank">
+
+
+            <!--最高杰作，根据不同的数字来判断显示几个图片-->
+          <!--  <a href="#" target="_blank">
                 <div :class="imgCount==3?'img-cute':'img-two-cute'">
-                    <!--                    <div :class="imgThree==true?img-three-left:imgTwo==true?img-two-left:img-one">-->
                     <div :class="imgCount==3?'img-three-left':imgCount==2?'img-two-left':'img-one'">
                         <slot name="0"></slot>
-                        <!-- <el-image></el-image>-->
                     </div>
                     <div :class="imgCount==3?'img-three-cute':imgCount==2?'img-two-right':''">
-                        <div :class="imgCount==3?'img-three-right-top':imgCount==2?'img-two-right-img':''" v-if="imgCount!=1">
+                        <div :class="imgCount==3?'img-three-right-top':imgCount==2?'img-two-right-img':''"
+                             v-if="imgCount!=1">
                             <slot name="1"></slot>
-                            <!--<el-image></el-image>-->
                         </div>
                         <div class="img-three-right-bottom" v-if="imgCount==3">
                             <slot name="2" v-if="imgCount==3"></slot>
+                        </div>
+                    </div>
+                </div>
+            </a>
+-->
+            <!--最高杰作，根据不同的数字来判断显示几个图片-->
+         <!--   <a href="#" target="_blank">
+                <div :class="imgCount==3?'img-cute':imgCount==2?'img-two-cute':'img-one-cute'">
+                    <div :class="imgCount==3?'img-three-left':imgCount==2?'img-two-left':'img-one'">
+                        <slot name="0"></slot>
+                    </div>
+                    <div :class="imgCount==3?'img-three-cute':imgCount==2?'img-two-right':''">
+                        <div :class="imgCount==3?'img-three-right-top':imgCount==2?'img-two-right-img':''"
+                             v-if="imgCount!=1">
+                            <slot name="1"></slot>
+                        </div>
+                        <div class="img-three-right-bottom" v-if="imgCount==3">
+                            <slot name="2" v-if="imgCount==3"></slot>
+                        </div>
+                    </div>
+                </div>
+            </a>
+-->
 
-                            <!-- <el-image></el-image>-->
+
+            <!--最高杰作，根据不同的数字来判断显示几个图片-->
+            <a href="#" target="_blank">
+                <div :class="imgCount>=3?'img-cute':imgCount==2?'img-two-cute':'img-one-cute'">
+                    <div :class="imgCount>=3?'img-three-left':imgCount==2?'img-two-left':'img-one'">
+                        <slot name="0"></slot>
+                    </div>
+                    <div :class="imgCount>=3?'img-three-cute':imgCount==2?'img-two-right':''">
+                        <div :class="imgCount>=3?'img-three-right-top':imgCount==2?'img-two-right-img':''"
+                             v-if="imgCount!=1">
+                            <slot name="1"></slot>
+                        </div>
+                        <div class="img-three-right-bottom" v-if="imgCount>=3">
+                            <slot name="2" v-if="imgCount>=3"></slot>
                         </div>
                     </div>
                 </div>
@@ -129,14 +166,14 @@
              </a>-->
 
             <!-- 一种图片的情况-->
-           <!-- <a href="#" target="_blank">
-                <div class="img-one">
-                    <div class="">
-                        <slot name="0"></slot>
-                    </div>
+            <!-- <a href="#" target="_blank">
+                 <div class="img-one">
+                     <div class="">
+                         <slot name="0"></slot>
+                     </div>
 
-                </div>
-            </a>-->
+                 </div>
+             </a>-->
 
             <br><br>
             <!--
@@ -236,14 +273,14 @@
         type: Number,
         default: 3
       },
-    /*  imgTwo: {
-        type: Boolean,
-        default: false
-      },
-      imgThree: {
-        type: Boolean,
-        default: true
-      }*/
+      /*  imgTwo: {
+          type: Boolean,
+          default: false
+        },
+        imgThree: {
+          type: Boolean,
+          default: true
+        }*/
     }
   }
 </script>
@@ -257,13 +294,21 @@
         height: 325px;
         clear: both
     }
-
+    /*两个图片的容器*/
     .img-two-cute {
         width: 95%;
         margin: 0 auto;
         height: 255px;
         clear: both
     }
+    /*一张图片的容器*/
+    .img-one-cute{
+        width: 95%;
+        margin: 0 auto;
+        height: auto;
+    }
+
+
 
     .img-one {
         width: 100%;

@@ -43,7 +43,8 @@
                     <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
                 </input-link-button>
             </router-link>-->
-            <router-link to="/img-input">
+<!--            <router-link to="/img-input">-->
+            <router-link to="/imgs-input">
 
                 <input-link-button>
                     <img slot="link-img"

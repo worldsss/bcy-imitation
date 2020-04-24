@@ -4,7 +4,7 @@
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12">
                     <!--单图片-->
-                    <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>
+<!--                    <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>-->
 
 
                     <!--多图片-->
@@ -15,7 +15,7 @@
                 </el-col>
                 <el-col :span="12">
                     <!--单图片显示瀑布流-->
-                    <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>
+<!--                    <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>-->
                     <!-- 文字显示瀑布流-->
                     <water-fall-all-text :test-cute01="textCute"></water-fall-all-text>
 
