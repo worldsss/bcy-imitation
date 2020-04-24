@@ -47,8 +47,14 @@
             <span slot="img-text">
                 {{item.pr_info}}
             </span>
-
-           <!-- <img v-for="(item1,index1) in item.pro_imgs"
+            <el-button slot="img-tags"
+                       type="info"
+                       size="mini"
+                       :plain="true"
+                       :autofocus="false" v-for="(item2,index) in item.pr_tags">
+                {{item2.tags_name}}
+            </el-button>
+          <!--  <img v-for="(item1,index1) in item.pro_imgs"
                  :slot="index1"
                  :src="item1.img"
                  alt=""

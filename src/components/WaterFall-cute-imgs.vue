@@ -194,7 +194,14 @@
                   &lt;!&ndash;                文字插槽&ndash;&gt;
                   <slot name="img-content"></slot>
               </div>-->
-
+           <!-- <el-button slot="img-tags"
+                       type="info"
+                       size="mini"
+                       :plain="true"
+                       :autofocus="false" v-for="(item2,index) in item.imgTags">
+                {{item2}}
+            </el-button>-->
+            <slot name="img-tags"></slot>
 
             <el-row :gutter="10" style="width: 90%;margin: 0 auto;text-align: center">
                 <el-col :span="6">
