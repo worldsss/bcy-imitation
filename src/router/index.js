@@ -149,7 +149,7 @@ const routes = [
         },
     },
     {
-        path: '/content',
+        path: '/content/:prid',
         name: 'UserMain',
         component: Content,
         meta:{

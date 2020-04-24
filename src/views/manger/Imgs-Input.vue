@@ -314,7 +314,7 @@
             })
 
             //跳转到推荐页面
-            // this.$router.replace("/")
+            this.$router.replace("/")
 
 
 
