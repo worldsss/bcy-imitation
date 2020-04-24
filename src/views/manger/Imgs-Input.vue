@@ -9,6 +9,7 @@
                 <h2>发布图片</h2>
                 <el-divider></el-divider>
 
+<!--                图片的显示-->
                 <div style="" class="addimg-div" v-for="(item,index) in img">
                     <img :src="item" alt="" class="my-uploadimg-style"/>
                     <el-button type="danger"
@@ -39,6 +40,8 @@
                 <p style="text-align: left;opacity: 0.5">点击添加图片,只能发布一张</p>
                 <p style="text-align: left">想说的话</p>
                 <div style="margin: 20px 0;"></div>
+
+<!--                图片简介-->
                 <el-input
                         type="textarea"
                         :autosize="{ minRows: 4, maxRows: 4}"
@@ -46,6 +49,7 @@
                         v-model="proContent.pr_info">
                 </el-input>
 
+                <!-- 标签的标签-->
                 <input-tag :model-tags="modelTags" :dynamic-tags="dynamicTags">
 
                 </input-tag>
@@ -113,11 +117,7 @@
       return {
         disabled: false,
         modelTags: ['限定捏土', 'jk', '汉服', 'Lolita', '手写', 'cos'],//推荐添加的标签
-        dynamicTags: [ /*{
-          "tid": 0,
-          "tags_name": "",
-          "proIndexList": null
-        }*/], //当前选择的标签
+        dynamicTags: [], //当前选择的标签
 
         doUpload: 'http://l/uploads',
         dialogImageUrl: '',
@@ -151,16 +151,22 @@
           label: '禁止修改'
         }],
         value: [],
-        pro_tags: {
+       /* dynamicTags: {
           tid: 0,
-          prid: 0,
-        },
-        newPrid:0,
+          // prid: 0,
+        },*/
+        newPrid: 0,
         //上传的多个对象
-        proImgs:{
-          img:'',
+        proImgs: {
+          img: '',
         },
-        imgName:[], //这里存放的是将要传入数据库中的路径
+        imgName: [], //这里存放的是将要传入数据库中的路径
+        pro_tags:{
+
+        },
+
+
+
       }
     },
     methods: {
@@ -177,109 +183,96 @@
         })
       },
       change(file) {
-        // this.proContent.pr_img = file.url
-        // this.img = file.url
-        //将要上传到数据库中的名称，为了可以直接在页面中显示才做的处理
-        // this.proContent.pr_img = "http://localhost:8090/static/img/" + file.name
-
         //用于在页面上显示的值
         this.img.push(file.url)
 
         //用于在数据库中和查询出来的值里显示
         this.imgName.push("http://localhost:8090/static/img/" + file.name)
-
-
-        // this.img.push("http://localhost:8090/static/img/" + file.name)
-        // console.log(this.img)
-        // alert(this.proContent.pr_img)
-
-        console.log(this.imgName )
+        console.log(this.imgName)
       },
       //真正的上传事件
       newSubmitForm() {//确定上传
-
-        // console.log(this.dynamicTags)
-
         //格式化日期
         this.proContent.pr_date = new Date().toLocaleString() + "";
-
         //提交上传事件
         this.$refs.newupload.submit();
         // alert(this.proContent.pr_img)
 
-        //把标签和当前作品的关系上传到pro_tags表中
+        //把标签和当前作品的关系上传到dynamicTags表中
         let _this = this
 
         axios.post("http://127.0.0.1:8090/test", this.proContent)
             .then(res => {
-              // alert(res)
-              // console.log(res.data)
-              //把获得到的prid先存起来
 
               function recurTest(j, length) {
                 _this.proImgs.img = _this.imgName[j]
                 axios.post("http://127.0.0.1:8090/insertImgs", _this.proImgs)
                     .then(res => {
-                      console.log("第" + (j + 1) + "次循环");
+                      console.log("第" + (j + 1) + "次插入图片");
                       if (++j < length) {
                         recurTest(j, length);
-                      }else {
-                        //发送改变当前pro_content中的图片个数的字段，在图片上传完成之后发送
+                      } else {
+                        //最后一次循环退出时,发送改变当前pro_content中的图片个数的字段，在图片上传完成之后发送
                         axios.get("http://127.0.0.1:8090/updateProImgCount")
-                            .then(res =>{
-                              console.log("这里是1的话图片个数修改成功"+res)
+                            .then(res => {
+                              console.log("这里是1的话图片个数修改成功" + res)
+
+
                             })
                       }
                     })
-
               }
 
               recurTest(0, this.imgName.length);
 
 
 
+              function tagsUpload(j, length) {
+                console.log(_this.dynamicTags)
+                // _this.dynamicTags.tid = _this.dynamicTags[j].tid
+
+                axios.post("http://localhost:8090/insertProTags", _this.dynamicTags)
+                    .then(res => {
+                      console.log("第" + (j + 1) + "次循环");
+                      if (++j < length) {
+                        recurTest(j, length);
+                      }
+                    })
+
+              }
+
+              tagsUpload(0, this.dynamicTags.length);
+
+
+            /*  console.log(_this.dynamicTags)
+               axios({
+                 method:'POST',
+                 headers: {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json'
+                 },
+                 url:'http://127.0.0.1:8090/insertForProTags'
+               },_this.dynamicTags)
+               .then(res =>{
+                 console.log(res)
+               })*/
+
+              /*axios.post("http://127.0.0.1:8090/insertForProTags", _this.dynamicTags)
+                  .then(res => {
+                    console.log("第" + (j + 1) + "次插入标签");
+                    if (++j < length) {
+                      recurTest(j, length);
+                    }
+                  })*/
+
             })
 
-              //使用for循环不能解决异步请求最后的值都变为最后一个值的情况
-              /*
-                            for (var i=0;i<this.dynamicTags.length;i++){
-                              this.pro_tags.tid = this.dynamicTags[i].tid
-                              axios.post("http://localhost:8090/insertProTags", this.pro_tags)
-                                  .then(res => {
-                                    console.log(res)
-                                  })
-                            }*/
-              /*  this.pro_tags.tid = 1;
-                console.log(this.pro_tags)
-                axios.post("http://localhost:8090/insertProTags", this.pro_tags)
-                    .then(res => {
-                      console.log(res)
-                    })*/
-
-
-              //在这里发送插入图片的请求就好了,循环整个图片数组，根据下标来插入数据
-              /* for (var i = 0; i < this.img.length; i++) {
-
-                 axios.post("/api/insertImgs", {
-                   prid: dass,
-                   img: this.img[i]
-                 })
-                     .then(res => {
-                       console.log(res)
-                     })
-               }*/
-
-
-              //跳转到推荐页面
-              // this.$router.replace("/")
+            //跳转到推荐页面
+            // this.$router.replace("/")
 
             .catch(err => {
 
-        })
-
-
-
-
+            })
 
 
       },
@@ -289,12 +282,36 @@
         this.dialogVisible = true;
       },
       removeImg(index) {
-        this.img.splice(index,1)
+        this.img.splice(index, 1)
 
       },
 
     },
+    addTags(index) {
+      console.log("点击")
+      if (this.dynamicTags == "") {
+        // alert("第一次点击")
+        this.dynamicTags.push(index)
+        console.log(this.dynamicTags)
+      } else {
+        for (var i=0;i<this.dynamicTags.length;i++){
+          if (this.dynamicTags[i].tags_name == index.tags_name){
+            this.moretags = false
+            alert("不能添加相同的标签")
+          }else {
+            this.moretags = true
+
+          }
+        }
+        if(this.moretags){
+          this.dynamicTags.push(index)
+        }
+      }
+
+    },
     created() {
+
+      //请求推荐的标签名称
       axios.get("http://localhost:8090/showTags")
           .then(res => {
             // alert("获取成功")

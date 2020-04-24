@@ -142,20 +142,8 @@
           }
         },*/
       addTags(index) {
-        console.log('点击')
-        // console.log(this.dynamicTags[0].tags_name)
-        /*  for (var i=0;i<this.dynamicTags.length;i++){
-            if (this.dynamicTags[i].tags_name == index.tags_name){
-              this.moretags = false
-              alert("不能添加相同的标签")
-            }else {
-              this.moretags = true
+       /* console.log('点击')
 
-            }
-          }
-          if(this.moretags){
-            this.dynamicTags.push(index)
-          }*/
         if (this.dynamicTags == "") {
           // alert("第一次点击")
           this.dynamicTags.push(index)
@@ -174,7 +162,7 @@
             this.dynamicTags.push(index)
           }
       }
-
+*/
     },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
