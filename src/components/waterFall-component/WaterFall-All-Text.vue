@@ -10,13 +10,13 @@
                  slot="img"
                  style="width: 100%;height:auto;position: relative;bottom: 0px;"
                  @click="hrefContent(item.pcid)" alt="">
-          <!--  <el-button slot="img-tags"
+            <el-button slot="img-tags"
                        type="info"
                        size="mini"
                        :plain="true"
-                       :autofocus="false" v-for="(item2,index) in item.imgTags">
-                {{item2}}
-            </el-button>-->
+                       :autofocus="false" v-for="(item2,index) in item.pc_tags">
+                {{item2.tags_name}}
+            </el-button>
             <span slot="img-collect">{{item.pc_collect == false?'已收藏':'收藏'}}</span>
             <span slot="img-go">{{item.pc_go}}</span>
             <span slot="img-comment">{{item.pc_comment}}</span>
