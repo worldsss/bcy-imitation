@@ -22,7 +22,7 @@ import Test02 from '../views/manger/Test02'
 import QuestionsPage from '../views/Questions-page'
 import ImgsPage from "../views/manger/Imgs-Input"
 import UserRegister from '../views/user-page/User-register'
-import UserLogin from '../views/user-page/User_login'
+import UserLogin from '../views/user-page/User-login'
 
 Vue.use(VueRouter)
 
