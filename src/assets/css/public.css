@@ -55,3 +55,8 @@ body{
     margin: 0px;
     opacity: 0.5;
 }
+
+.bcy-buttons{
+    background-color: #ff6fa2 !important;
+    color: white !important;
+}

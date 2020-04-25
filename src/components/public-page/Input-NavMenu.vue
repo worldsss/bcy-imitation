@@ -201,9 +201,8 @@
         <!--        头像图标-->
         <el-menu-item style="float: right;" v-popover:popo>
             <!--            :src="circleUrl"-->
-            <el-avatar :size="40"
-            >
-                头像
+            <el-avatar :size="40" :src="$store.state.user.user_avatar">
+<!--                头像-->
             </el-avatar>
 
             <!--            头像的popover-->
@@ -216,7 +215,7 @@
 
                     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
                 <!--                    :value="true"-->
-                <p style="text-align: center">用户名称</p>
+                <p style="text-align: center"> {{$store.state.user.user_name}}</p>
                 <el-divider></el-divider>
                 <el-row :gutter="10">
                     <el-col :span="12">

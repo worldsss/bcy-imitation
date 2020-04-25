@@ -21,7 +21,8 @@ import NewImgTestInput from '../views/manger/New-Img-Test-Input'
 import Test02 from '../views/manger/Test02'
 import QuestionsPage from '../views/Questions-page'
 import ImgsPage from "../views/manger/Imgs-Input"
-
+import UserRegister from '../views/user-page/User-register'
+import UserLogin from '../views/user-page/User_login'
 
 Vue.use(VueRouter)
 
@@ -146,6 +147,22 @@ const routes = [
         component: UserSetting,
         meta:{
             title:'个人主页'
+        },
+    },
+    {
+        path: '/user-register',
+        name: 'UserSetting',
+        component: UserRegister,
+        meta:{
+            title:'用户注册'
+        },
+    },
+    {
+        path: '/user-login',
+        name: 'UserSetting',
+        component: UserLogin,
+        meta:{
+            title:'用户登录'
         },
     },
     {

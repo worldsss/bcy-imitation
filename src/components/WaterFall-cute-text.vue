@@ -26,7 +26,7 @@
             </div>
             <!--标题插槽-->
             <div class="pc-text-title">
-                <h3>
+                <h3 style="margin-bottom: 0px">
                     <slot name="img-title"></slot>
                 </h3>
             </div>

@@ -20,8 +20,9 @@
                    <!-- <water-fall-all-imgs :water-imgs="imgsContent"></water-fall-all-imgs>
                     <water-fall-all-imgs :water-imgs="imgsContent2"></water-fall-all-imgs>-->
 
-                    <water-fall-all-imgs v-for="(item,index) in allWaterFallImgs" :water-imgs="item">
-
+                    <water-fall-all-imgs
+                            v-for="(item,index) in allWaterFallImgs"
+                            :water-imgs="item">
                     </water-fall-all-imgs>
 
                 </el-col>
@@ -29,7 +30,12 @@
                     <!--单图片显示瀑布流-->
 <!--                    <water-fall-all-img :img-cute="imgCute02"></water-fall-all-img>-->
                     <!-- 文字显示瀑布流-->
-                    <water-fall-all-text :test-cute01="textCute"></water-fall-all-text>
+<!--                    <water-fall-all-text :test-cute01="textCute"></water-fall-all-text>-->
+                    <water-fall-all-text
+                            v-for="(item,index) in allWaterFallText"
+                            :test-cute01="item">
+
+                    </water-fall-all-text>
 
 
                 </el-col>
@@ -38,10 +44,10 @@
         </div>
 
         <!--     右侧关注的用户和圈子-->
-        <right-ranking-tags :rank-tags="rankTags"
+        <right-ranking-tags :rank-tags="rankTags01"
                             :rank-name="rankName"
                             :active-rank="activeRank"
-                            :rank-tags01="rankTags">
+                            :rank-tags01="rankTags02">
 
         </right-ranking-tags>
 
@@ -74,12 +80,19 @@
     data() {
       return {
         rankName: '我关注的用户',
-        rankTags: [
+        rankTags01: [
           {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
           {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
           {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
           {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
           {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
+        ],
+        rankTags02: [
+          {rankImg: '3.jpg', rankName: '凹凸世界', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '4.jpg', rankName: '游戏', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '5.jpg', rankName: '绘画', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '4.jpg', rankName: '壁纸', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+          {rankImg: '5.jpg', rankName: '明日方舟', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
         ],
         activeRank: ["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"],
         imgsContent:[],
@@ -90,6 +103,7 @@
         textCute:[], //文字内容
         allWaterFallImgs:[],
         allWaterFallData:[],
+        allWaterFallText:[],
         isScrollDown:false,
 
       }
@@ -194,6 +208,9 @@
           .then(res => {
             console.log(res.data)
             this.textCute = res.data.list;
+
+            this.allWaterFallText.push(res.data.list)
+
           })
 
       var _this = this
@@ -216,7 +233,13 @@
 
 
               })
+          axios.get("http://localhost:8090/showPcIndex?pageSize=10&pageNumber="+_this.pageNumber)
+              .then(res => {
+                console.log(res.data)
 
+                _this.allWaterFallText.push(res.data.list)
+
+              })
 
         }
       }
