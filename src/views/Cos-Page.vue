@@ -310,16 +310,13 @@
         height: auto;
         border-radius: 10px;
     }
-
+/*
     .cute-text-img {
-        /* width: 90%;
-         height: 100%;
-         border-radius: 10px;*/
         width: 100%;
         position: relative;
         bottom: 50%;
         border-radius: 10px;
-    }
+    }*/
 
     .bottom {
         margin-top: 13px;

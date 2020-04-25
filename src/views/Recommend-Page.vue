@@ -8,7 +8,7 @@
 
 
                     <!--多图片-->
-                    <water-fall-all-imgs :water-imgs="imgsContent">
+                    <water-fall-all-imgs :water-imgs="imgsContent" v-loading="imgLoading">
 
                     </water-fall-all-imgs>
 
@@ -170,6 +170,7 @@
           },
         ],
         imgsContent:[],
+        imgLoading:true, //加载事件，当图片还未上传到服务器上时，首页加载
       }
     },
     mounted() {
@@ -209,6 +210,20 @@
             this.textCute = res.data.list;
           })*/
 
+    },
+    updated() {
+      axios.get("http://localhost:8090/showIndex")
+          .then(res => {
+            this.imgsContent = res.data.list;
+
+            if(res.data.list[0].pro_imgs[0]==null){
+              this.imgLoading = true
+            }else {
+              this.imgLoading = false
+            }
+
+
+          })
     }
 
   }
@@ -233,15 +248,12 @@
         border-radius: 10px;
     }
 
-    .cute-text-img {
-        /* width: 90%;
-         height: 100%;
-         border-radius: 10px;*/
+  /*  .cute-text-img {
         width: 100%;
         position: relative;
         bottom: 50%;
         border-radius: 10px;
-    }
+    }*/
 
 
     .lunbo-big {

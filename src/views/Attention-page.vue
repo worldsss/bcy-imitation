@@ -202,15 +202,12 @@
         border-radius: 10px;
     }
 
-    .cute-text-img {
-        /* width: 90%;
-         height: 100%;
-         border-radius: 10px;*/
+    /*.cute-text-img {
         width: 100%;
         position: relative;
         bottom: 50%;
         border-radius: 10px;
-    }
+    }*/
 
 
     .lunbo-big {

@@ -6,7 +6,10 @@
             <span slot="img-text">{{item.pc_info}}</span>
             <span slot="img-content" v-html="item.pc_content"></span>
             <span slot="img-title" v-html="item.pc_title"></span>
-            <img :src="item.pc_firstImg" slot="img" class="cute-text-img" alt="">
+            <img :src="item.pc_firstImg"
+                 slot="img"
+                 style="width: 100%;height:auto;position: relative;bottom: 0px;"
+                 @click="hrefContent(item.pcid)" alt="">
           <!--  <el-button slot="img-tags"
                        type="info"
                        size="mini"
@@ -64,7 +67,15 @@
         }
       }
 
+    },
+    methods:{
+      hrefContent(index){
+        let routeData = this.$router.resolve({ path: '/content/'+index });
+        window.open(routeData.href, '_blank');
+
+      }
     }
+
   }
 </script>
 
@@ -90,17 +101,27 @@
         border-radius: 10px;
     }
 
-    .cute-text-img {
+    /*.cute-text-img-water {*/
+    .cute-text-img{
         /* width: 90%;
          height: 100%;
          border-radius: 10px;*/
         width: 100%;
+        height: 200px;
+        overflow: hidden;
         position: relative;
         bottom: 50%;
         border-radius: 10px;
+
+/*
+        width: 100% !important;
+        position: relative !important;
+        bottom: 50% !important;
+        border-radius: 10px !important;*/
+
     }
 
-
+/*
     .lunbo-big {
         color: #475669;
         font-size: 14px;
@@ -115,5 +136,17 @@
         opacity: 0.75;
         line-height: 500px;
         margin: 0;
+    }*/
+</style>
+
+
+<style>
+    .cute-text-img{
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        bottom: 50%;
+        border-radius: 10px;
     }
 </style>

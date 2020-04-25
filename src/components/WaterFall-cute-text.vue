@@ -15,30 +15,28 @@
                 </el-col>
 
             </el-header>
-            <p style="text-align: left;width: 90%;margin: 5px auto">
+            <p class="pc-text-p">
                 <slot name="img-text"></slot>
             </p>
-            <div style="width: 90%;height: 200px;margin: 5px auto;border-radius: 10px; overflow: hidden">
-                <a href="" target="_blank">
+            <div class="pc-img-div">
+<!--                <a href="" target="_blank">-->
                     <!-- 图片插槽-->
                     <slot name="img"></slot>
-                </a>
+<!--                </a>-->
             </div>
             <!--标题插槽-->
-            <div style="width: 90%;margin: 0 auto">
+            <div class="pc-text-title">
                 <h3>
                     <slot name="img-title"></slot>
                 </h3>
             </div>
 
-<!--            内容插槽-->
-            <div style="text-align: left;width: 90%;margin: 5px auto;" class="index-text">
-              <slot name="img-content"></slot>
+            <!--            内容插槽-->
+            <div  class="index-text pc-text-content">
+                <slot name="img-content"></slot>
             </div>
 
             <div style="padding: 14px 14px 0px 14px;">
-
-
 
 
                 <!-- 标签插槽-->
@@ -76,15 +74,16 @@
 </template>
 
 <script>
-    export default {
-        name: ""
-    }
+  export default {
+    name: ""
+  }
 </script>
 
 <style>
-    .index-text img{
+    .index-text img {
         display: none !important;
     }
+
     .time {
         font-size: 13px;
         color: #999;
@@ -103,16 +102,16 @@
         border-radius: 10px;
     }
 
-    .cute-text-img {
-        /* width: 90%;
+   /* .cute-text-img {
+        !* width: 90%;
          height: 100%;
-         border-radius: 10px;*/
+         border-radius: 10px;*!
         width: 100%;
         position: relative;
         bottom: 25%;
         border-radius: 10px;
     }
-
+*/
 
     .lunbo-big {
         color: #475669;
@@ -129,4 +128,41 @@
         line-height: 500px;
         margin: 0;
     }
+</style>
+<style scoped>
+
+    .pc-text-p {
+        text-align: left;
+        width: 90%;
+        margin: 5px auto;
+        overflow: hidden;
+    }
+
+    .pc-img-div {
+        width: 90%;
+        height: 200px;
+        margin: 5px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .pc-text-title {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .pc-text-content {
+        text-align: left;
+        width: 90%;
+        margin: 5px auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+
+    }
+
+
 </style>

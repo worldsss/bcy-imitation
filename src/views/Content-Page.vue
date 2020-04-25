@@ -27,7 +27,10 @@
                             <el-image :src="item.img" :preview-src-list="imgList"></el-image>
 
                         </div>
+<!--                        <h2 v-html="pcContent.pc_title"></h2>-->
+                        <el-card v-html="pcContent.pc_info" class="pc-info"></el-card>
 
+                        <div v-html="pcContent.pc_content" class="pc-content"></div>
 
 
                     </div>
@@ -101,7 +104,20 @@
           pr_tags: [],
         },
         imgList:[], //图片大图预览
+        testImgList:[],
+        pcContent:{
+          pc_content: "",
+          pc_title: "",
+          pc_info: "",
+          pc_givelike: 0,
+          pc_go: 0,
+          pc_click: 0,
+          pc_collect: null,
+          pc_date: null,
+          pc_comment: 0,
+        }
       }
+
     },
     created() {
       var prid = this.$route.params.prid
@@ -117,6 +133,19 @@
             }
 
           })
+
+      axios.get("http://127.0.0.1:8090/selectPcIndexByPcid?pcid=" + prid)
+          .then(res => {
+            console.log(res)
+            this.pcContent = res.data
+            console.log(this.pcContent)
+
+          })
+
+
+
+
+
     }
   }
 </script>
@@ -129,5 +158,26 @@
     .my-opacity {
         opacity: 0.5;
     }
+    .pc-content{
+
+    }
+    .pc-content img{
+        width: 100%;
+        height: auto;
+    }
+
+</style>
+<style scoped>
+
+
+    .pc-info{
+        background-color: #f5f5fa;
+        line-height: 50px;
+        font-size: 16px;
+        color: #a1a1b1;
+        text-indent: 2em;
+        border-radius: 5px;
+    }
+
 
 </style>

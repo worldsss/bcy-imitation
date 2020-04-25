@@ -313,8 +313,7 @@
 
             })
 
-            //跳转到推荐页面
-            this.$router.replace("/")
+
 
 
 
@@ -335,6 +334,8 @@
               .then(res => {
                 if (++j < length) {
                   tagsUpload(j, length);
+                }else{
+
                 }
 
               })
@@ -342,7 +343,8 @@
         }
 
         tagsUpload(0, this.dynamicTags.length);
-
+        //跳转到推荐页面
+        this.$router.push("/")
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
@@ -406,6 +408,9 @@
             console.log(res.data)
             this.modelTags = res.data
           })
+
+
+
 
 
     }

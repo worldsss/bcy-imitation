@@ -185,14 +185,4 @@
         cursor:pointer; /*箭头变小手的效果*/
     }
 
-    .cute-text-img {
-        /* width: 90%;
-         height: 100%;
-         border-radius: 10px;*/
-        width: 100%;
-        position: relative;
-        bottom: 25%;
-        border-radius: 5px;
-    }
-
 </style>

@@ -396,16 +396,16 @@
         height: 100%;
         border-radius: 5px;
     }
-
+/*
     .cute-text-img {
-        /* width: 90%;
+        !* width: 90%;
          height: 100%;
-         border-radius: 10px;*/
+         border-radius: 10px;*!
         width: 100%;
         position: relative;
         bottom: 25%;
         border-radius: 5px;
-    }
+    }*/
 
     .img-ul {
         width: 90%;
