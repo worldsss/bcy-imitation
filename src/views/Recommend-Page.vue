@@ -1,14 +1,26 @@
 <template>
-    <div>
-        <div class="main-left">
+    <div  @scroll="loadNextTest">
+        <div class="main-left"  v-loading="imgLoading"
+             v-infinite-scroll="loadNextPaging"
+             :infinite-scroll-distance="500" :infinite-scroll-immediate="false"	>
             <el-row :gutter="10" style="margin: 10px 0px">
                 <el-col :span="12">
                     <!--单图片-->
 <!--                    <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>-->
 
+<!--                    <div v-html="allWaterFallImgs"></div>-->
+<!--                    {{allWaterFallImgs}}-->
+
+
+                  <!--  <div v-for="(item,index) in allWaterFallImgs">
+                        <div v-html="item"></div>
+                    </div>-->
 
                     <!--多图片-->
-                    <water-fall-all-imgs :water-imgs="imgsContent" v-loading="imgLoading">
+                   <!-- <water-fall-all-imgs :water-imgs="imgsContent"></water-fall-all-imgs>
+                    <water-fall-all-imgs :water-imgs="imgsContent2"></water-fall-all-imgs>-->
+
+                    <water-fall-all-imgs v-for="(item,index) in allWaterFallImgs" :water-imgs="item">
 
                     </water-fall-all-imgs>
 
@@ -70,107 +82,16 @@
           {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
         ],
         activeRank: ["2020春日活动", "2020汉服同袍会", "春日脱团大作战", "男女装cos大作战"],
-        fill: 'fill',
-        isFixed: false,
-        scrollNowLoation: '',
-        squareUrl: '2.jpg',
-        textCute: [],
-        imgCute01: [
-          {
-            user_avatar: '1.jpg',
-            user_name: '测试名称',
-            pr_info: '测试对象传入插槽',
-            pr_img: '37.jpg',
-            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
-            imgCollect: '收藏',
-            pr_go: 45,
-            pr_click: 4505,
-          },
-          {
-            user_avatar: '3.jpg',
-            user_name: '测试名称',
-            pr_info: '测试对象传入插槽',
-            pr_img: '36.jpg',
-            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
-            imgCollect: '收藏',
-            pr_go: 45,
-            pr_click: 4505,
-          },
-          {
-            user_avatar: '4.jpg',
-            user_name: '测试名称',
-            pr_info: '测试对象传入插槽',
-            pr_img: '34.jpg',
-            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
-            imgCollect: '收藏',
-            pr_go: 45,
-            pr_click: 4505,
-          },
-
-        ],
-        imgCute02: [
-          {
-            imgAvatar: '1.jpg',
-            imgName: '测试名称',
-            imgText: '测试对象传入插槽',
-            img: '24.jpg',
-            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
-            imgCollect: '收藏',
-            imgGo: 45,
-            imgComment: 15,
-            imgClick: 4505,
-          },
-          {
-            imgAvatar: '1.jpg',
-            imgName: '测试名称',
-            imgText: '测试对象传入插槽',
-            img: '25.jpg',
-            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
-            imgCollect: '已收藏',
-            imgGo: 45,
-            imgComment: 15,
-            imgClick: 4505,
-          },
-          {
-            imgAvatar: '1.jpg',
-            imgName: '测试名称',
-            imgText: '测试对象传入插槽',
-            img: '26.jpg',
-            imgTags: ['崩坏', '明日方舟', '二次元', 'cos'],
-            imgCollect: '收藏',
-            imgGo: 45,
-            imgComment: 15,
-            imgClick: 4505,
-          },
-        ],
-        TestCute01: [
-          {
-            imgAvatar: '1.jpg',
-            imgName: '测试名称',
-            imgText: '测试对象传入插槽',
-            img: '25.jpg',
-            imgContent: `<b>测试文字的显示是什么样子</b>`,
-            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
-            imgCollect: '已收藏',
-            imgGo: 45,
-            imgComment: 15,
-            imgClick: 4505,
-          },
-          {
-            imgAvatar: '1.jpg',
-            imgName: '测试名称',
-            imgText: '发布文字',
-            img: '26.jpg',
-            imgContent: `<b>测试文字的显示是什么样子</b>`,
-            imgTags: ['崩坏', '哈哈', '二次元', 'cos'],
-            imgCollect: '已收藏',
-            imgGo: 45,
-            imgComment: 15,
-            imgClick: 4505,
-          },
-        ],
         imgsContent:[],
-        imgLoading:true, //加载事件，当图片还未上传到服务器上时，首页加载
+        imgsContent2:[],
+        imgLoading:false, //加载事件，当图片还未上传到服务器上时，首页加载
+        pageSize:10, //页面几页
+        pageNumber:1, //当前页数,
+        textCute:[], //文字内容
+        allWaterFallImgs:[],
+        allWaterFallData:[],
+        isScrollDown:false,
+
       }
     },
     mounted() {
@@ -183,44 +104,135 @@
         } else {
           this.isFixed = false
         }
+
+
+        if(window.scrollY>4000){
+
+         /* this.pageNumber++;
+          axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber)
+              .then(res => {
+                console.log(res.data)
+                this.imgsContent = res.data.list;
+
+
+              })*/
+        }
+        if(this.isScrollDown){
+          console.log("发送啊")
+          this.pageNumber++;
+          axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber)
+              .then(res => {
+                console.log(res.data)
+
+                this.allWaterFallImgs.push(res.data.list)
+
+
+              })
+        }
+
+
+
+
+      },
+      loadNextPaging(){
+      /*  console.log("触发滚动")
+
+        this.pageNumber++;
+        axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber)
+            .then(res => {
+              console.log(res.data)
+              this.imgsContent = res.data.list;
+
+
+            })*/
+        if(this.isScrollDown ==true){
+          console.log("发送啊")
+          this.pageNumber++;
+          axios.get("http://localhost:8090/showIndex?pageSize=10&pageNumber=2")
+              .then(res => {
+                console.log(res.data)
+
+                this.allWaterFallImgs.push(res.data.list)
+
+
+              })
+        }
+
+
+
+      },
+      loadNextTest(){
+        console.log("执行滚动")
       }
     },
     created() {
-      /* axios.get("http://localhost:8090/showPro")
-           .then(res => {
-             console.log(res.data)
-             this.imgCute01 = res.data.list;
-           })*/
+
 
       axios.get("http://localhost:8090/showIndex")
           .then(res => {
             console.log(res.data)
-            this.imgCute02 = res.data.list;
+            // this.imgCute02 = res.data.list;
             this.imgsContent = res.data.list;
+
+            this.allWaterFallImgs.push(res.data.list)
+            /*this.allWaterFallData = res.data.list
+            console.log(this.allWaterFallData)
+            this.allWaterFallImgs = "<water-fall-all-imgs :water-imgs=allWaterFallData></water-fall-all-imgs>"
+            console.log(this.allWaterFallImgs)*/
           })
+
+      // axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber++)
+     /* axios.get("http://localhost:8090/showIndex?pageSize=10&pageNumber=2")
+          .then(res => {
+            console.log(res.data)
+            // this.imgCute02 = res.data.list;
+            this.imgsContent2 = res.data.list;
+          })
+*/
+
       axios.get("http://localhost:8090/showPcIndex")
           .then(res => {
             console.log(res.data)
             this.textCute = res.data.list;
           })
 
-      /*axios.get("http://localhost:8090/showIndex")
-          .then(res => {
-            console.log(res.data)
-            this.textCute = res.data.list;
-          })*/
+      var _this = this
+      window.onscroll = function(){
+        var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+        var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
+
+        if(scrollTop+windowHeight==scrollHeight){
+          this.isScrollDown = true
+          //写后台加载数据的函数
+          console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
+          console.log("发送啊")
+          _this.pageNumber++;
+          axios.get("http://localhost:8090/showIndex?pageSize=10&pageNumber="+_this.pageNumber)
+              .then(res => {
+                console.log(res.data)
+
+                _this.allWaterFallImgs.push(res.data.list)
+
+
+              })
+
+
+        }
+      }
+
 
     },
     updated() {
       axios.get("http://localhost:8090/showIndex")
           .then(res => {
             this.imgsContent = res.data.list;
-
+/*
             if(res.data.list[0].pro_imgs[0]==null){
               this.imgLoading = true
             }else {
               this.imgLoading = false
-            }
+            }*/
 
 
           })
