@@ -43,6 +43,7 @@
     data () {
       return {
         user:{
+          uid:0,
           user_name:'',
           user_password:'',
           user_avatar:'staticUserAvatar.jpg',
@@ -55,9 +56,10 @@
         axios.post("http://127.0.0.1:8090/userLogin",this.user)
             .then(res =>{
               console.log(res.data)
+              alert('登录成功')
               alert(res.data)
-              if(res.data==1){
-
+              if(res.data!=''){
+                this.user.uid = res.data
                 this.$store.commit('addUserName',this.user)
 
                 this.$router.replace("/")

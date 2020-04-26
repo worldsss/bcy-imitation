@@ -264,6 +264,8 @@
         //把标签和当前作品的关系上传到dynamicTags表中
         let _this = this
 
+        //把当前的用户id传入到后台中去
+        this.proContent.uid = this.$store.state.user.uid
         axios.post("http://127.0.0.1:8090/test", this.proContent)
             .then(res => {
 
