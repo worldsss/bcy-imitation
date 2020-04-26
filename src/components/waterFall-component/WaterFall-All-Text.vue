@@ -1,6 +1,6 @@
 <template>
     <div class="markdown-body">
-        <water-fall-text-cute v-for="(item,index) in TestCute01">
+       <!-- <water-fall-text-cute v-for="(item,index) in TestCute01">
             <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
             <strong slot="img-name">{{item.user_name}}</strong>
             <span slot="img-text">{{item.pc_info}}</span>
@@ -22,6 +22,35 @@
             <span slot="img-comment">{{item.pc_comment}}</span>
             <span slot="img-click">{{item.pc_click}}</span>
         </water-fall-text-cute>
+-->
+        <water-fall-text-cute v-for="(item,index) in TestCute01">
+            <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
+            <strong slot="img-name">{{item.user_name}}</strong>
+            <span slot="img-text">{{item.pc_info}}</span>
+            <span slot="img-content" v-html="item.pc_content"></span>
+            <span slot="img-title" v-html="item.pc_title"></span>
+
+            <div slot="img" :class="item.pc_firstImg!=''?'pc-img-div':'pc-img-ss'">
+                <img :src="item.pc_firstImg"
+                     style="width: 100%;margin: 0 auto; height:auto;position: relative;bottom: 0px;cursor: pointer;"
+                     @click="hrefContent(item.pcid)" alt="">
+            </div>
+
+
+            <el-button slot="img-tags"
+                       type="info"
+                       size="mini"
+                       :plain="true"
+                       :autofocus="false" v-for="(item2,index) in item.pc_tags">
+                {{item2.tags_name}}
+            </el-button>
+            <span slot="img-collect">{{item.pc_collect == false?'已收藏':'收藏'}}</span>
+            <span slot="img-go">{{item.pc_go}}</span>
+            <span slot="img-comment">{{item.pc_comment}}</span>
+            <span slot="img-click">{{item.pc_click}}</span>
+        </water-fall-text-cute>
+
+
     </div>
 </template>
 
@@ -79,8 +108,8 @@
   }
 </script>
 
-
-<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">
+<!--居然是因为这个的吗？？？？？-->
+<!--<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">-->
 
 <style scoped>
     .time {
@@ -120,26 +149,26 @@
         border-radius: 10px !important;*/
 
     }
-
-/*
-    .lunbo-big {
-        color: #475669;
-        font-size: 14px;
-        opacity: 0.75;
-        line-height: 150px;
-        margin: 0;
+    .pc-img-div {
+        width: 90%;
+        height: 200px;
+        margin: 5px auto;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
     }
 
-    .lunbo-small {
-        color: #475669;
-        font-size: 14px;
-        opacity: 0.75;
-        line-height: 500px;
-        margin: 0;
-    }*/
+    .pc-img-ss{
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+
+
 </style>
 
-
+<!--
 <style>
     .cute-text-img{
         width: 100%;
@@ -149,4 +178,4 @@
         bottom: 50%;
         border-radius: 10px;
     }
-</style>
+</style>-->

@@ -15,15 +15,21 @@
                 </el-col>
 
             </el-header>
+            <!-- 简介插槽-->
             <p class="pc-text-p">
                 <slot name="img-text"></slot>
             </p>
-            <div class="pc-img-div">
-<!--                <a href="" target="_blank">-->
-                    <!-- 图片插槽-->
-                    <slot name="img"></slot>
-<!--                </a>-->
-            </div>
+
+            <!--图片插槽-->
+            <!--<div class="pc-img-div">
+                <slot name="img"></slot>
+            </div>-->
+
+
+            <slot name="img">
+<!--                <slot name="img"></slot>-->
+            </slot>
+
             <!--标题插槽-->
             <div class="pc-text-title">
                 <h3 style="margin-bottom: 0px">
@@ -32,7 +38,7 @@
             </div>
 
             <!--            内容插槽-->
-            <div  class="index-text pc-text-content">
+            <div class="index-text pc-text-content">
                 <slot name="img-content"></slot>
             </div>
 
@@ -102,16 +108,16 @@
         border-radius: 10px;
     }
 
-   /* .cute-text-img {
-        !* width: 90%;
-         height: 100%;
-         border-radius: 10px;*!
-        width: 100%;
-        position: relative;
-        bottom: 25%;
-        border-radius: 10px;
-    }
-*/
+    /* .cute-text-img {
+         !* width: 90%;
+          height: 100%;
+          border-radius: 10px;*!
+         width: 100%;
+         position: relative;
+         bottom: 25%;
+         border-radius: 10px;
+     }
+ */
 
     .lunbo-big {
         color: #475669;
@@ -145,6 +151,11 @@
         border-radius: 10px;
         overflow: hidden;
         cursor: pointer;
+    }
+    .pc-img-ss{
+        width: 90%;
+        margin: 0 auto;
+        text-align: center;
     }
 
     .pc-text-title {
