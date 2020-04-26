@@ -7,7 +7,7 @@
                     <slot name="img-avatar"></slot>
                     <!--                    <el-avatar :size="40" :src="circleUrl"></el-avatar>-->
                 </el-col>
-                <el-col :span="5">
+                <el-col :span="10">
                     <p style="margin-top: 10px">
                         <!-- 姓名插槽-->
                         <slot name="img-name"></slot>

@@ -19,57 +19,59 @@
         <el-menu-item index="/question-page">问答</el-menu-item>
 
         <!--        发布按钮的popover-->
-        <el-popover
-                ref="fabu"
-                placement="bottom-start"
-                width="300"
-                trigger="hover"
-                visible-arrow="false"
-                content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-            <router-link to="/test-input">
-                <input-link-button>
-                    <img slot="link-img"
-                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                         alt="" style="width: 100%;height: 100%;margin: 10px">
-                    <span slot="link-name">文字</span>
-                    <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
-                </input-link-button>
-            </router-link>
-            <!--<router-link to="/q-input">
-                <input-link-button>
-                    <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                          alt="" style="width: 100%;height: 100%;margin: 10px">
-                    <span slot="link-name">文字</span>
-                    <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
-                </input-link-button>
-            </router-link>-->
-            <!--            <router-link to="/img-input">-->
-            <router-link to="/imgs-input">
+        <div v-if="$store.state.user.user_name!=''">
+            <el-popover
+                    ref="fabu"
+                    placement="bottom-start"
+                    width="300"
+                    trigger="hover"
+                    visible-arrow="false"
+                    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+                <router-link to="/test-input">
+                    <input-link-button>
+                        <img slot="link-img"
+                             src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                             alt="" style="width: 100%;height: 100%;margin: 10px">
+                        <span slot="link-name">文字</span>
+                        <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
+                    </input-link-button>
+                </router-link>
+                <!--<router-link to="/q-input">
+                    <input-link-button>
+                        <img  slot="link-img" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                              alt="" style="width: 100%;height: 100%;margin: 10px">
+                        <span slot="link-name">文字</span>
+                        <span slot="link-info">绘画，cos，手办,汉服，表情包</span>
+                    </input-link-button>
+                </router-link>-->
+                <!--            <router-link to="/img-input">-->
+                <router-link to="/imgs-input">
 
-                <input-link-button>
-                    <img slot="link-img"
-                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                         alt="" style="width: 100%;height: 100%;margin: 10px">
-                    <span slot="link-name">图片</span>
-                    <span slot="link-info">小说，漫评，段子，文章，碎碎念</span>
+                    <input-link-button>
+                        <img slot="link-img"
+                             src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                             alt="" style="width: 100%;height: 100%;margin: 10px">
+                        <span slot="link-name">图片</span>
+                        <span slot="link-info">小说，漫评，段子，文章，碎碎念</span>
 
-                </input-link-button>
+                    </input-link-button>
 
-            </router-link>
+                </router-link>
 
-            <router-link to="/question-input">
-                <input-link-button>
-                    <img slot="link-img"
-                         src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
-                         alt="" style="width: 100%;height: 100%;margin: 10px">
-                    <span slot="link-name">问答</span>
-                    <span slot="link-info">如何评论？如何反驳？为什么讨厌</span>
+                <router-link to="/question-input">
+                    <input-link-button>
+                        <img slot="link-img"
+                             src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=389260568,2254331704&fm=26&gp=0.jpg"
+                             alt="" style="width: 100%;height: 100%;margin: 10px">
+                        <span slot="link-name">问答</span>
+                        <span slot="link-info">如何评论？如何反驳？为什么讨厌</span>
 
-                </input-link-button>
-            </router-link>
+                    </input-link-button>
+                </router-link>
 
-        </el-popover>
-        <el-menu-item style="float: right;padding-left: 0px">
+            </el-popover>
+        </div>
+        <el-menu-item style="float: right;padding-left: 0px" @click="nowIsLogin()">
             <el-button type="danger" size="mini" style="background-color: #fb678b" v-popover:fabu>
                 <i class="el-icon-edit-outline" style="color: white"></i>
                 发布
@@ -339,6 +341,12 @@
           this.isFixed = true
         } else {
           this.isFixed = false
+        }
+      },
+      nowIsLogin() {
+        if (this.$store.state.user.user_name == '') {
+          alert("只有登录后才能发布作品哦！")
+          this.$router.push("/user-login")
         }
       }
     }

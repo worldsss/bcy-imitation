@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user:{
+      uid:0,
       user_name:'',
       user_avatar:'',
     }
