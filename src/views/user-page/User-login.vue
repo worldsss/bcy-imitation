@@ -56,13 +56,16 @@
         axios.post("http://127.0.0.1:8090/userLogin",this.user)
             .then(res =>{
               console.log(res.data)
-              alert('登录成功')
-              alert(res.data)
+              // alert('登录成功')
+              // alert(res.data)
               if(res.data!=''){
+                alert("登录成功")
                 this.user.uid = res.data
                 this.$store.commit('addUserName',this.user)
 
                 this.$router.replace("/")
+              }else {
+                alert("登录失败，请重新输入用户名或密码!")
               }
 
 
