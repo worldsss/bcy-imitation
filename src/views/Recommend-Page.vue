@@ -182,6 +182,15 @@
     created() {
 
 
+      //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+           .then(res =>{
+             alert(res)
+             console.log(res)
+           })
+
+
+
       axios.get("http://localhost:8090/showIndex")
           .then(res => {
             console.log(res.data)

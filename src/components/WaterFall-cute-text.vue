@@ -25,17 +25,26 @@
                 <slot name="img"></slot>
             </div>-->
 
-
+            <!--图片插槽-->
             <slot name="img">
 <!--                <slot name="img"></slot>-->
             </slot>
 
             <!--标题插槽-->
-            <div class="pc-text-title">
+            <!--<div class="pc-text-title">
                 <h3 style="margin-bottom: 0px">
                     <slot name="img-title"></slot>
                 </h3>
+            </div>-->
+
+            <!--标题插槽,发现不能点击跳转到内容页面-->
+            <div class="pc-text-title">
+                <slot name="img-title">
+<!--                    <slot name="img-title"></slot>-->
+                </slot>
             </div>
+
+
 
             <!--            内容插槽-->
             <div class="index-text pc-text-content">

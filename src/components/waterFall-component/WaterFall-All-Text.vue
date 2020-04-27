@@ -23,7 +23,7 @@
             <span slot="img-click">{{item.pc_click}}</span>
         </water-fall-text-cute>
 -->
-        <water-fall-text-cute v-for="(item,index) in TestCute01">
+       <!-- <water-fall-text-cute v-for="(item,index) in TestCute01">
             <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
             <strong slot="img-name">{{item.user_name}}</strong>
             <span slot="img-text">{{item.pc_info}}</span>
@@ -48,8 +48,37 @@
             <span slot="img-go">{{item.pc_go}}</span>
             <span slot="img-comment">{{item.pc_comment}}</span>
             <span slot="img-click">{{item.pc_click}}</span>
-        </water-fall-text-cute>
+        </water-fall-text-cute>-->
 
+
+        <water-fall-text-cute v-for="(item,index) in TestCute01">
+            <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
+            <strong slot="img-name">{{item.user_name}}</strong>
+            <span slot="img-text">{{item.pc_info}}</span>
+            <span slot="img-content" v-html="item.pc_content"></span>
+            <h3 slot="img-title"
+                v-html="item.pc_title"
+                @click="hrefContent(item.pcid)" class="pc-img-title"></h3>
+
+            <div slot="img" :class="item.pc_firstImg!=''?'pc-img-div':'pc-img-ss'">
+                <img :src="item.pc_firstImg"
+                     style="width: 100%;margin: 0 auto; height:auto;position: relative;bottom: 0px;cursor: pointer;"
+                     @click="hrefContent(item.pcid)" alt="">
+            </div>
+
+
+            <el-button slot="img-tags"
+                       type="info"
+                       size="mini"
+                       :plain="true"
+                       :autofocus="false" v-for="(item2,index) in item.pc_tags">
+                {{item2.tags_name}}
+            </el-button>
+            <span slot="img-collect">{{item.pc_collect == false?'已收藏':'收藏'}}</span>
+            <span slot="img-go">{{item.pc_go}}</span>
+            <span slot="img-comment">{{item.pc_comment}}</span>
+            <span slot="img-click">{{item.pc_click}}</span>
+        </water-fall-text-cute>
 
     </div>
 </template>
@@ -162,6 +191,14 @@
         width: 90%;
         margin: 0 auto;
         text-align: center;
+    }
+
+    .pc-img-title{
+        margin-bottom: 0px;
+        cursor: pointer;
+    }
+    .pc-img-title:hover{
+        text-decoration: underline;
     }
 
 
