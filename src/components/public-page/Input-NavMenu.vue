@@ -19,7 +19,8 @@
         <el-menu-item index="/question-page">问答</el-menu-item>
 
         <!--        发布按钮的popover-->
-        <div v-if="$store.state.user.user_name!=''">
+<!--        <div v-if="$store.state.user.user_name!=''">-->
+        <div :class="isUserShow!=true?'display-none':''">
             <el-popover
                     ref="fabu"
                     placement="bottom-start"
@@ -78,7 +79,8 @@
             </el-button>
         </el-menu-item>
         <!--        消息-->
-        <div v-if="$store.state.user.user_name!=''">
+<!--        <div v-if="$store.state.user.user_name!=''">-->
+        <div :class="isUserShow!=true?'display-none':''">
             <el-menu-item style="float: right;">
                 <el-badge is-dot class="item" v-popover:infor>
                     <i class="el-icon-bell"></i>
@@ -203,7 +205,9 @@
             </el-menu-item>
         </div>
         <!--头像图标，当vuex中还没有用户信息时，不显示-->
-        <div v-if="$store.state.user.user_name!=''">
+<!--        <div v-if="$store.state.user.user_name!=''">-->
+<!--        <div v-if="$store.state.user.user_name!=''">-->
+        <div  :class="isUserShow!=true?'display-none':''">
             <el-menu-item style="float: right;" v-popover:popo>
                 <!--  <el-avatar :size="40" :src="$store.state.user.user_avatar">
                       &lt;!&ndash; 头像&ndash;&gt;
@@ -317,6 +321,7 @@
         isFixed: false,
         messages: [],
         // recommend-page
+        isUserShow:false,
       }
     },
     created() {
@@ -325,6 +330,19 @@
       if (this.$route.path == '/') {
         this.activeIndex = "/recommend-page"
       }
+
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log(res)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null){
+               this.isUserShow = true
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+            }else {
+            }
+          })
+
     },
     beforeRouteLeave(to, from, next) {
 
@@ -414,6 +432,15 @@
         position: fixed !important;
         top: 0px;
         z-index: 1000000;
+    }
+
+
+</style>
+
+<style scoped>
+    .display-none{
+        /*display: none;*/
+        opacity: 0;
     }
 
 

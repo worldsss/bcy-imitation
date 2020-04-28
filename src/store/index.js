@@ -14,7 +14,13 @@ export default new Vuex.Store({
   mutations: {
     addUserName(state,Newuser){
       state.user = Newuser
+    },
+    changeUser(state,userName,uid,userAvatar){
+      state.user.uid = uid
+      state.user.user_name = userName
+      state.user.user_avatar = userAvatar
     }
+
 
   },
   actions: {

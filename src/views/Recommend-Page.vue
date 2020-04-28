@@ -62,6 +62,7 @@
   import WaterFallAllImg from '../components/waterFall-component/WaterFall-All-Img'
   import WaterFallAllText from '../components/waterFall-component/WaterFall-All-Text'
   import WaterFallAllImgs from '../components/waterFall-component/WaterFall-All-Imgs'
+  // import Vue from 'vue'
 
   export default {
     name: "RecommendPage",
@@ -179,16 +180,57 @@
         console.log("执行滚动")
       }
     },
+    beforeCreate() {
+      //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log(res)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null){
+
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+            }else {
+            }
+          })
+
+       /* if(sessionStorage.getItem("userName")!=null && sessionStorage.getItem("userAvatar")!=null){
+
+          this.$store.commit('changeUser',sessionStorage.getItem("userName"),
+              sessionStorage.getItem("userAvatar"),sessionStorage.getItem("uid"))
+
+        }else {
+          // this.$store.commit('addUserName',null)
+        }
+*/
+      console.log(this.$store.state.user)
+
+    },
     created() {
 
+/*
 
       //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
       axios.get("http://127.0.0.1:8090/getSessionUserInfo")
            .then(res =>{
-             alert(res)
+             // alert(res)
              console.log(res)
+             //把当前已经登录的用户的信息再存入vuex中
+             if(res.data!=""){
+               // this.$store.state.user = res.data
+               // Vue.set(this.$store.state.user,res.data)
+
+               //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+               this.$store.commit('addUserName',res.data)
+
+             }else {
+
+             }
+
+
            })
 
+*/
 
 
       axios.get("http://localhost:8090/showIndex")
@@ -268,6 +310,22 @@
 
 
           })
+    },
+    beforeMount() {
+     /* //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            // alert(res)
+            console.log(res)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=""){
+
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+            }else {
+            }
+          })
+*/
     }
 
   }

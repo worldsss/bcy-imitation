@@ -60,8 +60,17 @@
               // alert(res.data)
               if(res.data!=''){
                 alert("登录成功")
-                this.user.uid = res.data
+                // this.user.uid = res.data
+
+                this.user = res.data
                 this.$store.commit('addUserName',this.user)
+
+                //试了半天，发现组件对vuex的判断比我发出请求到接受到session再赋值给vuex要快的多，没办法使用前端自己的session
+                sessionStorage.setItem("userName",this.user.user_name)
+                sessionStorage.setItem("uid",this.user.uid)
+                sessionStorage.setItem("useAvatar",this.user.user_avatar)
+
+
 
                 this.$router.replace("/")
               }else {
