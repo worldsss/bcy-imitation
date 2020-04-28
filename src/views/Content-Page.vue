@@ -57,10 +57,10 @@
             </el-col>
             <el-col :span="6">
                 <el-card style="text-align: center;margin-bottom: 10px">
-                    <el-avatar src="3.jpg" :size="80"></el-avatar>
-<!--                    <img :src="'http://localhost:8080/'+userAvatar" alt="" width="80" height="80">-->
+<!--                    <el-avatar src="3.jpg" :size="80"></el-avatar>-->
+                    <img :src="'http://localhost:8080/'+nowUser.user_avatar" alt="" width="80" height="80" style="border-radius: 50%">
 <!--                    <p>姓名</p>-->
-                    <p>姓名</p>
+                    <p>{{this.nowUser.user_name}}</p>
                     <span>关注 17</span>
                     <el-divider direction="vertical"></el-divider>
                     <span>粉丝&nbsp;14</span>
@@ -119,6 +119,11 @@
           pc_comment: 0,
         },
         userAvatar:'',
+        nowUser:{
+          uid:0,
+          user_name:'',
+          user_avatar:'',
+        }
       }
 
     },
@@ -144,6 +149,14 @@
             console.log(this.pcContent)
 
           })
+
+      axios.get("http://127.0.0.1:8090/getUserByPrid?prid=" + prid)
+          .then(res => {
+            console.log(res.data)
+            this.nowUser = res.data
+
+          })
+
 
       /*  if(this.$store.state.user.user_avatar!='' && this.$store.state.user.user_avatar!=null){
           this.userAvatar = this.$store.state.user.user_avatar
