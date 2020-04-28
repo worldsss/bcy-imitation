@@ -58,6 +58,8 @@
             <el-col :span="6">
                 <el-card style="text-align: center;margin-bottom: 10px">
                     <el-avatar src="3.jpg" :size="80"></el-avatar>
+<!--                    <img :src="'http://localhost:8080/'+userAvatar" alt="" width="80" height="80">-->
+<!--                    <p>姓名</p>-->
                     <p>姓名</p>
                     <span>关注 17</span>
                     <el-divider direction="vertical"></el-divider>
@@ -115,7 +117,8 @@
           pc_collect: null,
           pc_date: null,
           pc_comment: 0,
-        }
+        },
+        userAvatar:'',
       }
 
     },
@@ -142,9 +145,11 @@
 
           })
 
+      /*  if(this.$store.state.user.user_avatar!='' && this.$store.state.user.user_avatar!=null){
+          this.userAvatar = this.$store.state.user.user_avatar
 
-
-
+        }
+      alert(this.userAvatar)*/
 
     }
   }

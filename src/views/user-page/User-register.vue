@@ -6,7 +6,7 @@
                 <el-card>
                     <h3>现在就加入半次元</h3>
                     <el-input placeholder="请输入用户名"
-                              prefix-icon="el-icon-user" v-model="user.user_name"></el-input>
+                              prefix-icon="el-icon-user" v-model="user.user_name" @blur="judgeUserName()"></el-input>
                     <br><br>
                     <el-input placeholder="请输入密码"
                               prefix-icon="el-icon-question" v-model="user.user_password"></el-input>
@@ -51,9 +51,23 @@
         .then(res =>{
           console.log(res.data)
           if(res.data=="成功"){
+            alert("注册成功！")
             this.$router.replace('/user-login')
           }
         })
+      },
+      judgeUserName(){
+        axios.post("http://127.0.0.1:8090/judgeUserName",this.user)
+            .then(res =>{
+              console.log(res.data)
+              if(res.data=="成功"){
+
+              }else {
+                alert("用户名重复")
+                this.user.user_name = ""
+              }
+            })
+
       }
     }
   }

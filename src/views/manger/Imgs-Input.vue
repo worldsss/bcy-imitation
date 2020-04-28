@@ -346,7 +346,8 @@
 
         tagsUpload(0, this.dynamicTags.length);
         //跳转到推荐页面
-        this.$router.push("/")
+        // this.$router.push("/")
+        _this.$router.go(-1)
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);

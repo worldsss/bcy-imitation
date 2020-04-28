@@ -80,7 +80,7 @@
         </el-menu-item>
         <!--        消息-->
 <!--        <div v-if="$store.state.user.user_name!=''">-->
-        <div :class="isUserShow!=true?'display-none':''">
+        <div :class="isUserShow == false?'display-none':''">
             <el-menu-item style="float: right;">
                 <el-badge is-dot class="item" v-popover:infor>
                     <i class="el-icon-bell"></i>
@@ -207,7 +207,7 @@
         <!--头像图标，当vuex中还没有用户信息时，不显示-->
 <!--        <div v-if="$store.state.user.user_name!=''">-->
 <!--        <div v-if="$store.state.user.user_name!=''">-->
-        <div  :class="isUserShow!=true?'display-none':''">
+        <div  :class="isUserShow==false?'display-none':''">
             <el-menu-item style="float: right;" v-popover:popo>
                 <!--  <el-avatar :size="40" :src="$store.state.user.user_avatar">
                       &lt;!&ndash; 头像&ndash;&gt;
@@ -275,7 +275,7 @@
                         </el-col>
                     </el-row>
                     <br>
-                    <el-button style="width: 100%;">
+                    <el-button style="width: 100%;" @click="outUser()">
                         退出账号
                     </el-button>
                 </el-popover>
@@ -283,7 +283,9 @@
             </el-menu-item>
         </div>
         <!--        当vuex中没有数据时说明还没有登录，所以显示登录或注册-->
-        <div v-if="$store.state.user.user_name==''">
+<!--        <div v-if="$store.state.user.user_name==''">-->
+<!--        <div v-if="$store.state.user.user_name==''">-->
+        <div  :class="isUserShow==true?'display-none':''">
             <el-menu-item style="float: right;">
                 <el-link href="/user-register" :underline="false">注册</el-link>
             </el-menu-item>
@@ -322,6 +324,11 @@
         messages: [],
         // recommend-page
         isUserShow:false,
+        voiduser:{
+          uid:0,
+          user_name:'',
+          user_avatar:'',
+        },
       }
     },
     created() {
@@ -333,15 +340,20 @@
 
       axios.get("http://127.0.0.1:8090/getSessionUserInfo")
           .then(res =>{
-            console.log(res)
+            console.log("这里是session中的对象"+res.data)
             //把当前已经登录的用户的信息再存入vuex中
-            if(res.data!=null){
+            if(res.data!=null && res.data!=''){
                this.isUserShow = true
               //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
               this.$store.commit('addUserName',res.data)
             }else {
+              this.isUserShow = false
             }
           })
+
+      // if()
+
+
 
     },
     beforeRouteLeave(to, from, next) {
@@ -366,7 +378,21 @@
           alert("只有登录后才能发布作品哦！")
           this.$router.push("/user-login")
         }
-      }
+      },
+      outUser(){
+
+        axios.get("http://127.0.0.1:8090/outUserSession")
+             .then(res =>{
+               this.$store.commit('outUser',this.voiduser)
+
+              this.$router.go(0)
+               alert("退出成功")
+             })
+
+
+
+      },
+
     }
 
   }
@@ -439,8 +465,8 @@
 
 <style scoped>
     .display-none{
-        /*display: none;*/
-        opacity: 0;
+        display: none;
+        /*opacity: 0;*/
     }
 
 
