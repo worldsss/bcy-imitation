@@ -123,6 +123,7 @@
 
         if(window.scrollY>4000){
 
+          alert("这个什么时候被执行的来着？")
          /* this.pageNumber++;
           axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber)
               .then(res => {
@@ -160,7 +161,7 @@
 
 
             })*/
-        if(this.isScrollDown ==true){
+      /*  if(this.isScrollDown ==true){
           console.log("发送啊")
           this.pageNumber++;
           axios.get("http://localhost:8090/showIndex?pageSize=10&pageNumber=2")
@@ -171,7 +172,7 @@
 
 
               })
-        }
+        }*/
 
 
 
@@ -182,7 +183,7 @@
     },
     beforeCreate() {
       //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
-      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+    /*  axios.get("http://127.0.0.1:8090/getSessionUserInfo")
           .then(res =>{
             console.log(res)
             //把当前已经登录的用户的信息再存入vuex中
@@ -192,7 +193,7 @@
               this.$store.commit('addUserName',res.data)
             }else {
             }
-          })
+          })*/
 
        /* if(sessionStorage.getItem("userName")!=null && sessionStorage.getItem("userAvatar")!=null){
 
@@ -271,6 +272,8 @@
         var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
 
         if(scrollTop+windowHeight==scrollHeight){
+
+          //发送翻页的axios的请求发送
           this.isScrollDown = true
           //写后台加载数据的函数
           console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
@@ -298,18 +301,22 @@
 
     },
     updated() {
-      axios.get("http://localhost:8090/showIndex")
+     /* axios.get("http://localhost:8090/showIndex")
           .then(res => {
             this.imgsContent = res.data.list;
-/*
+/!*
             if(res.data.list[0].pro_imgs[0]==null){
               this.imgLoading = true
             }else {
               this.imgLoading = false
-            }*/
+            }*!/
 
 
-          })
+          })*/
+
+
+
+
     },
     beforeMount() {
      /* //当页面上已经有用户登录且没有关闭浏览器时，向服务器上发送请求来获取当前在session状态下的用户
@@ -330,7 +337,7 @@
 
   }
 </script>
-<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">
+<!--<link href="https://cdn.bootcss.com/github-markdown-css/2.10.0/github-markdown.min.css" rel="stylesheet">-->
 <style scoped>
     .time {
         font-size: 13px;
