@@ -123,7 +123,7 @@
 
         if(window.scrollY>4000){
 
-          alert("这个什么时候被执行的来着？")
+          // alert("这个什么时候被执行的来着？")
          /* this.pageNumber++;
           axios.get("http://localhost:8090/showIndex?pageSize="+this.pageSize+"&pageNumber="+this.pageNumber)
               .then(res => {

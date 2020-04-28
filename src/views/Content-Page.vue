@@ -12,11 +12,11 @@
                         <el-divider direction="vertical"></el-divider>
                         <span>46条评论</span>
                         <br><br>
-                       <!-- <div>
-                            <el-tag><i class="el-icon-s-management"></i>明日方舟</el-tag>
-                            <el-tag>推进之王</el-tag>
-                        </div>-->
-                            <el-tag v-for="(item,index) in ProContent.pr_tags">{{item.tags_name}}</el-tag>
+                        <!-- <div>
+                             <el-tag><i class="el-icon-s-management"></i>明日方舟</el-tag>
+                             <el-tag>推进之王</el-tag>
+                         </div>-->
+                        <el-tag v-for="(item,index) in ProContent.pr_tags">{{item.tags_name}}</el-tag>
 
 
                         <el-divider></el-divider>
@@ -27,7 +27,7 @@
                             <el-image :src="item.img" :preview-src-list="imgList"></el-image>
 
                         </div>
-<!--                        <h2 v-html="pcContent.pc_title"></h2>-->
+                        <!--                        <h2 v-html="pcContent.pc_title"></h2>-->
                         <el-card v-html="pcContent.pc_info" class="pc-info"></el-card>
 
                         <div v-html="pcContent.pc_content" class="pc-content"></div>
@@ -55,17 +55,19 @@
                     <el-button class="bcy-button">按发布排序</el-button>
                 </el-card>
             </el-col>
-            <el-col :span="6">
-                <el-card style="text-align: center;margin-bottom: 10px">
-<!--                    <el-avatar src="3.jpg" :size="80"></el-avatar>-->
-                    <img :src="'http://localhost:8080/'+nowUser.user_avatar" alt="" width="80" height="80" style="border-radius: 50%">
-<!--                    <p>姓名</p>-->
+            <el-col :span="6" class="content-rigth-userInfo">
+                <el-card >
+                    <!--                    <el-avatar src="3.jpg" :size="80"></el-avatar>-->
+                    <img :src="'http://localhost:8080/'+nowUser.user_avatar" alt="" width="80" height="80"
+                         style="border-radius: 50%">
+                    <!--                    <p>姓名</p>-->
                     <p>{{this.nowUser.user_name}}</p>
                     <span>关注 17</span>
                     <el-divider direction="vertical"></el-divider>
                     <span>粉丝&nbsp;14</span>
-                    <p class="my-opacity">会写小说懒的写</p>
-                    <el-button>关注</el-button>
+                    <!--                    <p class="my-opacity">会写小说懒的写</p>-->
+                    <p class="my-opacity">{{nowUser.user_info}}</p>
+                    <el-button @click="insertUserFans()">关注</el-button>
                     <el-button icon="el-icon-message">私信</el-button>
                     <el-button>勾搭</el-button>
                 </el-card>
@@ -105,9 +107,9 @@
           pro_imgs: [],
           pr_tags: [],
         },
-        imgList:[], //图片大图预览
-        testImgList:[],
-        pcContent:{
+        imgList: [], //图片大图预览
+        testImgList: [],
+        pcContent: {
           pc_content: "",
           pc_title: "",
           pc_info: "",
@@ -118,11 +120,16 @@
           pc_date: null,
           pc_comment: 0,
         },
-        userAvatar:'',
-        nowUser:{
+        userAvatar: '',
+        nowUser: {
+          uid: 0,
+          user_name: '',
+          user_avatar: '',
+          user_info: '',
+        },
+        userFans:{
           uid:0,
-          user_name:'',
-          user_avatar:'',
+          fid:0,
         }
       }
 
@@ -136,7 +143,7 @@
             console.log(this.ProContent)
 
             //开启图片的大图预览
-            for (var i=0;i<this.ProContent.pro_imgs.length;i++){
+            for (var i = 0; i < this.ProContent.pro_imgs.length; i++) {
               this.imgList.push(this.ProContent.pro_imgs[i].img)
             }
 
@@ -152,6 +159,7 @@
 
       axios.get("http://127.0.0.1:8090/getUserByPrid?prid=" + prid)
           .then(res => {
+            console.log("这里是用户的信息s")
             console.log(res.data)
             this.nowUser = res.data
 
@@ -164,6 +172,22 @@
         }
       alert(this.userAvatar)*/
 
+    },
+    methods:{
+      insertUserFans(){
+        this.userFans.uid = this.$store.state.user.uid;
+        this.userFans.fid = this.nowUser.uid
+
+        axios.post("http://127.0.0.1:8090/insertUserFans",this.userFans)
+            .then(res => {
+              console.log("这里是用户的信息s")
+              console.log(res.data)
+              this.nowUser = res.data
+
+            })
+
+
+      }
     }
   }
 </script>
@@ -176,10 +200,12 @@
     .my-opacity {
         opacity: 0.5;
     }
-    .pc-content{
+
+    .pc-content {
 
     }
-    .pc-content img{
+
+    .pc-content img {
         width: 100%;
         height: auto;
     }
@@ -188,7 +214,7 @@
 <style scoped>
 
 
-    .pc-info{
+    .pc-info {
         background-color: #f5f5fa;
         line-height: 50px;
         font-size: 16px;
@@ -196,6 +222,17 @@
         text-indent: 2em;
         border-radius: 5px;
     }
+
+    .content-rigth-userInfo {
+        text-align: center;
+        margin-bottom: 10px;
+        position: sticky; /*粘附功能，随着屏幕滚动吸附到屏幕上*/
+        top: 50px;
+
+    }
+  /*  .content-rigth-userInfo-fixed{
+        position: fixed;
+    }*/
 
 
 </style>

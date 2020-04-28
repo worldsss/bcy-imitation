@@ -133,8 +133,16 @@ const routes = [
             title:'多图片上传'
         }
     },
-    {
+   /* {
         path: '/user-main',
+        name: 'UserMain',
+        component: UserMain,
+        meta:{
+            title:'个人主页'
+        },
+    },*/
+    {
+        path: '/user-main/:uid',
         name: 'UserMain',
         component: UserMain,
         meta:{

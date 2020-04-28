@@ -232,7 +232,7 @@
                     <el-divider></el-divider>
                     <el-row :gutter="10">
                         <el-col :span="12">
-                            <el-link :underline="false" href="/user-main">
+                            <el-link :underline="false" :href="'/user-main/'+$store.state.user.uid">
                                 <i class="el-icon-s-home"></i>
                                 个人主页
                             </el-link>

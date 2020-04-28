@@ -8,19 +8,21 @@
                     <el-image :src="src01">
 
                     </el-image>
-                    <el-avatar :src="src03" :size="120"
+                    <el-avatar :src="'http://localhost:8080/'+myuser.user_avatar" :size="120"
                                style="position:absolute;top: 100px;left: 30px;border: 5px solid"></el-avatar>
 
                     <div style="width: 90%;margin: 0 auto; background-color: white">
                         <br><br>
-                        <h3 class="my-test-left">worlds</h3>
+<!--                        <h3 class="my-test-left">worlds</h3>-->
+                        <h3 class="my-test-left">{{myuser.user_name}}</h3>
                         <div class="my-test-left">
                             <el-tag><i class="el-icon-male"></i></el-tag>
                             <el-tag>求cp</el-tag>
                             <el-tag>coser</el-tag>
                             <el-tag>河南</el-tag>
 
-                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>
+<!--                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>-->
+                            <p class="my-test-left">{{myuser.user_info}}</p>
                             <el-link style="font-size: 20px;margin-right: 15px">
                                 537
                                 <span class="my-opacity">关注</span>
@@ -70,8 +72,10 @@
 
                 </div>
                 <br>
+
+<!--              这里是内容-->
                 <el-card>
-                    <el-row :gutter="10">
+                  <!--  <el-row :gutter="10">
                         <el-col :span="8" class="my-like-img-height">
                             <el-link>
                                 <el-image :src="likeImg[0]"></el-image>
@@ -103,13 +107,21 @@
                             </el-link>
 
                         </el-col>
-                        <el-col :span="8" class="my-like-img-height"> <!--style="width: 100%;height: 100%"-->
+                        <el-col :span="8" class="my-like-img-height"> &lt;!&ndash;style="width: 100%;height: 100%"&ndash;&gt;
                             <el-link>
                                 <el-image :src="likeImg[2]"></el-image>
                             </el-link>
 
                         </el-col>
-                    </el-row>
+                    </el-row>-->
+               <!-- <water-fall-all-imgs :water-imgs="imgsList">
+
+                </water-fall-all-imgs>-->
+                    <water-fall-all-imgs
+                            v-for="(item,index) in imgsList"
+                            :water-imgs="item">
+                    </water-fall-all-imgs>
+
 
                 </el-card>
 
@@ -171,11 +183,13 @@
 
 <script>
   import InputNav from '../../components/public-page/Input-NavMenu'
+  import WaterFallAllImgs from '../../components/waterFall-component/WaterFall-All-Imgs'
 
   export default {
     name: "UserMain",
     components: {
-      InputNav
+      InputNav,
+      WaterFallAllImgs
     },
     data() {
       return {
@@ -189,7 +203,14 @@
         fits: 'scale-down',
         isFixeds: false,
         squareUrl:"",
-
+        myuser:{
+          uid:0,
+          user_name:'',
+          user_avatar:'',
+          user_info:'',
+          user_sex:'',
+        },
+        imgsList:[],
       }
     },
     mounted() {
@@ -203,6 +224,32 @@
           this.isFixeds = false
         }
       }
+    },
+    created() {
+        var uid = this.$route.params.uid;
+      axios.get("http://127.0.0.1:8090/selectUserByUid?uid=" + uid)
+          .then(res => {
+            console.log(res.data)
+            this.myuser = res.data
+          })
+
+        /*  //获取当前用户的全部作品
+          axios.get("http://127.0.0.1:8090/getProContentByUid?uid=" + uid)
+              .then(res => {
+                console.log(res.data)
+                this.imgsList = res.data
+
+              })*/
+      //获取当前用户的全部作品
+      axios.get("http://127.0.0.1:8090/getProIndexByUid?uid=" + uid)
+          .then(res => {
+            console.log(res.data)
+            this.imgsList.push(res.data.list)
+
+          })
+
+
+
     }
   }
 </script>
