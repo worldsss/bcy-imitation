@@ -250,9 +250,12 @@
                         </el-link>
                     </el-col>
                     <el-col :span="6">
-                        <el-link icon="el-icon-view" :underline="false" type="info">
+                       <!-- <el-link icon="el-icon-view" :underline="false" type="info">
                             <slot name="img-click"></slot>
-                        </el-link>
+                        </el-link>-->
+<!--                        <el-link icon="el-icon-view" :underline="false" type="info">-->
+                            <slot name="img-click"></slot>
+<!--                        </el-link>-->
                     </el-col>
                 </el-row>
 

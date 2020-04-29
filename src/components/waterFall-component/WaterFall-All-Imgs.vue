@@ -139,7 +139,13 @@
             </span>
             <span slot="img-click">
 <!--                {{item.pr_click}}-->
-                {{item.pr_givelike}}
+<!--                {{item.pr_givelike}}-->
+                 <el-link @click="clickUserGivelike(item)"
+                          :underline="false"
+                          type="info" >
+                    <i class="el-icon-magic-stick"></i>
+                    {{item.pr_givelike}}
+                </el-link>
             </span>
 
         </water-fall-imgs>
@@ -161,50 +167,7 @@
         type: Array,
         default() {
           return [
-            /*  {
-                ImgsAvator: '3.jpg',
-                ImgsName: '用户1',
-                ImgsText: '哈哈哈1',
-                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-                ImgsCollect: 125,
-                ImgsGO: 241,
-                ImgsComment: 784,
-                ImgsClick: 25,
-                ImgsLink: 'http://www.baidu.com'
-              },
-              {
-                ImgsAvator: '4.jpg',
-                ImgsName: '用户2',
-                ImgsText: '哈哈哈2',
-                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-                ImgsCollect: 125,
-                ImgsGO: 241,
-                ImgsComment: 784,
-                ImgsClick: 25,
-                ImgsLink: 'http://www.baidu.com'
-              },
-              {
-                ImgsAvator: '5.jpg',
-                ImgsName: '用户3',
-                ImgsText: '哈哈哈3',
-                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-                ImgsCollect: 125,
-                ImgsGO: 241,
-                ImgsComment: 784,
-                ImgsClick: 25,
-                ImgsLink: 'http://www.baidu.com'
-              },
-              {
-                ImgsAvator: '6.jpg',
-                ImgsName: '用户4',
-                ImgsText: '哈哈哈4',
-                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-                ImgsCollect: 125,
-                ImgsGO: 241,
-                ImgsComment: 784,
-                ImgsClick: 25,
-                ImgsLink: 'http://www.baidu.com'
-              },*/
+
           ]
         }
       },
@@ -218,7 +181,11 @@
           uid: 0,
           prid: 0,
         },
-        isCollect: '收藏'
+        isCollect: '收藏',
+        proContent:{
+          prid:0,
+        },
+        isGivelikeOne:0,
 
       }
     },
@@ -241,22 +208,28 @@
         this.userCollect.prid = index.prid
         this.userCollect.uid = this.$store.state.user.uid;
 
+        //如果当前点赞数没有更新的话
         if(index.pr_comment_count==0){
-          axios.post("http://localhost:8090/insertUserCollect", this.userCollect)
-              .then(res => {
-                // alert(res.data)
-                if (res.data == 1) {
-                  index.pr_comment_count = 1;
-                  this.$message({
-                    message: '收藏成功!',
-                    type: 'success',
-                    offset: 100
-                  });
-                } else {
-                  alert("请先登录！")
-                }
+          if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+            axios.post("http://localhost:8090/insertUserCollect", this.userCollect)
+                .then(res => {
+                  // alert(res.data)
+                  if (res.data == 1) {
+                    index.pr_comment_count = 1;
+                    this.$message({
+                      message: '收藏成功!',
+                      type: 'success',
+                      offset: 100
+                    });
+                  } else {
+                    alert("请先登录！")
+                  }
 
-              })
+                })
+
+          }else {
+            alert("先登录才能收藏哦！")
+          }
 
         }else {
           axios.post("http://localhost:8090/deleteUserCollect", this.userCollect)
@@ -296,6 +269,41 @@
         }
 */
 
+      },
+      //点赞功能
+      clickUserGivelike(item){
+        this.proContent.prid = item.prid;
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
+          this.isGivelikeOne++;
+          if (this.isGivelikeOne == 1) {
+            axios.post("http://localhost:8090/addPrClickByPrid", this.proContent)
+                .then(res => {
+                  console.log(res.data)
+                  item.pr_givelike++
+                  this.$message({
+                    type: "success",
+                    message: '感谢你的点赞！',
+                    offset: 100
+                  })
+
+                })
+          }
+          if (this.isGivelikeOne == 2) {
+            axios.post("http://localhost:8090/lessPrClickByPrid", this.proContent)
+                .then(res => {
+                  if (res.data == 1) {
+                    item.pr_givelike--
+                    this.isGivelikeOne = 0
+                    this.$message({type: "success", message: '取消点赞', offset: 100})
+                  }
+
+                })
+
+          }
+
+        }else {
+          alert("登录后才能点赞哦!")
+        }
       }
     },
     created() {
