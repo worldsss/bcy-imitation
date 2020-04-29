@@ -23,6 +23,8 @@ import QuestionsPage from '../views/Questions-page'
 import ImgsPage from "../views/manger/Imgs-Input"
 import UserRegister from '../views/user-page/User-register'
 import UserLogin from '../views/user-page/User-login'
+import CirclePage from '../views/circle-page'
+
 
 Vue.use(VueRouter)
 
@@ -109,6 +111,15 @@ const routes = [
         component: ImgInput,
         meta:{
             title:'发布图片'
+        },
+    },
+    {
+        path: '/circle-page/:tid',
+        // path: '/circle-page',
+        name: 'CirclePage',
+        component: CirclePage,
+        meta:{
+            title:'圈子'
         },
     },
     {

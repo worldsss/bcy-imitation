@@ -153,13 +153,11 @@
                         <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                     </el-card>
                     <br>
-                    <el-card class="box-card">
+                  <!--  <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>我关注的用户</span>
-                            <!--                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
                         </div>
                         <div v-for="o in 4" :key="o" class="text item">
-                            <!--                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>-->
                             <el-row :gutter="10">
                                 <el-col :span="2">
                                     <el-link :underline="false">
@@ -173,7 +171,31 @@
                             </el-row>
                         </div>
                         <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
+                    </el-card>-->
+
+
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>我关注的用户</span>
+                            <!--                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
+                        </div>
+                        <div v-for="(item,index) in userAttention" :key="index" class="text item">
+                            <!--                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>-->
+                            <el-row :gutter="10">
+                                <el-col :span="2">
+                                    <el-link :underline="false">
+                                        <el-avatar shape="circle" :size="20" :src="'http://localhost:8080/'+item.user_avatar"></el-avatar>
+                                    </el-link>
+                                </el-col>
+                                <el-col :span="17">
+                                    <el-link> {{item.user_name}}</el-link>
+
+                                </el-col>
+                            </el-row>
+                        </div>
+                        <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                     </el-card>
+
                 </div>
 
             </el-col>
@@ -211,6 +233,7 @@
           user_sex:'',
         },
         imgsList:[],
+        userAttention:[], //我关注的用户
       }
     },
     mounted() {
@@ -248,6 +271,14 @@
 
           })
 
+
+      //获取我关注的用户
+      axios.get("http://127.0.0.1:8090/getUserFansUserByFid?fid=" + uid)
+          .then(res => {
+            console.log(res.data)
+            this.userAttention = res.data
+
+          })
 
 
     }
