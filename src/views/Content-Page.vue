@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div >
         <input-nav></input-nav>
         <br>
         <el-row :gutter="20" style="width: 80%;margin:0 auto">
@@ -55,7 +55,7 @@
                     <el-button class="bcy-button">按发布排序</el-button>
                 </el-card>
             </el-col>
-            <el-col :span="6" class="content-rigth-userInfo">
+            <el-col :span="6" class="content-rigth-userInfo" id="userInfo">
                 <el-card >
                     <!--                    <el-avatar src="3.jpg" :size="80"></el-avatar>-->
                     <img :src="'http://localhost:8080/'+nowUser.user_avatar" alt="" width="80" height="80"
@@ -67,11 +67,13 @@
                     <span>粉丝&nbsp;14</span>
                     <!--                    <p class="my-opacity">会写小说懒的写</p>-->
                     <p class="my-opacity">{{nowUser.user_info}}</p>
-                    <el-button @click="insertUserFans()">关注</el-button>
-                    <el-button icon="el-icon-message">私信</el-button>
-                    <el-button>勾搭</el-button>
+                    <el-button size="medium" @click="insertUserFans()"
+                               :class="isUserAtten==true?'bcy-buttons-visited':'bcy-buttons'">
+                        <i class="el-icon-plus" v-show="!isUserAtten"></i>{{userAtten}}</el-button>
+                    <el-button size="medium" icon="el-icon-message">私信</el-button>
+                    <el-button size="medium">勾搭</el-button>
                 </el-card>
-                <el-card id="choucan">
+                <el-card id="choucan" style="margin: 10px 0px">
                     <el-row :gutter="10">
                         <el-col :span="6">
                             <el-button style="width: 100%;">收藏</el-button>
@@ -130,7 +132,9 @@
         userFans:{
           uid:0,
           fid:0,
-        }
+        },
+        isUserAtten:false,
+        userAtten:'关注'
       }
 
     },
@@ -163,6 +167,24 @@
             console.log(res.data)
             this.nowUser = res.data
 
+            //查询当前的用户我关注了没有
+            this.userFans.uid = this.$store.state.user.uid;  //登录的用户
+            this.userFans.fid = this.nowUser.uid //作品内容的用户
+            console.log("这里是当前用户的信息")
+            console.log(this.userFans)
+            axios.post("http://127.0.0.1:8090/selectUserFansByFid",this.userFans)
+                .then(res => {
+                  console.log(res.data)
+                  if (res.data==1){
+                    this.isUserAtten = true
+                    this.userAtten = '已关注'
+                  }
+
+
+                })
+
+
+
           })
 
 
@@ -172,17 +194,26 @@
         }
       alert(this.userAvatar)*/
 
+
+
+
     },
     methods:{
       insertUserFans(){
         this.userFans.uid = this.$store.state.user.uid;
         this.userFans.fid = this.nowUser.uid
 
+        //添加一个用户
         axios.post("http://127.0.0.1:8090/insertUserFans",this.userFans)
             .then(res => {
               console.log("这里是用户的信息s")
               console.log(res.data)
               this.nowUser = res.data
+              if(res.data!=''){
+                alert(this.userAtten)
+                this.userAtten = "已关注"
+                this.isUserAtten = true
+              }
 
             })
 
@@ -195,6 +226,10 @@
 <style>
     #choucan .el-card__body {
         padding: 10px;
+    }
+
+    #userInfo .el-card__body{
+        padding: 10px 5px;
     }
 
     .my-opacity {
@@ -233,6 +268,10 @@
   /*  .content-rigth-userInfo-fixed{
         position: fixed;
     }*/
+    .bcy-buttons-visited{
+        background-color: #e5e5e5 !important ;
+        color: #a1a1a6 !important;
+    }
 
 
 </style>
