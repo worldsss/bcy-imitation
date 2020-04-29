@@ -230,9 +230,14 @@
 
                 <el-row :gutter="10" style="width: 90%;margin: 0 auto;text-align: center">
                     <el-col :span="6">
-                        <el-link icon="el-icon-star-off" :underline="false" type="info">
+                      <!--  <el-link icon="el-icon-star-off" @click="userCollect()" :underline="false" type="info">
                             <slot name="img-collect"></slot>
-                        </el-link>
+                        </el-link>-->
+                        <slot name="img-collect" icon="el-icon-star-off"
+                                  @click="userCollect()"
+                                  :underline="false" type="info">
+<!--                            <slot name="img-collect"></slot>-->
+                        </slot>
                     </el-col>
                     <el-col :span="6">
                         <el-link icon="el-icon-position" :underline="false" type="info">

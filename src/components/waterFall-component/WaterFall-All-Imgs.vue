@@ -37,6 +37,56 @@
 
    -->
 
+        <!--
+
+                <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" :img-count="item.pr_img_count">
+                    &lt;!&ndash;            <a :href="'http://127.0.0.1:8090/selectTagById?prid='+item.prid" slot="img-link">&ndash;&gt;
+                    <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
+                    <strong slot="img-name">
+                        {{item.user_name}}
+                    </strong>
+                    <span slot="img-text">
+                        {{item.pr_info}}
+                    </span>
+                    <el-button slot="img-tags"
+                               type="info"
+                               size="mini"
+                               :plain="true"
+                               :autofocus="false" v-for="(item2,index) in item.pr_tags">
+                        {{item2.tags_name}}
+                    </el-button>
+                    &lt;!&ndash;  <img v-for="(item1,index1) in item.pro_imgs"
+                           :slot="index1"
+                           :src="item1.img"
+                           alt=""
+                           class="imgs-width"  />&ndash;&gt;
+                    &lt;!&ndash;            <a :href="'http://127.0.0.1:8090/selectTagById?prid='+item.prid" slot="img-link"></a>&ndash;&gt;
+
+                    <el-image v-for="(item1,index1) in item.pro_imgs"
+                              :slot="index1"
+                              :src="item1.img"
+                              alt=""
+                              fit="cover"
+                              @click="hrefContent(item.prid)"
+                              class="imgs-width"/>
+
+                    <span slot="img-collect">
+        &lt;!&ndash;                {{item.pr_}}&ndash;&gt;
+                    </span>
+                    <span slot="img-go">
+                        {{item.pr_go}}
+                    </span>
+                    <span slot="img-comment">
+                        {{item.pr_comment_count}}
+                    </span>
+                    <span slot="img-click">
+                        {{item.pr_click}}
+                    </span>
+
+                </water-fall-imgs>
+
+        -->
+
 
         <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" :img-count="item.pr_img_count">
             <!--            <a :href="'http://127.0.0.1:8090/selectTagById?prid='+item.prid" slot="img-link">-->
@@ -69,17 +119,12 @@
                       @click="hrefContent(item.prid)"
                       class="imgs-width"/>
 
-
-            <!-- <el-image v-for="(item1,index1) in item.pro_imgs"
-                  :slot="index1"
-                  :src="item1.img"
-                  alt=""
-                  fit="cover"
-                  class="imgs-width"  />-->
-
-
             <span slot="img-collect">
-<!--                {{item.pr_}}-->
+                <el-link @click="clickUserCollect(item.prid)"
+                         :underline="false"
+                         type="info">
+                    <i :class="isCollect=='收藏'?'el-icon-star-off':'el-icon-star-on'"></i>
+                    {{isCollect}}</el-link>
             </span>
             <span slot="img-go">
                 {{item.pr_go}}
@@ -92,6 +137,8 @@
             </span>
 
         </water-fall-imgs>
+
+
     </div>
 </template>
 
@@ -108,7 +155,7 @@
         type: Array,
         default() {
           return [
-            {
+          /*  {
               ImgsAvator: '3.jpg',
               ImgsName: '用户1',
               ImgsText: '哈哈哈1',
@@ -151,7 +198,7 @@
               ImgsComment: 784,
               ImgsClick: 25,
               ImgsLink: 'http://www.baidu.com'
-            },
+            },*/
           ]
         }
       },
@@ -159,15 +206,50 @@
 
 
     },
-    methods:{
-      hrefContent(index){
+    data(){
+      return{
+        userCollect:{
+          uid:0,
+          prid:0,
+        },
+        isCollect:'收藏'
+
+      }
+    },
+    methods: {
+      hrefContent(index) {
 
         // var tempwindow=window.open('_blank');
         // tempwindow.location="http://127.0.0.1:8090/selectTagById?prid="+prid;
         // tempwindow.location="/c";
         // let routeData = this.$router.resolve({ path: '/content', query: { prid:index } });
-        let routeData = this.$router.resolve({ path: '/content/'+index });
+        //打开新的页面显示内容
+        let routeData = this.$router.resolve({path: '/content/' + index});
         window.open(routeData.href, '_blank');
+
+      },
+      //用户收藏
+      clickUserCollect(index){
+        this.userCollect.prid = index
+        this.userCollect.uid = this.$store.state.user.uid;
+
+        axios.post("http://localhost:8090/insertUserCollect",this.userCollect)
+            .then(res => {
+              alert(res.data)
+              if(res.data==1){
+                this.isCollect = "已收藏"
+                this.$message({
+                  message: '收藏成功!',
+                  type: 'success',
+                  offset:100
+                });
+              }else {
+                alert("请先登录！")
+              }
+
+            })
+
+
 
       }
     },
@@ -182,7 +264,7 @@
         width: 100%;
         height: 100%;
         border-radius: 5px;
-        cursor:pointer; /*箭头变小手的效果*/
+        cursor: pointer; /*箭头变小手的效果*/
     }
 
 </style>
