@@ -128,6 +128,7 @@
           user_name: '',
           user_avatar: '',
           user_info: '',
+          user_attention:0,
         },
         userFans:{
           uid:0,
@@ -161,6 +162,7 @@
 
           })
 
+      //根据作品prid来获得当前的用户信息
       axios.get("http://127.0.0.1:8090/getUserByPrid?prid=" + prid)
           .then(res => {
             console.log("这里是用户的信息s")
