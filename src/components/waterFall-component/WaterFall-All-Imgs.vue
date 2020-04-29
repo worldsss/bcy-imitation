@@ -119,21 +119,27 @@
                       @click="hrefContent(item.prid)"
                       class="imgs-width"/>
 
-            <span slot="img-collect">
-                <el-link @click="clickUserCollect(item.prid)"
+            <span slot="img-collect"  v-on="isLoadUserCollect(item.prid)">
+<!--                <el-link @click="clickUserCollect(item.prid)"-->
+                <el-link @click="clickUserCollect(item)"
+
                          :underline="false"
-                         type="info">
-                    <i :class="isCollect=='收藏'?'el-icon-star-off':'el-icon-star-on'"></i>
-                    {{isCollect}}</el-link>
+                         type="info" >
+                    <i :class="item.pr_comment_count==0?'el-icon-star-off':'el-icon-star-on'"></i>
+<!--                    {{isCollect}}-->
+                    {{item.pr_comment_count==1?'已收藏':'收藏'}}
+                </el-link>
             </span>
             <span slot="img-go">
                 {{item.pr_go}}
             </span>
             <span slot="img-comment">
-                {{item.pr_comment_count}}
+                {{item.pr_click}}
+<!--                {{item.pr_comment_count}}-->
             </span>
             <span slot="img-click">
-                {{item.pr_click}}
+<!--                {{item.pr_click}}-->
+                {{item.pr_givelike}}
             </span>
 
         </water-fall-imgs>
@@ -155,50 +161,50 @@
         type: Array,
         default() {
           return [
-          /*  {
-              ImgsAvator: '3.jpg',
-              ImgsName: '用户1',
-              ImgsText: '哈哈哈1',
-              Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-              ImgsCollect: 125,
-              ImgsGO: 241,
-              ImgsComment: 784,
-              ImgsClick: 25,
-              ImgsLink: 'http://www.baidu.com'
-            },
-            {
-              ImgsAvator: '4.jpg',
-              ImgsName: '用户2',
-              ImgsText: '哈哈哈2',
-              Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-              ImgsCollect: 125,
-              ImgsGO: 241,
-              ImgsComment: 784,
-              ImgsClick: 25,
-              ImgsLink: 'http://www.baidu.com'
-            },
-            {
-              ImgsAvator: '5.jpg',
-              ImgsName: '用户3',
-              ImgsText: '哈哈哈3',
-              Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-              ImgsCollect: 125,
-              ImgsGO: 241,
-              ImgsComment: 784,
-              ImgsClick: 25,
-              ImgsLink: 'http://www.baidu.com'
-            },
-            {
-              ImgsAvator: '6.jpg',
-              ImgsName: '用户4',
-              ImgsText: '哈哈哈4',
-              Imgs: ['7.jpg', '8.jpg', '9.jpg'],
-              ImgsCollect: 125,
-              ImgsGO: 241,
-              ImgsComment: 784,
-              ImgsClick: 25,
-              ImgsLink: 'http://www.baidu.com'
-            },*/
+            /*  {
+                ImgsAvator: '3.jpg',
+                ImgsName: '用户1',
+                ImgsText: '哈哈哈1',
+                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
+                ImgsCollect: 125,
+                ImgsGO: 241,
+                ImgsComment: 784,
+                ImgsClick: 25,
+                ImgsLink: 'http://www.baidu.com'
+              },
+              {
+                ImgsAvator: '4.jpg',
+                ImgsName: '用户2',
+                ImgsText: '哈哈哈2',
+                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
+                ImgsCollect: 125,
+                ImgsGO: 241,
+                ImgsComment: 784,
+                ImgsClick: 25,
+                ImgsLink: 'http://www.baidu.com'
+              },
+              {
+                ImgsAvator: '5.jpg',
+                ImgsName: '用户3',
+                ImgsText: '哈哈哈3',
+                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
+                ImgsCollect: 125,
+                ImgsGO: 241,
+                ImgsComment: 784,
+                ImgsClick: 25,
+                ImgsLink: 'http://www.baidu.com'
+              },
+              {
+                ImgsAvator: '6.jpg',
+                ImgsName: '用户4',
+                ImgsText: '哈哈哈4',
+                Imgs: ['7.jpg', '8.jpg', '9.jpg'],
+                ImgsCollect: 125,
+                ImgsGO: 241,
+                ImgsComment: 784,
+                ImgsClick: 25,
+                ImgsLink: 'http://www.baidu.com'
+              },*/
           ]
         }
       },
@@ -206,16 +212,17 @@
 
 
     },
-    data(){
-      return{
-        userCollect:{
-          uid:0,
-          prid:0,
+    data() {
+      return {
+        userCollect: {
+          uid: 0,
+          prid: 0,
         },
-        isCollect:'收藏'
+        isCollect: '收藏'
 
       }
     },
+    computed: {},
     methods: {
       hrefContent(index) {
 
@@ -229,33 +236,99 @@
 
       },
       //用户收藏
-      clickUserCollect(index){
-        this.userCollect.prid = index
+      clickUserCollect(index) {
+        // alert(index.prid)
+        this.userCollect.prid = index.prid
         this.userCollect.uid = this.$store.state.user.uid;
 
-        axios.post("http://localhost:8090/insertUserCollect",this.userCollect)
-            .then(res => {
-              alert(res.data)
-              if(res.data==1){
-                this.isCollect = "已收藏"
-                this.$message({
-                  message: '收藏成功!',
-                  type: 'success',
-                  offset:100
-                });
-              }else {
-                alert("请先登录！")
-              }
+        if(index.pr_comment_count==0){
+          axios.post("http://localhost:8090/insertUserCollect", this.userCollect)
+              .then(res => {
+                // alert(res.data)
+                if (res.data == 1) {
+                  index.pr_comment_count = 1;
+                  this.$message({
+                    message: '收藏成功!',
+                    type: 'success',
+                    offset: 100
+                  });
+                } else {
+                  alert("请先登录！")
+                }
 
-            })
+              })
 
+        }else {
+          axios.post("http://localhost:8090/deleteUserCollect", this.userCollect)
+              .then(res => {
+                if (res.data == 1) {
+                  index.pr_comment_count = 0;
+                  this.$message({
+                    message: '已经取消收藏',
+                    type: 'success',
+                    offset: 100
+                  });
+                } else {
+                  alert("请先登录！")
+                }
 
+              })
+
+        }
+
+      },
+      isLoadUserCollect(index) {
+      /*  this.userCollect.prid = index
+        //用户id
+        this.userCollect.uid = this.$store.state.user.uid;
+        console.log("这里是用户收藏表")
+        console.log(this.userCollect)
+        if(this.$store.state.user.uid!="" && this.$store.state.user.uid!=null){
+          axios.post("http://localhost:8090/judgeUserCollect", this.userCollect)
+              .then(res => {
+                console.log(res.data)
+                if (res.data == 1) {
+                  this.isCollect = "已收藏"
+                }
+              })
+        }else {
+
+        }
+*/
 
       }
     },
     created() {
       // console.log(this.WaterImgs[0].pro_imgs.length);
-    }
+
+      // alert("抬起鼠标")
+      var _this = this
+
+      function tagsUpload(j,i, length) {
+        _this.userCollect.prid  = j
+        _this.userCollect.uid = _this.$store.state.user.uid;
+        if(_this.$store.state.user.uid!="" && _this.$store.state.user.uid!=null) {
+          axios.post("http://localhost:8090/judgeUserCollect", _this.userCollect)
+              .then(res => {
+                console.log(res.data)
+                if (res.data == 1) {
+                  _this.WaterImgs[i].pr_comment_count = 1
+                }else {
+                  // _this.isCollect = "收藏"
+                  _this.WaterImgs[i].pr_comment_count = 0
+                }
+                if (++i < length) {
+                  tagsUpload(--j, i, length);
+                } else {
+                }
+              })
+        }
+      }
+      tagsUpload(this.WaterImgs[0].prid,0, this.WaterImgs.length);
+
+
+    },
+
   }
 </script>
 

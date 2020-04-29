@@ -59,7 +59,12 @@
               // alert('登录成功')
               // alert(res.data)
               if(res.data!=''){
-                alert("登录成功")
+                // alert("登录成功")
+                this.$message({
+                  message: '登录成功!',
+                  type: 'success',
+                  offset: 100
+                });
                 // this.user.uid = res.data
 
                 this.user = res.data
