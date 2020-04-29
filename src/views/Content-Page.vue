@@ -62,12 +62,12 @@
                          style="border-radius: 50%">
                     <!--                    <p>姓名</p>-->
                     <p>{{this.nowUser.user_name}}</p>
-                    <span>关注 17</span>
+                    <span>关注 {{nowUser.user_attention}}</span>
                     <el-divider direction="vertical"></el-divider>
-                    <span>粉丝&nbsp;14</span>
+                    <span>粉丝&nbsp;{{nowUser.user_fans}}</span>
                     <!--                    <p class="my-opacity">会写小说懒的写</p>-->
                     <p class="my-opacity">{{nowUser.user_info}}</p>
-                    <el-button size="medium" @click="insertUserFans()"
+                    <el-button size="medium" @click="insertUserFans()" :disabled="isUserAtten"
                                :class="isUserAtten==true?'bcy-buttons-visited':'bcy-buttons'">
                         <i class="el-icon-plus" v-show="!isUserAtten"></i>{{userAtten}}</el-button>
                     <el-button size="medium" icon="el-icon-message">私信</el-button>
@@ -129,6 +129,7 @@
           user_avatar: '',
           user_info: '',
           user_attention:0,
+          user_fans:0,
         },
         userFans:{
           uid:0,
