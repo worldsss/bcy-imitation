@@ -61,3 +61,11 @@ body{
     color: white !important;
 }
 
+.bcy-button-hover{
+    background-color: #ff6fa2 !important;
+    color: white !important;
+}
+.bcy-button-hover:hover{
+    background-color: #e5e5e5 !important ;
+    color: #a1a1a6 !important;
+}

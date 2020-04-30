@@ -13,12 +13,14 @@
                                 <el-avatar src="3.jpg" :size="80" shape="square" style="border-radius: 10px"></el-avatar>
                             </el-col>
                             <el-col :span="18">
-                                <h3 style="margin: 0px 0px 5px;padding: 0px 5px">雷狮</h3>
+                                <h3 style="margin: 0px 0px 5px;padding: 0px 5px">
+                                    {{tags.tags_name}}
+                                </h3>
                                 <el-tag type="warning" effect="dark">人气新圈榜NO.1</el-tag>
-                                <p>雷狮圈子欢迎您-发布内容并打上"雷狮"标签就能出现在圈子里哦~</p>
+                                <p>{{tags.tags_name}}圈子欢迎您-发布内容并打上"{{tags.tags_name}}"标签就能出现在圈子里哦~</p>
                             </el-col>
                         </el-row>
-                        <span class="my-opacity">成员数：858215</span>
+                        <span class="my-opacity">成员数：{{tagsChilrdenCount}}</span>
                         <el-button type="primary" class="bcy-buttons" style="float: right">关注圈子</el-button>
                         <br><br>
                         <el-link :underline="false" class="circle-text-link">热门动态</el-link>
@@ -182,6 +184,12 @@
         allWaterFallData: [],
         allWaterFallText: [],
         isScrollDown: false,
+        tags:{
+          tid:0,
+          tags_name:'',
+          tags_recom:'',
+        },
+        tagsChilrdenCount:0,
       }
     },
     mounted() {
@@ -228,8 +236,9 @@
 
           })
 
-
+      //多图片根据tid显示
       var tid = this.$route.params.tid;
+      console.log(tid)
       axios.get("http://localhost:8090/getProIndexByTid?tid="+tid)
           .then(res => {
             console.log(res.data)
@@ -240,7 +249,7 @@
 
           })
 
-
+      //文字根据tid显示
       axios.get("http://localhost:8090/showPcIndex")
           .then(res => {
             console.log(res.data)
@@ -249,6 +258,25 @@
             this.allWaterFallText.push(res.data.list)
 
           })
+
+      //标签信息
+      axios.get("http://localhost:8090/getTagsByTid?tid="+tid)
+          .then(res => {
+            console.log(res.data)
+            this.tags = res.data
+          })
+
+
+      //标签信息
+      axios.get("http://localhost:8090/getCountPridByTid?tid="+tid)
+          .then(res => {
+            console.log(res.data)
+            this.tagsChilrdenCount = res.data
+          })
+
+
+
+
 
       var _this = this
       window.onscroll = function () {
@@ -259,7 +287,7 @@
         if (scrollTop + windowHeight == scrollHeight) {
 
           //发送翻页的axios的请求发送
-          this.isScrollDown = true
+        /*  this.isScrollDown = true
           //写后台加载数据的函数
           console.log("距顶部" + scrollTop + "可视区高度" + windowHeight + "滚动条总高度" + scrollHeight);
           console.log("发送啊")
@@ -279,7 +307,7 @@
                 _this.allWaterFallText.push(res.data.list)
 
               })
-
+*/
         }
       }
 
@@ -356,5 +384,7 @@
         font-size: 18px;
     }
 
-
+    .givelike-icon{
+        color: #ff6fa2;
+    }
 </style>

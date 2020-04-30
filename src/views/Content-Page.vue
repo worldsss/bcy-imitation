@@ -58,10 +58,11 @@
             <el-col :span="6" class="content-rigth-userInfo" id="userInfo">
                 <el-card >
                     <!--                    <el-avatar src="3.jpg" :size="80"></el-avatar>-->
-                    <img :src="'http://localhost:8080/'+nowUser.user_avatar" alt="" width="80" height="80"
-                         style="border-radius: 50%">
+                    <img :src="'http://localhost:8080/'+nowUser.user_avatar"
+                         alt="" width="80" height="80"
+                         style="border-radius: 50%;cursor: pointer" @click="gotoUserMain()">
                     <!--                    <p>姓名</p>-->
-                    <p>{{this.nowUser.user_name}}</p>
+                    <p @click="gotoUserMain" style="cursor: pointer">{{this.nowUser.user_name}}</p>
                     <span>关注 {{nowUser.user_attention}}</span>
                     <el-divider direction="vertical"></el-divider>
                     <span>粉丝&nbsp;{{nowUser.user_fans}}</span>
@@ -76,11 +77,14 @@
                 <el-card id="choucan" style="margin: 10px 0px">
                     <el-row :gutter="10">
                         <el-col :span="6">
-                            <el-button style="width: 100%;">收藏</el-button>
+<!--                            <el-button style="width: 100%;">收藏</el-button>-->
+                            <el-button style="">收藏</el-button>
 
                         </el-col>
                         <el-col :span="18">
-                            <el-button style="width: 100%;"><i class="el-icon-magic-stick"></i> 赞 <span>242</span>
+                            <el-button style="width: 100%;" :class="isGivelikeOne==1?'bcy-buttons-visited':'bcy-buttons'" @click="clickUserGivelike">
+                                <i class="el-icon-magic-stick" :class="isGivelikeOne==1?'givelike-icon':''"></i> 赞
+                                <span>{{ProContent.pr_givelike}}</span>
                             </el-button>
 
                         </el-col>
@@ -103,6 +107,7 @@
     data() {
       return {
         ProContent: {
+          prid:0,
           pr_info: '',
           pr_date: '',
           pr_go: 0,
@@ -136,7 +141,11 @@
           fid:0,
         },
         isUserAtten:false,
-        userAtten:'关注'
+        userAtten:'关注',
+        isGivelikeOne:0,
+        proContents:{ //点赞的对象
+          prid:0,
+        },
       }
 
     },
@@ -205,23 +214,76 @@
       insertUserFans(){
         this.userFans.uid = this.$store.state.user.uid;
         this.userFans.fid = this.nowUser.uid
+        if(this.$store.state.user.uid!=''){
+          //添加一个用户
+          axios.post("http://127.0.0.1:8090/insertUserFans",this.userFans)
+              .then(res => {
+                console.log("这里是用户的信息s")
+                console.log(res.data)
+                this.nowUser = res.data
+                if(res.data!=''){
+                  alert(this.userAtten)
+                  this.userAtten = "已关注"
+                  this.isUserAtten = true
+                }
 
-        //添加一个用户
-        axios.post("http://127.0.0.1:8090/insertUserFans",this.userFans)
-            .then(res => {
-              console.log("这里是用户的信息s")
-              console.log(res.data)
-              this.nowUser = res.data
-              if(res.data!=''){
-                alert(this.userAtten)
-                this.userAtten = "已关注"
-                this.isUserAtten = true
-              }
+              })
 
-            })
+        }else {
+          alert("请先登录！")
+        }
 
 
-      }
+      },
+      gotoUserMain(){
+        if(this.$store.state.user.uid!=''){
+          var uid = this.$store.state.user.uid;
+          //打开新的页面显示内容
+          let routeData = this.$router.resolve({path: '/user-main/' + uid});
+          window.open(routeData.href, '_blank');
+        }else {
+          alert("请先登录")
+        }
+
+      },
+      //点赞功能
+      clickUserGivelike(){
+
+        var prid = this.$route.params.prid;
+        this.proContents.prid = this.$route.params.prid;
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
+          this.isGivelikeOne++;
+          if (this.isGivelikeOne == 1) {
+            axios.post("http://localhost:8090/addPrClickByPrid", this.proContents)
+                .then(res => {
+                  console.log(res.data)
+
+                  this.ProContent.pr_givelike++
+                  this.$message({
+                    type: "success",
+                    message: '感谢你的点赞！',
+                    offset: 100
+                  })
+
+                })
+          }
+          if (this.isGivelikeOne == 2) {
+            axios.post("http://localhost:8090/lessPrClickByPrid", this.proContents)
+                .then(res => {
+                  if (res.data == 1) {
+                    this.ProContent.pr_givelike--
+                    this.isGivelikeOne = 0
+                    this.$message({type: "success", message: '取消点赞', offset: 100})
+                  }
+
+                })
+
+          }
+
+        }else {
+          alert("登录后才能点赞哦!")
+        }
+      },
     }
   }
 </script>
@@ -275,6 +337,11 @@
         background-color: #e5e5e5 !important ;
         color: #a1a1a6 !important;
     }
+    .givelike-icon{
+        color: #ff6fa2;
+    }
+
+
 
 
 </style>

@@ -24,15 +24,16 @@
 <!--                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>-->
                             <p class="my-test-left">{{myuser.user_info}}</p>
                             <el-link style="font-size: 20px;margin-right: 15px">
-                                537
+<!--                                537-->
+                                {{myuser.user_attention}}
                                 <span class="my-opacity">关注</span>
                             </el-link>
                             <el-link style="font-size: 20px;margin-right: 15px">
-                                12
+                                {{myuser.user_fans}}
                                 <span class="my-opacity">粉丝</span>
                             </el-link>
                             <el-link style="font-size: 20px;margin-right: 10px" disabled>
-                                537
+                                {{myuser.user_givelike}}
                                 <span class="">获赞</span>
                             </el-link>
                         </div>

@@ -2,13 +2,13 @@
     <div>
         <el-card :body-style="{ padding: '0px' }" style="border-radius: 10px;margin-bottom: 10px">
 
-                <el-header style="padding-top: 10px">
+                <el-header style="padding: 10px 10px;">
                     <el-col :span="3">
                         <!--   头像插槽-->
                         <slot name="img-avatar"></slot>
                         <!-- <el-avatar :size="40" :src="circleUrl"></el-avatar>-->
                     </el-col>
-                    <el-col :span="5">
+                    <el-col :span="8">
                         <p style="margin-top: 10px">
                             <!-- 姓名插槽-->
                             <slot name="img-name"></slot>

@@ -90,8 +90,19 @@
 
         <water-fall-imgs v-for="(item,index) in WaterImgs" :img-links="imgLinks" :img-count="item.pr_img_count">
             <!--            <a :href="'http://127.0.0.1:8090/selectTagById?prid='+item.prid" slot="img-link">-->
-            <el-avatar :size="40" :src="item.user_avatar" slot="img-avatar"></el-avatar>
-            <strong slot="img-name">
+             <!--   <el-avatar :size="40"
+                           :src="item.user_avatar"
+                           slot="img-avatar"
+                           class="user-name"
+                           @click="gotoUserMain(item)"
+                          ></el-avatar>-->
+            <img width="40" height="40" style="border-radius: 50%"
+                       :src="item.user_avatar"
+                       slot="img-avatar"
+                       class="user-name"
+                       @click="gotoUserMain(item)"
+            ></img>
+            <strong slot="img-name" class="user-name" @click="gotoUserMain(item)">
                 {{item.user_name}}
             </strong>
             <span slot="img-text">
@@ -101,7 +112,8 @@
                        type="info"
                        size="mini"
                        :plain="true"
-                       :autofocus="false" v-for="(item2,index) in item.pr_tags">
+                       :autofocus="false" v-for="(item2,index) in item.pr_tags"
+                       @click="gotoContent(item2)" >
                 {{item2.tags_name}}
             </el-button>
             <!--  <img v-for="(item1,index1) in item.pro_imgs"
@@ -125,7 +137,7 @@
 
                          :underline="false"
                          type="info" >
-                    <i :class="item.pr_comment_count==0?'el-icon-star-off':'el-icon-star-on'"></i>
+                    <i :class="item.pr_comment_count==0?'el-icon-star-off':'el-icon-star-on givelike-icon'"></i>
 <!--                    {{isCollect}}-->
                     {{item.pr_comment_count==1?'已收藏':'收藏'}}
                 </el-link>
@@ -143,7 +155,7 @@
                  <el-link @click="clickUserGivelike(item)"
                           :underline="false"
                           type="info" >
-                    <i class="el-icon-magic-stick"></i>
+                    <i class="el-icon-magic-stick" :class="isGivelikeOne==1?'givelike-icon':''"></i>
                     {{item.pr_givelike}}
                 </el-link>
             </span>
@@ -186,6 +198,7 @@
           prid:0,
         },
         isGivelikeOne:0,
+
 
       }
     },
@@ -304,6 +317,22 @@
         }else {
           alert("登录后才能点赞哦!")
         }
+      },
+      //跳转到圈子页面
+      gotoContent(index){
+        var tid = index.tid
+        //打开新的页面显示内容
+        let routeData = this.$router.resolve({path: '/circle-page/' + tid});
+        window.open(routeData.href, '_blank');
+
+
+      },
+      gotoUserMain(index){
+        var uid = index.uid
+        //打开新的页面显示内容
+        let routeData = this.$router.resolve({path: '/user-main/' + uid});
+        window.open(routeData.href, '_blank');
+
       }
     },
     created() {
@@ -347,5 +376,17 @@
         border-radius: 5px;
         cursor: pointer; /*箭头变小手的效果*/
     }
+    .user-name{
+        cursor: pointer;
+    }
+    .user-name:hover{
+        text-decoration: underline;
+    }
+
+    .givelike-icon{
+        color: #ff6fa2;
+    }
+
+
 
 </style>
