@@ -227,6 +227,10 @@
         inputVisible: false,
         inputValue: '',
         moretags: false,
+        updateImgByPrid:{
+          pr_img:'',
+          prid:0,
+        }
 
 
       }
@@ -235,7 +239,7 @@
       beforeUpload(file) {
         let fd = new FormData();
         fd.append('file', file);//传文件
-        //在点击上传之后才会执行的异步操作
+        //在点击上传之后才会执行的异步操作，上传当前的图片
         axios.post("http://127.0.0.1:8090/uploads", fd).then(res => {
           // alert("上传成功")
           // console.log(res.data)
@@ -274,6 +278,23 @@
                 axios.post("http://127.0.0.1:8090/insertImgs", _this.proImgs)
                     .then(res => {
                       console.log("第" + (j + 1) + "次插入图片");
+
+                      if(res.data!=''){
+                        //当上传第一张图片的时候就把表中的首图的内容改变就好了
+                        if(j==0){
+
+                          _this.updateImgByPrid.pr_img = _this.imgName[j]
+                          //获取已经插入进去的最新的prid
+                          _this.updateImgByPrid.prid = res.data
+                              axios.post("http://127.0.0.1:8090/updateProImgByPrid", _this.updateImgByPrid)
+                                  .then(res =>{
+                                    console.log(res.data)
+                                    alert(res.data)
+                                  })
+                        }
+                      }
+
+
                       if (++j < length) {
                         recurTest(j, length);
                       } else {

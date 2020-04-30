@@ -13,7 +13,7 @@
 
                     <div style="width: 90%;margin: 0 auto; background-color: white">
                         <br><br>
-<!--                        <h3 class="my-test-left">worlds</h3>-->
+                        <!--                        <h3 class="my-test-left">worlds</h3>-->
                         <h3 class="my-test-left">{{myuser.user_name}}</h3>
                         <div class="my-test-left">
                             <el-tag><i class="el-icon-male"></i></el-tag>
@@ -21,10 +21,10 @@
                             <el-tag>coser</el-tag>
                             <el-tag>河南</el-tag>
 
-<!--                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>-->
+                            <!--                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>-->
                             <p class="my-test-left">{{myuser.user_info}}</p>
                             <el-link style="font-size: 20px;margin-right: 15px">
-<!--                                537-->
+                                <!--                                537-->
                                 {{myuser.user_attention}}
                                 <span class="my-opacity">关注</span>
                             </el-link>
@@ -38,12 +38,35 @@
                             </el-link>
                         </div>
                         <br>
+                        <el-tabs>
+                            <el-tabs v-model="activeName" @tab-click="handleClick(tab, event)">
+                                <el-tab-pane label="用户管理" name="first">
+                                    <el-dropdown>
+                                      <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
+                                        我的发布<i class="el-icon-arrow-down el-icon--right"></i>
+                                      </span>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item icon="el-icon-plus">全部</el-dropdown-item>
+                                            <el-dropdown-item icon="el-icon-circle-plus">文字</el-dropdown-item>
+                                            <el-dropdown-item icon="el-icon-circle-plus">图片</el-dropdown-item>
+                                            <el-dropdown-item icon="el-icon-circle-plus">问答</el-dropdown-item>
+                                            <el-dropdown-item icon="el-icon-circle-plus">视频</el-dropdown-item>
+
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+
+                                </el-tab-pane>
+                                <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                            </el-tabs>
+                        </el-tabs>
+
+
                         <el-row :gutter="10">
-                            <el-col :span="12">
+                            <el-col :span="12" style="text-align: center">
                                 <el-dropdown>
-                      <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
-                        我的发布<i class="el-icon-arrow-down el-icon--right"></i>
-                      </span>
+                                    <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
+                                     我的发布<i class="el-icon-arrow-down el-icon--right"></i>
+                                     </span>
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item icon="el-icon-plus">全部</el-dropdown-item>
                                         <el-dropdown-item icon="el-icon-circle-plus">文字</el-dropdown-item>
@@ -54,12 +77,12 @@
                                     </el-dropdown-menu>
                                 </el-dropdown>
                             </el-col>
-                            <el-col :span="12">
+                            <el-col :span="12" style="text-align: center">
 
                                 <el-dropdown>
-                              <span class="el-dropdown-link">
-                                下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-                              </span>
+                                      <span class="el-dropdown-link">
+                                        我的喜欢<i class="el-icon-arrow-down el-icon--right"></i>
+                                      </span>
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item>我的喜欢</el-dropdown-item>
                                         <el-dropdown-item>我的收藏</el-dropdown-item>
@@ -74,50 +97,49 @@
                 </div>
                 <br>
 
-<!--              这里是内容-->
+                <!--              这里是内容-->
                 <el-card>
-                  <!--  <el-row :gutter="10">
-                        <el-col :span="8" class="my-like-img-height">
-                            <el-link>
-                                <el-image :src="likeImg[0]"></el-image>
-                            </el-link>
-                        </el-col>
-                        <el-col :span="8" class="my-like-img-height">
-                            <el-link>
-                                <el-image :src="likeImg[1]"></el-image>
-                            </el-link>
+                    <!--  <el-row :gutter="10">
+                          <el-col :span="8" class="my-like-img-height">
+                              <el-link>
+                                  <el-image :src="likeImg[0]"></el-image>
+                              </el-link>
+                          </el-col>
+                          <el-col :span="8" class="my-like-img-height">
+                              <el-link>
+                                  <el-image :src="likeImg[1]"></el-image>
+                              </el-link>
 
-                        </el-col>
-                        <el-col :span="8" class="my-like-img-height">
-                            <el-link>
-                                <el-image :src="likeImg[2]"></el-image>
-                            </el-link>
+                          </el-col>
+                          <el-col :span="8" class="my-like-img-height">
+                              <el-link>
+                                  <el-image :src="likeImg[2]"></el-image>
+                              </el-link>
 
-                        </el-col>
-                    </el-row>
-                    <br>
-                    <el-row :gutter="10">
-                        <el-col :span="8" class="my-like-img-height">
-                            <el-link>
-                                <el-image :src="likeImg[0]"></el-image>
-                            </el-link>
-                        </el-col>
-                        <el-col :span="8" class="my-like-img-height">
-                            <el-link>
-                                <el-image :src="likeImg[1]"></el-image>
-                            </el-link>
+                          </el-col>
+                      </el-row>
+                      <br>
+                      <el-row :gutter="10">
+                          <el-col :span="8" class="my-like-img-height">
+                              <el-link>
+                                  <el-image :src="likeImg[0]"></el-image>
+                              </el-link>
+                          </el-col>
+                          <el-col :span="8" class="my-like-img-height">
+                              <el-link>
+                                  <el-image :src="likeImg[1]"></el-image>
+                              </el-link>
 
-                        </el-col>
-                        <el-col :span="8" class="my-like-img-height"> &lt;!&ndash;style="width: 100%;height: 100%"&ndash;&gt;
-                            <el-link>
-                                <el-image :src="likeImg[2]"></el-image>
-                            </el-link>
+                          </el-col>
+                          <el-col :span="8" class="my-like-img-height"> &lt;!&ndash;style="width: 100%;height: 100%"&ndash;&gt;
+                              <el-link>
+                                  <el-image :src="likeImg[2]"></el-image>
+                              </el-link>
 
-                        </el-col>
-                    </el-row>-->
-               <!-- <water-fall-all-imgs :water-imgs="imgsList">
+                          </el-col>
+                      </el-row>-->
 
-                </water-fall-all-imgs>-->
+<!--                    <router-view></router-view>-->
                     <water-fall-all-imgs
                             v-for="(item,index) in imgsList"
                             :water-imgs="item">
@@ -154,25 +176,25 @@
                         <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
                     </el-card>
                     <br>
-                  <!--  <el-card class="box-card">
-                        <div slot="header" class="clearfix">
-                            <span>我关注的用户</span>
-                        </div>
-                        <div v-for="o in 4" :key="o" class="text item">
-                            <el-row :gutter="10">
-                                <el-col :span="2">
-                                    <el-link :underline="false">
-                                        <el-avatar shape="circle" :size="20" :src="squareUrl"></el-avatar>
-                                    </el-link>
-                                </el-col>
-                                <el-col :span="17">
-                                    <el-link> {{'列表内容 ' + o }}</el-link>
+                    <!--  <el-card class="box-card">
+                          <div slot="header" class="clearfix">
+                              <span>我关注的用户</span>
+                          </div>
+                          <div v-for="o in 4" :key="o" class="text item">
+                              <el-row :gutter="10">
+                                  <el-col :span="2">
+                                      <el-link :underline="false">
+                                          <el-avatar shape="circle" :size="20" :src="squareUrl"></el-avatar>
+                                      </el-link>
+                                  </el-col>
+                                  <el-col :span="17">
+                                      <el-link> {{'列表内容 ' + o }}</el-link>
 
-                                </el-col>
-                            </el-row>
-                        </div>
-                        <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
-                    </el-card>-->
+                                  </el-col>
+                              </el-row>
+                          </div>
+                          <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
+                      </el-card>-->
 
 
                     <el-card class="box-card">
@@ -185,7 +207,8 @@
                             <el-row :gutter="10">
                                 <el-col :span="2">
                                     <el-link :underline="false">
-                                        <el-avatar shape="circle" :size="20" :src="'http://localhost:8080/'+item.user_avatar"></el-avatar>
+                                        <el-avatar shape="circle" :size="20"
+                                                   :src="'http://localhost:8080/'+item.user_avatar"></el-avatar>
                                     </el-link>
                                 </el-col>
                                 <el-col :span="17">
@@ -225,16 +248,17 @@
         ],
         fits: 'scale-down',
         isFixeds: false,
-        squareUrl:"",
-        myuser:{
-          uid:0,
-          user_name:'',
-          user_avatar:'',
-          user_info:'',
-          user_sex:'',
+        squareUrl: "",
+        myuser: {
+          uid: 0,
+          user_name: '',
+          user_avatar: '',
+          user_info: '',
+          user_sex: '',
         },
-        imgsList:[],
-        userAttention:[], //我关注的用户
+        imgsList: [],
+        userAttention: [], //我关注的用户
+        userCollectProContent: [], //我收藏的全部的作品
       }
     },
     mounted() {
@@ -250,20 +274,20 @@
       }
     },
     created() {
-        var uid = this.$route.params.uid;
+      var uid = this.$route.params.uid;
       axios.get("http://127.0.0.1:8090/selectUserByUid?uid=" + uid)
           .then(res => {
             console.log(res.data)
             this.myuser = res.data
           })
 
-        /*  //获取当前用户的全部作品
-          axios.get("http://127.0.0.1:8090/getProContentByUid?uid=" + uid)
-              .then(res => {
-                console.log(res.data)
-                this.imgsList = res.data
+      /*  //获取当前用户的全部作品
+        axios.get("http://127.0.0.1:8090/getProContentByUid?uid=" + uid)
+            .then(res => {
+              console.log(res.data)
+              this.imgsList = res.data
 
-              })*/
+            })*/
       //获取当前用户的全部作品
       axios.get("http://127.0.0.1:8090/getProIndexByUid?uid=" + uid)
           .then(res => {
@@ -281,6 +305,14 @@
 
           })
 
+      //获取我收藏的全部的作品
+      axios.get("http://127.0.0.1:8090/getProContentByUserCollectUid?uid=" + uid)
+          .then(res => {
+            console.log(res.data)
+            if (res.data != '') {
+              this.userCollectProContent = res.data
+            }
+          })
 
     }
   }
@@ -330,6 +362,7 @@
         top: 20px;
 
     }
+
     .fixedMenu {
         width: 100%;
         position: fixed;
