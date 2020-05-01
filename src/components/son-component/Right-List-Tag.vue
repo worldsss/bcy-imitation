@@ -5,34 +5,35 @@
                 <h3 style="margin: 0">{{rankName}}</h3>
             </div>
             <div v-for="(item,index) in rankTags" :key="index" class="text item link-line">
-               <!-- <el-row :gutter="10">  &lt;!&ndash;style="line-height: 30px"&ndash;&gt;
-                    <el-col :span="2">
-                        <el-link :underline="false" :href="item.rankLink">
-                            <el-avatar shape="square" :size="24" :src="item.rankImg">
+                <!-- <el-row :gutter="10">  &lt;!&ndash;style="line-height: 30px"&ndash;&gt;
+                     <el-col :span="2">
+                         <el-link :underline="false" :href="item.rankLink">
+                             <el-avatar shape="square" :size="24" :src="item.rankImg">
 
-                            </el-avatar>
-                        </el-link>
-                    </el-col>
-                    <el-col :span="16" style="padding-left: 10px">
-                        <el-link :href="item.rankLink">{{item.rankName}}</el-link>
-                    </el-col>
-                    <el-col :span="6">
-                        <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
-                    </el-col>
-                </el-row>-->
+                             </el-avatar>
+                         </el-link>
+                     </el-col>
+                     <el-col :span="16" style="padding-left: 10px">
+                         <el-link :href="item.rankLink">{{item.rankName}}</el-link>
+                     </el-col>
+                     <el-col :span="6">
+                         <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
+                     </el-col>
+                 </el-row>-->
                 <el-row :gutter="10">  <!--style="line-height: 30px"-->
-                    <el-col :span="2"  >
-                        <el-link :underline="false" >
+                    <el-col :span="2">
+                        <el-link :underline="false">
                             <el-avatar shape="square" :size="24" :src="item.rankImg">
 
                             </el-avatar>
                         </el-link>
                     </el-col>
-                    <el-col :span="16" style="padding-left: 10px" @click="clickUserGivelike(item.tid)"> <!--:href="item.rankLink"-->
-                        <a :href="'/circle-page/'+item.tid" target="_blank">{{item.tags_name}}</a>
+                    <el-col :span="16" style="padding-left: 10px" @click="clickUserGivelike(item.tid)">
+                        <!--:href="item.rankLink"-->
+                        <a :href="'/circle-page/'+item.tid" target="_blank" class="tags-link " style="">{{item.tags_name}}</a>
                     </el-col>
                     <el-col :span="6">
-                        <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
+                        <span style="float: right;opacity: 0.6;">{{item.tags_hot}}</span>
                     </el-col>
                 </el-row>
 
@@ -46,30 +47,28 @@
 <script>
   export default {
     name: "",
-    props:{
-      rankName:{
-        type:String,
+    props: {
+      rankName: {
+        type: String,
         default: '我关注的圈子',
       },
-      rankTags:{
-        type:Array,
-        default(){
+      rankTags: {
+        type: Array,
+        default() {
           return [
-            {rankImg:'3.jpg',rankName:'用户1',rankTime:'3分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'4.jpg',rankName:'用户2',rankTime:'5分钟前',rankLink:'http://www.baidu.com'},
-            {rankImg:'5.jpg',rankName:'用户3',rankTime:'6分钟前',rankLink:'http://www.baidu.com'},
+            {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
+            {rankImg: '5.jpg', rankName: '用户3', rankTime: '6分钟前', rankLink: 'http://www.baidu.com'},
           ]
         }
       },
     },
-    data(){
-      return{
-
-      }
+    data() {
+      return {}
     },
-    methods:{
+    methods: {
       //点赞功能
-      clickUserGivelike(index){
+      clickUserGivelike(index) {
         alert("点击了没有啊")
         //打开新的页面显示内容
         console.log(index)
@@ -84,7 +83,7 @@
 
 <style scoped>
 
-    .link-line{
+    .link-line {
         margin: 10px 0px;
     }
 
@@ -93,32 +92,36 @@
         color: #999;
 
     }
-    .fixedlunbo{
+
+    .fixedlunbo {
         width: 22%;
         position: fixed;
         top: 20px;
     }
-    .cute-img{
+
+    .cute-img {
         width: 100%;
         height: auto;
         border-radius: 10px;
     }
-   /* .cute-text-img{
-        width: 100%;
-        position: relative;
-        bottom: 50%;
-        border-radius: 10px;
-    }*/
+
+    /* .cute-text-img{
+         width: 100%;
+         position: relative;
+         bottom: 50%;
+         border-radius: 10px;
+     }*/
 
 
-    .lunbo-big{
+    .lunbo-big {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
         line-height: 150px;
         margin: 0;
     }
-    .lunbo-small{
+
+    .lunbo-small {
         color: #475669;
         font-size: 14px;
         opacity: 0.75;
@@ -126,12 +129,22 @@
         margin: 0;
     }
 
+    .tags-link {
+        text-decoration: none;
+        color: black;
+    }
+    .tags-link:hover{
+        text-decoration: underline;
+    }
+
+
 </style>
 <style>
-    .right-list .el-card__header{
+    .right-list .el-card__header {
         padding: 10px;
     }
-    .right-list .el-card__body{
+
+    .right-list .el-card__body {
         padding: 10px 20px;
     }
 </style>

@@ -170,10 +170,9 @@
                     <el-card class="box-card">
                         <div slot="header" class="clearfix">
                             <span>我关注的圈子</span>
-                            <!--                     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
                         </div>
-                        <div v-for="o in 4" :key="o" class="text item">
-                            <!--                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>-->
+<!--                        <div v-for="o in 4" :key="o" class="text item">-->
+                        <div v-for="(item,index) in rankTags" :key="o" class="text item">
                             <el-row :gutter="10">
                                 <el-col :span="2">
                                     <el-link :underline="false">
@@ -181,11 +180,11 @@
                                     </el-link>
                                 </el-col>
                                 <el-col :span="17">
-                                    <el-link> {{'列表内容 ' + o }}</el-link>
+                                    <a :href="'/circle-page/'+item.tid" target="_blank" class="tags-link"> {{item.tags_name}}</a>
 
                                 </el-col>
                                 <el-col :span="5">
-                                    <span style="float: right;opacity: 0.6;">6分钟前</span>
+                                    <span style="float: right;opacity: 0.6;">{{item.tags_hot}}</span>
                                 </el-col>
                             </el-row>
                         </div>
@@ -222,13 +221,13 @@
                             <!--                     <el-image :src="src02" style="width: 25px;height: 25px;margin: 0"></el-image>-->
                             <el-row :gutter="10">
                                 <el-col :span="2">
-                                    <el-link :underline="false">
+                                    <a :href="'/user-main/'+item.uid" target="_blank" class="tags-link" >
                                         <el-avatar shape="circle" :size="20"
                                                    :src="'http://localhost:8080/'+item.user_avatar"></el-avatar>
-                                    </el-link>
+                                    </a>
                                 </el-col>
                                 <el-col :span="17">
-                                    <el-link> {{item.user_name}}</el-link>
+                                    <a :href="'/user-main/'+item.uid" target="_blank" class="tags-link"> {{item.user_name}}</a>
 
                                 </el-col>
                             </el-row>
@@ -284,6 +283,7 @@
         ], //我收藏的全部的作品
         showState:1, //显示的收藏还是作品的状态
         userCollectImgs:[], //收藏的所有图片，存放为一个数组
+        rankTags:[],
       }
     },
     mounted() {
@@ -360,11 +360,43 @@
               console.log(this.userCollectImgs)
 
 
-
-
-
             }
           })
+
+
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log("这里是session中的对象"+res.data)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null && res.data!=''){
+              this.isUserShow = true
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+
+              console.log("我就不信这个时候的user是空的啊啊啊啊"+this.$store.state.user.uid)
+              if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+                axios.get("http://localhost:8090/getTagsNameByUid?uid="+this.$store.state.user.uid)
+                    .then(res => {
+                      console.log("这里是当前用户关注的圈子")
+                      console.log(res.data)
+                      this.rankTags = res.data
+
+
+                    })
+
+
+              }
+
+
+
+            }else {
+              this.isUserShow = false
+            }
+          })
+
+
+
+
 
     }
   }
@@ -439,6 +471,15 @@
     .user-pro-content-div-show {
         display: block;
     }
+
+    .tags-link {
+        text-decoration: none;
+        color: black;
+    }
+    .tags-link:hover{
+        text-decoration: underline;
+    }
+
 
 
 </style>

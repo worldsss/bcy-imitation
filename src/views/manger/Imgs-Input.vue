@@ -356,6 +356,10 @@
           axios.post("http://localhost:8090/insertProTags", _this.pro_tags)
               .then(res => {
                 if (++j < length) {
+
+
+
+
                   tagsUpload(j, length);
                 }else{
 
