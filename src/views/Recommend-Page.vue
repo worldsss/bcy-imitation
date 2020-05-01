@@ -80,7 +80,7 @@
     },
     data() {
       return {
-        rankName: '我关注的用户',
+        rankName: '我关注的圈子',
         rankTags01: [
           {rankImg: '3.jpg', rankName: '用户1', rankTime: '3分钟前', rankLink: 'http://www.baidu.com'},
           {rankImg: '4.jpg', rankName: '用户2', rankTime: '5分钟前', rankLink: 'http://www.baidu.com'},
@@ -297,6 +297,36 @@
 
         }
       }
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log("这里是session中的对象"+res.data)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null && res.data!=''){
+              this.isUserShow = true
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+
+              console.log("我就不信这个时候的user是空的啊啊啊啊"+this.$store.state.user.uid)
+              if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+                axios.get("http://localhost:8090/getTagsNameByUid?uid="+this.$store.state.user.uid)
+                    .then(res => {
+                      console.log("这里是当前用户关注的圈子")
+                      console.log(res.data)
+                      this.rankTags01 = res.data
+
+
+                    })
+
+
+              }
+
+
+
+            }else {
+              this.isUserShow = false
+            }
+          })
+
 
 
     },

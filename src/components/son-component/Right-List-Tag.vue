@@ -5,7 +5,7 @@
                 <h3 style="margin: 0">{{rankName}}</h3>
             </div>
             <div v-for="(item,index) in rankTags" :key="index" class="text item link-line">
-                <el-row :gutter="10">  <!--style="line-height: 30px"-->
+               <!-- <el-row :gutter="10">  &lt;!&ndash;style="line-height: 30px"&ndash;&gt;
                     <el-col :span="2">
                         <el-link :underline="false" :href="item.rankLink">
                             <el-avatar shape="square" :size="24" :src="item.rankImg">
@@ -19,7 +19,23 @@
                     <el-col :span="6">
                         <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
                     </el-col>
+                </el-row>-->
+                <el-row :gutter="10">  <!--style="line-height: 30px"-->
+                    <el-col :span="2"  >
+                        <el-link :underline="false" >
+                            <el-avatar shape="square" :size="24" :src="item.rankImg">
+
+                            </el-avatar>
+                        </el-link>
+                    </el-col>
+                    <el-col :span="16" style="padding-left: 10px" @click="clickUserGivelike(item.tid)"> <!--:href="item.rankLink"-->
+                        <a :href="'/circle-page/'+item.tid" target="_blank">{{item.tags_name}}</a>
+                    </el-col>
+                    <el-col :span="6">
+                        <span style="float: right;opacity: 0.6;">{{item.rankTime}}</span>
+                    </el-col>
                 </el-row>
+
             </div>
             <br>
             <el-button type="info" :plain="true" style="width: 100%">查看全部</el-button>
@@ -51,6 +67,17 @@
 
       }
     },
+    methods:{
+      //点赞功能
+      clickUserGivelike(index){
+        alert("点击了没有啊")
+        //打开新的页面显示内容
+        console.log(index)
+        let routeData = this.$router.resolve({path: '/circle-page/' + index});
+        window.open(routeData.href, '_blank');
+
+      },
+    }
 
   }
 </script>

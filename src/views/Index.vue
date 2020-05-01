@@ -64,6 +64,20 @@
           'https://p9-bcy.byteimg.com/img/banciyuan/22ee5b7b5983476a83901daff9e5a648~tplv-banciyuan-sq90.image']
       }
     },
+    created() {
+    /*  axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log("这里是session中的对象"+res.data)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null && res.data!=''){
+              this.isUserShow = true
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+            }else {
+              this.isUserShow = false
+            }
+          })*/
+    }
 
   }
 </script>

@@ -38,54 +38,54 @@
                             </el-link>
                         </div>
                         <br>
-                        <el-tabs>
-                            <el-tabs v-model="activeName" @tab-click="handleClick(tab, event)">
-                                <el-tab-pane label="用户管理" name="first">
-                                    <el-dropdown>
-                                      <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
-                                        我的发布<i class="el-icon-arrow-down el-icon--right"></i>
-                                      </span>
-                                        <el-dropdown-menu slot="dropdown">
-                                            <el-dropdown-item icon="el-icon-plus">全部</el-dropdown-item>
-                                            <el-dropdown-item icon="el-icon-circle-plus">文字</el-dropdown-item>
-                                            <el-dropdown-item icon="el-icon-circle-plus">图片</el-dropdown-item>
-                                            <el-dropdown-item icon="el-icon-circle-plus">问答</el-dropdown-item>
-                                            <el-dropdown-item icon="el-icon-circle-plus">视频</el-dropdown-item>
+                        <!--  <el-tabs>
+                              <el-tabs v-model="activeName" @tab-click="handleClick(tab, event)">
+                                  <el-tab-pane label="用户管理" name="first">
+                                      <el-dropdown>
+                                        <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
+                                          我的发布<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>
+                                        </span>
+                                          <el-dropdown-menu slot="dropdown">
+                                              <el-dropdown-item icon="el-icon-plus">全部</el-dropdown-item>
+                                              <el-dropdown-item icon="el-icon-circle-plus">文字</el-dropdown-item>
+                                              <el-dropdown-item icon="el-icon-circle-plus">图片</el-dropdown-item>
+                                              <el-dropdown-item icon="el-icon-circle-plus">问答</el-dropdown-item>
+                                              <el-dropdown-item icon="el-icon-circle-plus">视频</el-dropdown-item>
 
-                                        </el-dropdown-menu>
-                                    </el-dropdown>
+                                          </el-dropdown-menu>
+                                      </el-dropdown>
 
-                                </el-tab-pane>
-                                <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-                            </el-tabs>
-                        </el-tabs>
-
+                                  </el-tab-pane>
+                                  <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                              </el-tabs>
+                          </el-tabs>
+  -->
 
                         <el-row :gutter="10">
                             <el-col :span="12" style="text-align: center">
-                                <el-dropdown>
-                                    <span class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
+                                <el-dropdown @command="changeShowState">
+                                    <span  class="el-dropdown-link" style="color: #fb678b;font-size: 20px">
                                      我的发布<i class="el-icon-arrow-down el-icon--right"></i>
                                      </span>
                                     <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item icon="el-icon-plus">全部</el-dropdown-item>
-                                        <el-dropdown-item icon="el-icon-circle-plus">文字</el-dropdown-item>
-                                        <el-dropdown-item icon="el-icon-circle-plus">图片</el-dropdown-item>
-                                        <el-dropdown-item icon="el-icon-circle-plus">问答</el-dropdown-item>
-                                        <el-dropdown-item icon="el-icon-circle-plus">视频</el-dropdown-item>
+                                        <el-dropdown-item icon="el-icon-plus" command="all" >全部</el-dropdown-item>
+                                        <el-dropdown-item icon="el-icon-circle-plus" command="text">文字</el-dropdown-item>
+                                        <el-dropdown-item icon="el-icon-circle-plus" command="imgs">图片</el-dropdown-item>
+                                        <el-dropdown-item icon="el-icon-circle-plus" command="que">问答</el-dropdown-item>
 
                                     </el-dropdown-menu>
                                 </el-dropdown>
                             </el-col>
+                            <!--                            <router-link to="user-pro-content">哈哈哈哈哈哈哈哈哈</router-link>-->
                             <el-col :span="12" style="text-align: center">
 
-                                <el-dropdown>
+                                <el-dropdown @command="changeShowState">
                                       <span class="el-dropdown-link">
                                         我的喜欢<i class="el-icon-arrow-down el-icon--right"></i>
                                       </span>
                                     <el-dropdown-menu slot="dropdown">
-                                        <el-dropdown-item>我的喜欢</el-dropdown-item>
-                                        <el-dropdown-item>我的收藏</el-dropdown-item>
+                                        <el-dropdown-item command="mylike">我的喜欢</el-dropdown-item>
+                                        <el-dropdown-item command="mycollect">我的收藏</el-dropdown-item>
 
                                     </el-dropdown-menu>
                                 </el-dropdown>
@@ -98,55 +98,71 @@
                 <br>
 
                 <!--              这里是内容-->
-                <el-card>
-                    <!--  <el-row :gutter="10">
-                          <el-col :span="8" class="my-like-img-height">
-                              <el-link>
-                                  <el-image :src="likeImg[0]"></el-image>
-                              </el-link>
-                          </el-col>
-                          <el-col :span="8" class="my-like-img-height">
-                              <el-link>
-                                  <el-image :src="likeImg[1]"></el-image>
-                              </el-link>
+                <!--                <el-card>-->
+                <div :class="showState==5?'user-pro-content-div-show':'user-pro-content-div-none'">
+                  <!-- <el-row :gutter="10">
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[0]"></el-image>
+                            </el-link>
+                        </el-col>
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[1]"></el-image>
+                            </el-link>
 
-                          </el-col>
-                          <el-col :span="8" class="my-like-img-height">
-                              <el-link>
-                                  <el-image :src="likeImg[2]"></el-image>
-                              </el-link>
+                        </el-col>
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[2]"></el-image>
+                            </el-link>
 
-                          </el-col>
-                      </el-row>
-                      <br>
-                      <el-row :gutter="10">
-                          <el-col :span="8" class="my-like-img-height">
-                              <el-link>
-                                  <el-image :src="likeImg[0]"></el-image>
-                              </el-link>
-                          </el-col>
-                          <el-col :span="8" class="my-like-img-height">
-                              <el-link>
-                                  <el-image :src="likeImg[1]"></el-image>
-                              </el-link>
+                        </el-col>
+                    </el-row>
+                    <br>
+                    <el-row :gutter="10">
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[0]"></el-image>
+                            </el-link>
+                        </el-col>
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[1]"></el-image>
+                            </el-link>
 
-                          </el-col>
-                          <el-col :span="8" class="my-like-img-height"> &lt;!&ndash;style="width: 100%;height: 100%"&ndash;&gt;
-                              <el-link>
-                                  <el-image :src="likeImg[2]"></el-image>
-                              </el-link>
+                        </el-col>
+                        <el-col :span="8" class="my-like-img-height">
+                            <el-link>
+                                <el-image :src="likeImg[2]"></el-image>
+                            </el-link>
 
-                          </el-col>
-                      </el-row>-->
+                        </el-col>
+                    </el-row>-->
 
-<!--                    <router-view></router-view>-->
+
+                    <pro-content-cute :collect-imgs="userCollectProContent" :user-collect-imgs="userCollectImgs">
+
+                    </pro-content-cute>
+<!--                    <user-collect-content></user-collect-content>-->
+
+                </div>
+
+
+                <!--                    <router-view ></router-view>-->
+
+                <!--  <user-pro-content :imgs-list="imgsList">
+
+                  </user-pro-content>-->
+                <div :class="showState==1?'user-pro-content-div-show':'user-pro-content-div-none'">
                     <water-fall-all-imgs
                             v-for="(item,index) in imgsList"
                             :water-imgs="item">
                     </water-fall-all-imgs>
+                </div>
 
 
-                </el-card>
+                <!--                </el-card>-->
 
             </el-col>
             <el-col :span="8" @change="handleScroll">
@@ -230,12 +246,17 @@
 <script>
   import InputNav from '../../components/public-page/Input-NavMenu'
   import WaterFallAllImgs from '../../components/waterFall-component/WaterFall-All-Imgs'
+  // import UserProContent from './childComps/user-pro-content'
+  import ProContentCute from "../../components/user-component/ProContentCute";
 
   export default {
     name: "UserMain",
     components: {
       InputNav,
-      WaterFallAllImgs
+      WaterFallAllImgs,
+      // UserProContent,
+      ProContentCute,
+
     },
     data() {
       return {
@@ -258,7 +279,11 @@
         },
         imgsList: [],
         userAttention: [], //我关注的用户
-        userCollectProContent: [], //我收藏的全部的作品
+        userCollectProContent: [
+            // collectImgs:[],
+        ], //我收藏的全部的作品
+        showState:1, //显示的收藏还是作品的状态
+        userCollectImgs:[], //收藏的所有图片，存放为一个数组
       }
     },
     mounted() {
@@ -271,23 +296,38 @@
         } else {
           this.isFixeds = false
         }
+      },
+      changeShowState(command){
+        console.log(command)
+        if(command == "all"){
+          this.showState = 1;
+        }
+        if(command == 'mycollect'){
+          this.showState = 5;
+        }
+
       }
     },
     created() {
       var uid = this.$route.params.uid;
-      axios.get("http://127.0.0.1:8090/selectUserByUid?uid=" + uid)
+
+     axios.get("http://127.0.0.1:8090/selectUserByUid?uid=" + uid)
           .then(res => {
             console.log(res.data)
             this.myuser = res.data
           })
+/*
 
-      /*  //获取当前用户的全部作品
+        //获取当前用户的全部作品
         axios.get("http://127.0.0.1:8090/getProContentByUid?uid=" + uid)
             .then(res => {
               console.log(res.data)
               this.imgsList = res.data
 
-            })*/
+            })
+*/
+
+
       //获取当前用户的全部作品
       axios.get("http://127.0.0.1:8090/getProIndexByUid?uid=" + uid)
           .then(res => {
@@ -308,9 +348,21 @@
       //获取我收藏的全部的作品
       axios.get("http://127.0.0.1:8090/getProContentByUserCollectUid?uid=" + uid)
           .then(res => {
-            console.log(res.data)
             if (res.data != '') {
               this.userCollectProContent = res.data
+              console.log("这里是传回来的收藏")
+              console.log(res.data)
+
+              for (var i = 0; i < res.data.length; i++) {
+                this.userCollectImgs.push(res.data[i].pr_img)
+              }
+              console.log("这里是把返回的图片存到数组中的值");
+              console.log(this.userCollectImgs)
+
+
+
+
+
             }
           })
 
@@ -379,5 +431,14 @@
     .el-icon-arrow-down {
         font-size: 12px;
     }
+
+    .user-pro-content-div-none {
+        display: none;
+    }
+
+    .user-pro-content-div-show {
+        display: block;
+    }
+
 
 </style>

@@ -25,7 +25,6 @@ import UserRegister from '../views/user-page/User-register'
 import UserLogin from '../views/user-page/User-login'
 import CirclePage from '../views/circle-page'
 
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -154,11 +153,26 @@ const routes = [
     },*/
     {
         path: '/user-main/:uid',
+        // path: '/user-main',
         name: 'UserMain',
         component: UserMain,
+        // redirect:'user-pro-content',
         meta:{
             title:'个人主页'
         },
+       /* children:[
+            {
+                path:'/user-pro-content:id',
+                // path:'user-pro-content',
+                component:UserProContent,
+            },
+            {
+                path:'/user-collect-content',
+                component:UserCollectContent,
+            },
+        ]
+*/
+
 
 
 

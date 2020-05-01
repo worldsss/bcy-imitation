@@ -21,7 +21,21 @@
                             </el-col>
                         </el-row>
                         <span class="my-opacity">成员数：{{tagsChilrdenCount}}</span>
-                        <el-button type="primary" class="bcy-buttons" style="float: right">关注圈子</el-button>
+                        <!--<el-button
+                                   :class="!isUserAtten?'bcy-buttons':'bcy-button-active'"
+                                   style="float: right"
+                                   @click="attentionTags"
+                                   :disabled="isUserAtten">
+                            {{isUserAtten?'已关注':'关注圈子'}}
+                        </el-button>-->
+                        <!--:disabled="isUserAttenState==1"-->
+                        <el-button
+                                :class="isUserAttenState!=1?'bcy-buttons':'bcy-button-active'"
+                                style="float: right"
+                                @click="attentionTags"
+                                >
+                            {{isUserAttenState==1?'已关注':'关注圈子'}}
+                        </el-button>
                         <br><br>
                         <el-link :underline="false" class="circle-text-link">热门动态</el-link>
                         <el-link :underline="false" class="circle-text-link">最新动态</el-link>
@@ -190,6 +204,12 @@
           tags_recom:'',
         },
         tagsChilrdenCount:0,
+        userCircle:{ //用户-圈子关注对象
+          uid:0,
+          tid:0,
+        },
+        isUserAtten:false, //用户是否关注圈子
+        isUserAttenState:0, //用户是否关注圈子
       }
     },
     mounted() {
@@ -202,10 +222,58 @@
         } else {
           this.isFixeds = false
         }
+      },
+      attentionTags(){
+
+        if(this.isUserAttenState == 1){
+          this.userCircle.tid = this.$route.params.tid;
+          this.userCircle.uid = this.$store.state.user.uid;
+          axios.post("http://127.0.0.1:8090/deleteUserCircle",this.userCircle)
+              .then(res => {
+                if(res.data==1){
+                  console.log(res.data)
+                  this.$message({
+                    message:'取消关注此圈子！',
+                    type:"success",
+                    offset:100
+                  })
+                  this.isUserAtten = true
+                  this.isUserAttenState = 0;
+                }
+
+              })
+
+        }else {
+          if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
+            var tid = parseInt(this.$route.params.tid)
+            this.userCircle.tid = tid;
+            this.userCircle.uid = this.$store.state.user.uid;
+            axios.post("http://127.0.0.1:8090/insertUserCircle",this.userCircle)
+                .then(res => {
+                  if(res.data==1){
+                    console.log(res.data)
+                    this.$message({
+                      message:'感谢关注！',
+                      type:"success",
+                      offset:100
+                    })
+                    this.isUserAtten = true
+                    this.isUserAttenState = 1;
+
+                  }
+
+
+                })
+          }
+        }
+
+
       }
+
     },
     created() {
       var uid = this.$route.params.uid;
+      //返回当前user信息
       axios.get("http://127.0.0.1:8090/selectUserByUid?uid=" + uid)
           .then(res => {
             console.log(res.data)
@@ -272,6 +340,43 @@
           .then(res => {
             console.log(res.data)
             this.tagsChilrdenCount = res.data
+          })
+
+      //获取用户
+      axios.get("http://127.0.0.1:8090/getSessionUserInfo")
+          .then(res =>{
+            console.log("这里是session中的对象"+res.data)
+            //把当前已经登录的用户的信息再存入vuex中
+            if(res.data!=null && res.data!=''){
+              this.isUserShow = true
+              //vue不推荐直接把值赋值给state中的属性，而是使用方法的方式赋值，这样才是响应式的
+              this.$store.commit('addUserName',res.data)
+
+
+
+              if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
+                var tid = parseInt(this.$route.params.tid)
+                this.userCircle.tid = tid;
+                this.userCircle.uid = this.$store.state.user.uid;
+
+                axios.post("http://127.0.0.1:8090/judgeUserCircleByTidAndUid",this.userCircle)
+                    .then(res => {
+                      console.log("什么情况啊，就是没法出去啊")
+                      console.log(res.data)
+                      if(res.data==1){
+                        this.isUserAtten = true
+                        this.isUserAttenState = 1;
+                      }
+
+                    })
+              }
+
+
+
+
+            }else {
+              this.isUserShow = false
+            }
           })
 
 
@@ -382,6 +487,10 @@
         background-color: #b2dced;
         margin: 20px 20px 0px;
         font-size: 18px;
+    }
+    .bcy-buttons-active{
+        background-color: #e5e5e5 !important ;
+        color: #a1a1a6 !important;
     }
 
     .givelike-icon{

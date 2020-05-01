@@ -381,6 +381,7 @@
       },
       outUser(){
 
+        //退出vuex的登录状态
         axios.get("http://127.0.0.1:8090/outUserSession")
              .then(res =>{
                this.$store.commit('outUser',this.voiduser)
