@@ -278,7 +278,6 @@
                 axios.post("http://127.0.0.1:8090/insertImgs", _this.proImgs)
                     .then(res => {
                       console.log("第" + (j + 1) + "次插入图片");
-
                       if(res.data!=''){
                         //当上传第一张图片的时候就把表中的首图的内容改变就好了
                         if(j==0){
@@ -292,6 +291,9 @@
                                     alert(res.data)
                                   })
                         }
+
+
+
                       }
 
 
@@ -305,6 +307,20 @@
 
 
                             })
+
+
+                        //作品插入完成之后，修改圈子内作品的最新日期
+                        axios.get("http://127.0.0.1:8090/updateTagsLatestTime")
+                            .then(res => {
+                              if (res.data==1){
+                                alert("修改最新圈子日期成功!")
+                              }
+
+
+                            })
+
+
+
                       }
                     })
               }

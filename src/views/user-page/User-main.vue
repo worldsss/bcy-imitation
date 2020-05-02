@@ -16,10 +16,13 @@
                         <!--                        <h3 class="my-test-left">worlds</h3>-->
                         <h3 class="my-test-left">{{myuser.user_name}}</h3>
                         <div class="my-test-left">
-                            <el-tag><i class="el-icon-male"></i></el-tag>
-                            <el-tag>求cp</el-tag>
+                            <el-tag><i :class="myuser.user_sex!='女'?'el-icon-male':'el-icon-female'"></i></el-tag>
+                            <el-tag v-for="(item,index) in userTags">{{item.utag_name}}</el-tag>
+                            <!--<el-tag>coser</el-tag>
+                            <el-tag>河南</el-tag>-->
+                           <!-- <el-tag>求cp</el-tag>
                             <el-tag>coser</el-tag>
-                            <el-tag>河南</el-tag>
+                            <el-tag>河南</el-tag>-->
 
                             <!--                            <p class="my-test-left">一个喜欢看Cosplay的宅男</p>-->
                             <p class="my-test-left">{{myuser.user_info}}</p>
@@ -284,6 +287,7 @@
         showState:1, //显示的收藏还是作品的状态
         userCollectImgs:[], //收藏的所有图片，存放为一个数组
         rankTags:[],
+        userTags:[], //用户的个人标签3个
       }
     },
     mounted() {
@@ -375,6 +379,7 @@
 
               console.log("我就不信这个时候的user是空的啊啊啊啊"+this.$store.state.user.uid)
               if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+                //获取当前用户关注的全部圈子
                 axios.get("http://localhost:8090/getTagsNameByUid?uid="+this.$store.state.user.uid)
                     .then(res => {
                       console.log("这里是当前用户关注的圈子")
@@ -382,6 +387,13 @@
                       this.rankTags = res.data
 
 
+                    })
+                //获取用户的个人标签
+                axios.get("http://127.0.0.1:8090/getUserTagByUid?uid=" + this.$store.state.user.uid)
+                    .then(res => {
+                      console.log("这里是用户全部的个人标签")
+                      console.log(res.data)
+                      this.userTags = res.data
                     })
 
 
