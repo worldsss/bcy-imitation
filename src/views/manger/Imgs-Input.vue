@@ -353,10 +353,16 @@
         function tagsUpload(j, length) {
           console.log(_this.dynamicTags)
           _this.pro_tags.tid = _this.dynamicTags[j].tid
+          //给pro_tags作品-标签关系表中添加一条关系记录
           axios.post("http://localhost:8090/insertProTags", _this.pro_tags)
               .then(res => {
                 if (++j < length) {
-
+                  //当前圈子的tags_hot添加1
+                  axios.get("http://127.0.0.1:8090/addTagsHotByTid?tid="+_this.dynamicTags[j].tid)
+                      .then(res => {
+                        console.log("这里是当前圈子的tags_hot添加成功后的显示")
+                        console.log(res.data)
+                      })
 
 
 

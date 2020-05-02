@@ -47,7 +47,7 @@
         <right-ranking-tags :rank-tags="rankTags01"
                             :rank-name="rankName"
                             :active-rank="activeRank"
-                            :rank-tags01="rankTags02">
+                            :rank-tags01="hotTags">
 
         </right-ranking-tags>
 
@@ -106,6 +106,8 @@
         allWaterFallData:[],
         allWaterFallText:[],
         isScrollDown:false,
+        hotTags:[], //推荐的热门圈子
+
 
       }
     },
@@ -264,6 +266,16 @@
             this.allWaterFallText.push(res.data.list)
 
           })
+
+
+      axios.get("http://localhost:8090/getTagsHotLimitFive")
+          .then(res => {
+            console.log(res.data)
+           this.hotTags = res.data
+
+          })
+
+
 
       var _this = this
       window.onscroll = function(){

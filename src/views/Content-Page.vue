@@ -44,16 +44,100 @@
                 </div>
 
                 <el-card>
-                    <el-input type="textarea" placeholder="请输入评论吧" :autosize="{ minRows: 4, maxRows: 6}"></el-input>
-                    <el-button size="small" icon="el-icon-picture-outline">图片</el-button>
-                    <el-button size="small" icon="el-icon-picture-outline">表情</el-button>
-                    <el-button class="bcy-button" style="float: right">评论</el-button>
-                    <!--                    <span><i class="el-icon-picture-outline"></i>图片</span>-->
-                    <br>
-                    <span>共 <span>16</span>评论</span>
-                    <el-button class="bcy-button">按热度排序</el-button>
-                    <el-button class="bcy-button">按发布排序</el-button>
+                    <div>
+                        <el-input v-model="userComment" type="textarea" placeholder="请输入评论吧" :autosize="{ minRows: 4, maxRows: 6}"></el-input>
+                        <el-button size="small" icon="el-icon-picture-outline">图片</el-button>
+                        <el-button size="small" icon="el-icon-picture-outline">表情</el-button>
+                        <el-button class="bcy-button" style="float: right" @click="insertProComment()">评论</el-button>
+                        <!--                    <span><i class="el-icon-picture-outline"></i>图片</span>-->
+                        <br>
+                    </div>
+
+                  <!--  <span>共 <span>16</span>评论</span>
+                    <div style="float: right">
+                        <el-button class="bcy-button">按热度排序</el-button>
+                        <el-button class="bcy-button">按发布排序</el-button>
+                    </div>-->
+
                 </el-card>
+
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>共11条评论</span>
+                        <el-button style="float: right; padding: 3px 0" >
+                            按热度顺序
+                        </el-button>
+                        <el-button style="float: right; padding: 3px 10px" >
+                            按发布顺序
+                        </el-button>
+                    </div>
+                   <el-row :gutter="10">
+                    <el-col :span="2">
+                        <el-avatar src="http://localhost:8080/3.jpg" :size="50" style="margin-top: 10px"></el-avatar>
+                    </el-col>
+                    <el-col :span="22">
+                        <div style="margin: 10px 0px">
+                            <el-link style="font-size: 14px">这里是评论的用户名称</el-link>
+                            <el-tag type="success">标签二</el-tag>
+                            <el-tag type="success">标签三</el-tag>
+                            <br><br>
+                            <span>太强了，这真的不是官图吗？</span>
+                            <br><br>
+                            <div  style="clear: both;height: 50px">
+                                <span style="float: left" class="my-opacity">2小时前</span>
+                                <span style="float: right">
+                                    <el-link>回复</el-link>
+                                    <el-divider direction="vertical"></el-divider>
+                                    <el-link>赞</el-link>
+                                </span>
+                            </div>
+
+                            <div style="background-color: #f0f1f2">
+                                <el-row :gutter="10">
+                                    <el-col :span="2">
+                                        <el-avatar src="3.jpg" :size="50" style="margin-top: 10px;margin-left: 10px"></el-avatar>
+                                    </el-col>
+                                    <el-col :span="19">
+                                        <p>
+                                            <el-link style="font-size: 14px">这里是评论的用户名称</el-link>
+                                            <el-tag type="success">标签二</el-tag>
+                                            <el-tag type="success">标签三</el-tag>
+                                            <br><br>
+                                            <span>太强了，这真的不是官图吗？</span>
+                                            <br><br>
+                                            <span class="my-opacity">2小时前</span>
+                                        </p>
+                                    </el-col>
+
+                                </el-row>
+                            <el-button type="primary" size="mini" style="float: right">我也说一句</el-button>
+                            </div>
+
+                    </div>
+
+                    </el-col>
+
+                   </el-row>
+                    <el-row :gutter="10">
+                        <el-col :span="2">
+                            <el-avatar src="3.jpg" :size="50" style="margin-top: 10px"></el-avatar>
+                        </el-col>
+                        <el-col :span="20">
+                            <p>
+                                <el-link style="font-size: 14px">这里是评论的用户名称</el-link>
+                                <el-tag type="success">标签二</el-tag>
+                                <el-tag type="success">标签三</el-tag>
+                                <br><br>
+                                <span>太强了，这真的不是官图吗？</span>
+                                <br><br>
+                                <span class="my-opacity">2小时前</span>
+                            </p>
+                        </el-col>
+
+                    </el-row>
+                </el-card>
+
+
             </el-col>
             <el-col :span="6" class="content-rigth-userInfo" id="userInfo">
                 <el-card >
@@ -146,6 +230,14 @@
         proContents:{ //点赞的对象
           prid:0,
         },
+        proComment:{ //评论的内容对象
+          uid:0,
+          content:'',
+        },
+        userComment:'',
+
+
+
       }
 
     },
@@ -164,6 +256,7 @@
 
           })
 
+      //根据prid来获取作品内容
       axios.get("http://127.0.0.1:8090/selectPcIndexByPcid?pcid=" + prid)
           .then(res => {
             console.log(res)
@@ -206,7 +299,11 @@
         }
       alert(this.userAvatar)*/
 
-
+      axios.get("http://127.0.0.1:8090/getAllProCommentByPrid?prid=" + prid)
+          .then(res => {
+            console.log("这里是所有的评论内容")
+            console.log(res.data)
+          })
 
 
     },
@@ -284,7 +381,34 @@
           alert("登录后才能点赞哦!")
         }
       },
-    }
+      //插入一条评论
+      insertProComment(){
+        var uid = parseInt(this.$store.state.user.uid)
+        this.proComment.uid = uid;
+
+        this.proComment.content = this.userComment
+        console.log(this.proComment.content)
+        axios.post("http://localhost:8090/insertProComment", this.proComment)
+            .then(res => {
+              if (res.data == 1) {
+                alert("添加评论内容成功!")
+
+                axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
+                    .then(res => {
+                        alert("添加评论-作品表成功")
+
+                    })
+
+
+              }
+
+            })
+
+      }
+
+
+    },
+
   }
 </script>
 
