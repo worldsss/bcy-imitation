@@ -33,7 +33,8 @@
                         <a :href="'/circle-page/'+item.tid" target="_blank" class="tags-link " style="">{{item.tags_name}}</a>
                     </el-col>
                     <el-col :span="6">
-                        <span style="float: right;opacity: 0.6;">{{item.tags_hot}}</span>
+<!--                        <span style="float: right;opacity: 0.6;">{{// nowDate-item.tags_latest_time}}</span>-->
+                        <span style="float: right;opacity: 0.6;">{{nowtime(item)}}</span>
                     </el-col>
                 </el-row>
 
@@ -64,7 +65,9 @@
       },
     },
     data() {
-      return {}
+      return {
+        nowDate:'',
+      }
     },
     methods: {
       //点赞功能
@@ -76,6 +79,23 @@
         window.open(routeData.href, '_blank');
 
       },
+    },
+    computed:{
+      nowtime(){
+        return function (index) {
+          // alert(index.tags_latest_time)
+          var lastTime = new Date(index.tags_latest_time+"")
+          var nowTime =  new Date("yyyy年MM月dd日 hh:mm:ss")
+
+
+          return min
+        }
+
+      },
+
+    },
+    created() {
+      this.nowDate = new Date("yyyy年MM月dd日 hh:mm:ss")
     }
 
   }

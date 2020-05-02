@@ -291,6 +291,7 @@
           console.log("距顶部"+scrollTop+"可视区高度"+windowHeight+"滚动条总高度"+scrollHeight);
           console.log("发送啊")
           _this.pageNumber++;
+          //发送请求到下一页图片
           axios.get("http://localhost:8090/showIndex?pageSize=10&pageNumber="+_this.pageNumber)
               .then(res => {
                 console.log(res.data)
@@ -299,6 +300,7 @@
 
 
               })
+          //发送请求到下一页文字内容
           axios.get("http://localhost:8090/showPcIndex?pageSize=10&pageNumber="+_this.pageNumber)
               .then(res => {
                 console.log(res.data)
@@ -322,7 +324,7 @@
               if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
                 axios.get("http://localhost:8090/getTagsNameByUid?uid="+this.$store.state.user.uid)
                     .then(res => {
-                      console.log("这里是当前用户关注的圈子")
+                      // ("这里是当前用户关注的圈子")
                       console.log(res.data)
                       this.rankTags01 = res.data
 

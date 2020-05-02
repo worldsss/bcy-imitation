@@ -309,16 +309,6 @@
                             })
 
 
-                        //作品插入完成之后，修改圈子内作品的最新日期
-                        axios.get("http://127.0.0.1:8090/updateTagsLatestTime")
-                            .then(res => {
-                              if (res.data==1){
-                                alert("修改最新圈子日期成功!")
-                              }
-
-
-                            })
-
 
 
                       }
@@ -385,6 +375,19 @@
                   tagsUpload(j, length);
                 }else{
 
+                  //作品插入完成之后，修改圈子内作品的最新日期
+                  axios.get("http://127.0.0.1:8090/updateTagsLatestTime")
+                      .then(res => {
+                        if (res.data==1){
+                          alert("修改最新圈子日期成功!")
+                          _this.$router.go(-1)
+                        }
+
+
+                      })
+
+
+
                 }
 
               })
@@ -394,7 +397,7 @@
         tagsUpload(0, this.dynamicTags.length);
         //跳转到推荐页面
         // this.$router.push("/")
-        _this.$router.go(-1)
+        // _this.$router.go(-1)
       },
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);

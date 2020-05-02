@@ -20,6 +20,7 @@
 
         <!--        发布按钮的popover-->
 <!--        <div v-if="$store.state.user.user_name!=''">-->
+<!--        <div :class="isUserShow!=true?'display-none':''">-->
         <div :class="isUserShow!=true?'display-none':''">
             <el-popover
                     ref="fabu"
@@ -73,7 +74,7 @@
             </el-popover>
         </div>
         <el-menu-item style="float: right;padding-left: 0px" @click="nowIsLogin()">
-            <el-button type="danger" size="mini" style="background-color: #fb678b" v-popover:fabu>
+            <el-button type="danger" size="mini" style="background-color: #fb678b"  :class="isUserShow!=true?'display-none':''" v-popover:fabu>
                 <i class="el-icon-edit-outline" style="color: white"></i>
                 发布
             </el-button>
@@ -467,7 +468,7 @@
 <style scoped>
     .display-none{
         display: none;
-        /*opacity: 0;*/
+        opacity: 0;
     }
 
 
