@@ -28,11 +28,11 @@
                             </el-avatar>
                         </el-link>
                     </el-col>
-                    <el-col :span="16" style="padding-left: 10px" @click="clickUserGivelike(item.tid)">
+                    <el-col :span="13" style="padding-left: 10px" @click="clickUserGivelike(item.tid)">
                         <!--:href="item.rankLink"-->
                         <a :href="'/circle-page/'+item.tid" target="_blank" class="tags-link " style="">{{item.tags_name}}</a>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="9">
 <!--                        <span style="float: right;opacity: 0.6;">{{// nowDate-item.tags_latest_time}}</span>-->
                         <span style="float: right;opacity: 0.6;">{{nowtime(item)}}</span>
                     </el-col>
@@ -85,10 +85,37 @@
         return function (index) {
           // alert(index.tags_latest_time)
           var lastTime = new Date(index.tags_latest_time+"")
-          var nowTime =  new Date("yyyy年MM月dd日 hh:mm:ss")
+          var nowTime =  new Date("yyyy-MM-dd hh:mm:ss")
+
+          function time_dis (direct_time) {
+            // direct_time格式为yyyy-mm-dd hh:mm:ss 指定时间
+            var now_time = Date.parse(new Date());//当前时间的时间戳
+            var end_time = Date.parse(new Date(direct_time));//指定时间的时间戳
+
+              //计算相差天数
+              // var time_dis = end_time - now_time;
+              var time_dis = now_time - end_time;
+              var days=Math.floor(time_dis/(24*3600*1000));
+              //计算出小时数
+              var leave1=time_dis%(24*3600*1000);//计算天数后剩余的毫秒数
+              var hours=Math.floor(leave1/(3600*1000));
+              //计算相差分钟数
+              var leave2=leave1%(3600*1000);//计算小时数后剩余的毫秒数
+              var minutes=Math.floor(leave2/(60*1000));
+              //计算相差秒数
+              var leave3=leave2%(60*1000);//计算小时数后剩余的毫秒数
+              var second = leave3/1000;
+              // return days+"天"+hours+"小时"+minutes+"分"+second+"秒";
+              return minutes+"分"+second+"秒前";
+
+          }
+
+          // time_dis(index.tags_latest_time)//x天x小时x分钟x秒
 
 
-          return min
+
+          // return index.tags_latest_time
+          return time_dis(index.tags_latest_time)//x天x小时x分钟x秒
         }
 
       },

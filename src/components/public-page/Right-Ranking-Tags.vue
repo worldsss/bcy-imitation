@@ -26,7 +26,7 @@
 
                             </right-list-tag>
                             <div style="height: 10px"></div>
-                            <right-list-tag :rank-name="rankName" :rank-tags="rankTags01">
+                            <right-list-tag :rank-name="rankName2" :rank-tags="rankTags01">
 
                             </right-list-tag>
                         </div>
@@ -55,6 +55,10 @@
       rankName: {
         type: String,
         default: '我关注的圈子'
+      },
+      rankName2:{
+        type:String,
+        default:'热门圈子'
       },
       rankTags: {
         type: Array,

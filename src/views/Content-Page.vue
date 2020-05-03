@@ -118,6 +118,32 @@
                     </el-col>
 
                    </el-row>
+                    <el-row :gutter="10" v-for="(item,index) in proComments">
+                        <el-col :span="2">
+                            <el-avatar :src="'http://localhost:8080/'+item.user_avatar" :size="50" style="margin-top: 10px"></el-avatar>
+                        </el-col>
+                        <el-col :span="22">
+                            <div style="margin: 10px 0px">
+                                <el-link style="font-size: 14px">{{item.user_name}}</el-link>
+                                <el-tag type="success" v-for="(item1,index) in item.userTags">{{item1.utag_name}}</el-tag>
+                                <br><br>
+                                <span>{{item.content}}</span>
+                                <br><br>
+                                <div  style="clear: both;height: 50px">
+                                    <span style="float: left" class="my-opacity">{{item.time}}</span>
+                                    <span style="float: right">
+                                    <el-link>回复</el-link>
+                                    <el-divider direction="vertical"></el-divider>
+                                    <el-link>赞</el-link>
+                                </span>
+                                </div>
+
+
+                            </div>
+
+                        </el-col>
+
+                    </el-row>
                     <el-row :gutter="10">
                         <el-col :span="2">
                             <el-avatar src="3.jpg" :size="50" style="margin-top: 10px"></el-avatar>
@@ -235,6 +261,7 @@
           content:'',
         },
         userComment:'',
+        proComments:[] //当前作品的所有评论内容
 
 
 
@@ -243,6 +270,7 @@
     },
     created() {
       var prid = this.$route.params.prid
+      //查询当前作品的所有标签
       axios.get("http://127.0.0.1:8090/selectTagById?prid=" + prid)
           .then(res => {
             console.log(res)
@@ -299,11 +327,16 @@
         }
       alert(this.userAvatar)*/
 
-      axios.get("http://127.0.0.1:8090/getAllProCommentByPrid?prid=" + prid)
+      //获取全部的用户评论信息
+      axios.get("http://127.0.0.1:8090/getProComIndexByPrid?prid=" + prid)
           .then(res => {
             console.log("这里是所有的评论内容")
             console.log(res.data)
+            this.proComments = res.data
+
           })
+
+
 
 
     },
@@ -396,7 +429,7 @@
                 axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
                     .then(res => {
                         alert("添加评论-作品表成功")
-
+                        this.$router.go(0)
                     })
 
 
