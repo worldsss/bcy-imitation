@@ -177,7 +177,7 @@
                 <div style="background-color: #f0f1f2" v-for="(item1,index) in item.userParent">
                   <el-row :gutter="10">
                     <el-col :span="2">
-                      <el-avatar src="3.jpg" :size="50"
+                      <el-avatar :src="'http://localhost:8080/'+item1.user_avatar" :size="50"
                                  style="margin-top: 10px;margin-left: 10px"></el-avatar>
                     </el-col>
                     <el-col :span="19">
@@ -185,7 +185,7 @@
                         <el-link style="font-size: 14px">{{item1.user_name}}</el-link>
                         <!--                                                <el-tag type="success">标签二</el-tag>-->
                         <br><br>
-                        <span>{{item1.content}}</span>
+                        <span v-html="item1.content"></span>
                         <br><br>
                         <span class="my-opacity">{{item1.time}}</span>
                         <el-link style="text-align: right;float: right">点赞 10</el-link>
@@ -714,12 +714,12 @@
             })
       },
 
-      //添加一个评论的回复
+      //添加一个回复评论的回复
       gotoReplyUser(index) {
         var uid = parseInt(this.$store.state.user.uid)
         this.replyComment.uid = uid;
         this.replyComment.parent_cid = index.cid
-        this.replyComment.content = "回复<a>@"+index.user_name+"</a>:"+this.textareaReply
+        this.replyComment.content = "回复<a style='color: #409EFF'>@"+index.user_name+"</a>:"+this.textareaReply
         console.log(this.replyComment)
         axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
             .then(res => {
