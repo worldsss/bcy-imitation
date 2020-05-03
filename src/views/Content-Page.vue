@@ -210,7 +210,8 @@
                             <div style="height: 50px;width: 90%;margin: 0 auto">
 <!--                              <el-button style="float: right;display: block" @click="gotoReply(item1)">-->
                               <el-button style="float: right;display: block" @click="gotoReplyUser(item)">
-                                回复
+<!--                                回复-->
+                                这里是哪个回复
                               </el-button>
                             </div>
 
@@ -274,6 +275,8 @@
 
                     </div>
                     <div style="height: 50px;width: 90%;margin: 0 auto">
+<!--                      <el-button style="float: right;display: block" @click="gotoReply(item)">-->
+<!--                      <el-button style="float: right;display: block" @click="gotoReplyUser(item)">-->
                       <el-button style="float: right;display: block" @click="gotoReply(item)">
                         回复
                       </el-button>
@@ -646,28 +649,35 @@
           alert("登录后才能点赞哦!")
         }
       },
+
       //插入一条评论
       insertProComment() {
-        var uid = parseInt(this.$store.state.user.uid)
-        this.proComment.uid = uid;
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+          var uid = parseInt(this.$store.state.user.uid)
+          this.proComment.uid = uid;
 
-        this.proComment.content = this.userComment
-        console.log(this.proComment.content)
-        axios.post("http://localhost:8090/insertProComment", this.proComment)
-            .then(res => {
-              if (res.data == 1) {
-                alert("添加评论内容成功!")
+          this.proComment.content = this.userComment
+          console.log(this.proComment.content)
+          axios.post("http://localhost:8090/insertProComment", this.proComment)
+              .then(res => {
+                if (res.data == 1) {
+                  alert("添加评论内容成功!")
 
-                axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
-                    .then(res => {
-                      alert("添加评论-作品表成功")
-                      this.$router.go(0)
-                    })
+                  axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
+                      .then(res => {
+                        alert("添加评论-作品表成功")
+                        this.$router.go(0)
+                      })
 
 
-              }
+                }
 
-            })
+              })
+
+        }else {
+          alert("请先登录再完成评论功能")
+
+        }
 
       },
       //回复当前用户的功能
@@ -698,38 +708,50 @@
       },
       //添加一个评论的回复
       gotoReply(index) {
-        var uid = parseInt(this.$store.state.user.uid)
-        this.replyComment.uid = uid;
-        this.replyComment.parent_cid = index.cid
-        this.replyComment.content = this.textareaReply
-        console.log(this.replyComment)
-        axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
-            .then(res => {
-              if (res.data == 1) {
-                alert("添加评论内容成功!")
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
 
+          var uid = parseInt(this.$store.state.user.uid)
+          this.replyComment.uid = uid;
+          this.replyComment.parent_cid = index.cid
+          this.replyComment.content = this.textareaReply
+          console.log(this.replyComment)
+          axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
+              .then(res => {
+                if (res.data == 1) {
+                  alert("添加评论内容成功!")
+                  this.$router.go(0)
 
-              }
+                }
 
-            })
+              })
+        }else {
+          alert("请先登录!")
+        }
+
       },
 
       //添加一个回复评论的回复
       gotoReplyUser(index) {
-        var uid = parseInt(this.$store.state.user.uid)
-        this.replyComment.uid = uid;
-        this.replyComment.parent_cid = index.cid
-        this.replyComment.content = "回复<a style='color: #409EFF'>@"+index.user_name+"</a>:"+this.textareaReply
-        console.log(this.replyComment)
-        axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
-            .then(res => {
-              if (res.data == 1) {
-                alert("添加评论内容成功!")
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+          var uid = parseInt(this.$store.state.user.uid)
+          this.replyComment.uid = uid;
+          this.replyComment.parent_cid = index.cid
+          this.replyComment.content = "回复<a style='color: #409EFF'>@"+index.user_name+"</a>:"+this.textareaReply
+          console.log(this.replyComment)
+          axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
+              .then(res => {
+                if (res.data == 1) {
+                  alert("添加评论内容成功!")
+                  this.$router.go(0)
 
 
-              }
+                }
 
-            })
+              })
+        }else {
+          alert("请先登录")
+        }
+
       }
 
 
