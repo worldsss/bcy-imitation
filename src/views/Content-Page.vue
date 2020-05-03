@@ -666,6 +666,14 @@
                   axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
                       .then(res => {
                         alert("添加评论-作品表成功")
+
+                        axios.get("http://127.0.0.1:8090/updateProContetnCommentCount?prid=" + this.$route.params.prid)
+                            .then(res => {
+                              alert("修改作品表中的评论个数成功！")
+                              this.$router.go(0)
+                            })
+
+
                         this.$router.go(0)
                       })
 
