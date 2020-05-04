@@ -137,9 +137,10 @@
 
                          :underline="false"
                          type="info" >
-                    <i :class="item.pr_comment_count==0?'el-icon-star-off':'el-icon-star-on givelike-icon'"></i>
-<!--                    {{isCollect}}-->
-                    {{item.pr_comment_count==1?'已收藏':'收藏'}}
+                   <!-- <i :class="item.pr_comment_count==0?'el-icon-star-off':'el-icon-star-on givelike-icon'"></i>
+                    {{item.pr_comment_count==1?'已收藏':'收藏'}}-->
+                    <i :class="item.pr_go==0?'el-icon-star-off':'el-icon-star-on givelike-icon'"></i>
+                    {{item.pr_go==1?'已收藏':'收藏'}}
                 </el-link>
             </span>
             <span slot="img-go">
@@ -199,7 +200,10 @@
           prid:0,
         },
         isGivelikeOne:0,
-
+        userGivelike:{ //用户点赞表
+          uid:0,
+          prid:0
+        }
 
       }
     },
@@ -223,13 +227,13 @@
         this.userCollect.uid = this.$store.state.user.uid;
 
         //如果当前点赞数没有更新的话
-        if(index.pr_comment_count==0){
+        if(index.pr_go==0){
           if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
             axios.post("http://localhost:8090/insertUserCollect", this.userCollect)
                 .then(res => {
                   // alert(res.data)
                   if (res.data == 1) {
-                    index.pr_comment_count = 1;
+                    index.pr_go = 1;
                     this.$message({
                       message: '收藏成功!',
                       type: 'success',
@@ -246,10 +250,11 @@
           }
 
         }else {
+          //取消收藏，删除用户收藏-作品关系表中的一行
           axios.post("http://localhost:8090/deleteUserCollect", this.userCollect)
               .then(res => {
                 if (res.data == 1) {
-                  index.pr_comment_count = 0;
+                  index.pr_go = 0;
                   this.$message({
                     message: '已经取消收藏',
                     type: 'success',
@@ -285,7 +290,7 @@
 
       },
       //点赞功能
-      clickUserGivelike(item){
+      /*clickUserGivelike(item){
         this.proContent.prid = item.prid;
         if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
           this.isGivelikeOne++;
@@ -318,6 +323,23 @@
         }else {
           alert("登录后才能点赞哦!")
         }
+      },*/
+      //点击添加用户点赞-作品关系表
+      clickUserGivelike(item){
+        this.userGivelike.prid = item.prid;
+
+        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null) {
+          this.userGivelike.uid = this.$store.state.user.uid;
+          axios.post("http://127.0.0.1:8090/insertGivelike",this.userGivelike)
+              .then(res => {
+                console.log(res.data)
+                  item.pr_givelike = res.data
+
+              })
+
+        }else {
+          alert("登录后才能点赞哦!")
+        }
       },
       //跳转到圈子页面
       gotoContent(index){
@@ -342,18 +364,22 @@
       // alert("抬起鼠标")
       var _this = this
 
+      //判断当前作品是否收藏
       function tagsUpload(j,i, length) {
         _this.userCollect.prid  = j
         _this.userCollect.uid = _this.$store.state.user.uid;
         if(_this.$store.state.user.uid!="" && _this.$store.state.user.uid!=null) {
           axios.post("http://localhost:8090/judgeUserCollect", _this.userCollect)
               .then(res => {
+                console.log("这里是什么时候执行的啊")
                 console.log(res.data)
                 if (res.data == 1) {
-                  _this.WaterImgs[i].pr_comment_count = 1
+                  // _this.WaterImgs[i].pr_comment_count = 1
+                  _this.WaterImgs[i].pr_go = 1
                 }else {
                   // _this.isCollect = "收藏"
-                  _this.WaterImgs[i].pr_comment_count = 0
+                  _this.WaterImgs[i].pr_go = 0
+                  // _this.WaterImgs[i].pr_comment_count = 0
                 }
                 if (++i < length) {
                   tagsUpload(--j, i, length);

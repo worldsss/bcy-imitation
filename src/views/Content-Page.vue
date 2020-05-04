@@ -63,7 +63,7 @@
         </el-card>
         <el-card class="box-card">
           <div slot="header" class="clearfix">
-            <span>共11条评论</span>
+            <span>共{{ProContent.pr_comment_count}}条评论</span>
             <el-button style="float: right; padding: 3px 0">
               按热度顺序
             </el-button>
@@ -166,7 +166,7 @@
 
                  </div>-->
                 <span style="float: left;margin-right: 0%" class="my-opacity">{{item.time}}</span>
-                <el-link style="float: right"><i class="el-icon-magic-stick"></i>点赞 10</el-link>
+                <el-link style="float: right" @click="addProComment(item)"><i class="el-icon-magic-stick"></i>点赞 {{item.givelike}}</el-link>
                 <br>
                 <!--                                <el-divider direction="vertical"></el-divider>-->
                 <!-- <el-link>赞</el-link>
@@ -188,7 +188,7 @@
                         <span v-html="item1.content"></span>
                         <br><br>
                         <span class="my-opacity">{{item1.time}}</span>
-                        <el-link style="text-align: right;float: right">点赞 10</el-link>
+                        <el-link style="text-align: right;float: right" @click="addProComment(item1)">点赞 {{item1.givelike}}</el-link>
                       </p>
                       <div style="background-color: #f0f1f2" id="replys">
                         <el-collapse accordion>
@@ -455,6 +455,7 @@
           pr_go: 0,
           pro_imgs: [],
           pr_tags: [],
+          pr_comment_count:0,
         },
         imgList: [], //图片大图预览
         testImgList: [],
@@ -511,8 +512,10 @@
       //查询当前作品的所有标签
       axios.get("http://127.0.0.1:8090/selectTagById?prid=" + prid)
           .then(res => {
+            console.log("这里是内容的对象")
             console.log(res)
             this.ProContent = res.data
+            console.log("")
             console.log(this.ProContent)
 
             //开启图片的大图预览
@@ -558,20 +561,34 @@
           })
 
 
-      /*  if(this.$store.state.user.user_avatar!='' && this.$store.state.user.user_avatar!=null){
-          this.userAvatar = this.$store.state.user.user_avatar
-
-        }
-      alert(this.userAvatar)*/
-
       //获取全部的用户评论信息
-      axios.get("http://127.0.0.1:8090/getProComIndexByPrid?prid=" + prid)
+     /* axios.get("http://127.0.0.1:8090/getProComIndexByPrid?prid=" + prid)
+          .then(res => {
+            console.log("这里是所有的评论内容")
+            console.log(res.data)
+            this.proComments = res.data
+
+          })*/
+
+     //获取全部的用户评论信息，根据当前时间
+    /*  axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByTime?prid=" + prid)
           .then(res => {
             console.log("这里是所有的评论内容")
             console.log(res.data)
             this.proComments = res.data
 
           })
+*/
+
+      //获取全部的用户评论信息，根据评论热度
+      axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByGivelike?prid=" + prid)
+          .then(res => {
+            console.log("这里是所有的评论内容")
+            console.log(res.data)
+            this.proComments = res.data
+
+          })
+
 
 
     },
@@ -662,15 +679,15 @@
           axios.post("http://localhost:8090/insertProComment", this.proComment)
               .then(res => {
                 if (res.data == 1) {
-                  alert("添加评论内容成功!")
+                  // alert("添加评论内容成功!")
 
                   axios.get("http://127.0.0.1:8090/insertProComs?prid=" + this.$route.params.prid)
                       .then(res => {
-                        alert("添加评论-作品表成功")
+                        // alert("添加评论-作品表成功")
 
                         axios.get("http://127.0.0.1:8090/updateProContetnCommentCount?prid=" + this.$route.params.prid)
                             .then(res => {
-                              alert("修改作品表中的评论个数成功！")
+                              // alert("修改作品表中的评论个数成功！")
                               this.$router.go(0)
                             })
 
@@ -727,12 +744,16 @@
           axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
               .then(res => {
                 if (res.data == 1) {
-                  alert("添加评论内容成功!")
+                  // alert("添加评论内容成功!")
 
                   axios.get("http://127.0.0.1:8090/updateProContetnCommentCount?prid=" + this.$route.params.prid)
                       .then(res => {
-                        alert("修改作品表中的评论个数成功！")
-                        this.$router.go(0)
+
+                        // alert("修改作品表中的评论个数成功！")
+                        if(res.data == 1){
+
+                          this.$router.go(0)
+                        }
                       })
 
 
@@ -772,6 +793,21 @@
         }else {
           alert("请先登录")
         }
+
+      },
+      //给评论内容点赞
+      addProComment(index){
+        var cid = index.cid
+        alert(cid)
+        axios.get("http://127.0.0.1:8090/updateProCommentGiveLike?cid=" + cid)
+            .then(res => {
+              if(res.data == 1){
+                // alert
+                this.$router.go(0)
+
+              }
+
+            })
 
       }
 
