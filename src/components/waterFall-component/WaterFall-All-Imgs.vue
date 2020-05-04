@@ -157,7 +157,8 @@
                  <el-link @click="clickUserGivelike(item)"
                           :underline="false"
                           type="info" >
-                    <i class="el-icon-magic-stick" :class="isGivelikeOne==1?'givelike-icon':''"></i>
+<!--                    <i class="el-icon-magic-stick" :class="isGivelikeOne==1?'givelike-icon':''"></i>-->
+                    <i class="el-icon-magic-stick" :class="item.pr_is_givelike==1?'givelike-icon':''"></i>
                     {{item.pr_givelike}}
                 </el-link>
             </span>
@@ -203,7 +204,8 @@
         userGivelike:{ //用户点赞表
           uid:0,
           prid:0
-        }
+        },
+        isUserClick:false,
 
       }
     },
@@ -332,8 +334,28 @@
           this.userGivelike.uid = this.$store.state.user.uid;
           axios.post("http://127.0.0.1:8090/insertGivelike",this.userGivelike)
               .then(res => {
-                console.log(res.data)
-                  item.pr_givelike = res.data
+                if(res.data == 1){
+
+                  this.isUserClick = true
+                  //当前用户没有点赞
+                  axios.post("http://localhost:8090/addUserGivelikeByUidAndPrid", this.userGivelike)
+                      .then(res => {
+                        item.pr_givelike = res.data
+                        // item.pr_is_givelike = 1
+
+                      })
+
+                }else {
+                  //当前用户已经点赞
+                  this.isUserClick = false
+                  axios.post("http://localhost:8090/deleteUserGivelikeByUidAndPrid", this.userGivelike)
+                      .then(res => {
+                        item.pr_givelike = res.data
+                        // item.pr_is_givelike = 0
+
+                      })
+                }
+
 
               })
 
