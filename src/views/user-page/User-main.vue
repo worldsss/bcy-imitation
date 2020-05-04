@@ -73,6 +73,7 @@
                                     <el-dropdown-menu slot="dropdown">
                                         <el-dropdown-item icon="el-icon-plus" command="all" >全部</el-dropdown-item>
                                         <el-dropdown-item icon="el-icon-circle-plus" command="text">文字</el-dropdown-item>
+<!--                                        <el-dropdown-item icon="el-icon-circle-plus" command="imgs">图片</el-dropdown-item>-->
                                         <el-dropdown-item icon="el-icon-circle-plus" command="imgs">图片</el-dropdown-item>
                                         <el-dropdown-item icon="el-icon-circle-plus" command="que">问答</el-dropdown-item>
 

@@ -5,7 +5,7 @@
     <el-row :gutter="20" style="width: 80%;margin:0 auto">
       <el-col :span="18">
         <el-card>
-          <div style="width: 80%;margin: 0 auto">
+          <div style="width: 80%;margin: 0 auto;">
             <span>{{ProContent.pr_date}}</span>
             <el-divider direction="vertical"></el-divider>
             <span>119字</span>
@@ -20,10 +20,10 @@
 
 
             <el-divider></el-divider>
-            <div>
+            <div >
               {{ProContent.pr_info}}
             </div>
-            <div v-for="(item,index) in ProContent.pro_imgs" class="demo-image__preview">
+            <div v-for="(item,index) in ProContent.pro_imgs" class="demo-image__preview" style="text-align: center">
               <el-image :src="item.img" :preview-src-list="imgList"></el-image>
 
             </div>
@@ -600,6 +600,7 @@
 
 
       },
+      //跳转到用户主页
       gotoUserMain() {
         if (this.$store.state.user.uid != '') {
           var uid = this.$store.state.user.uid;
@@ -674,7 +675,7 @@
                             })
 
 
-                        this.$router.go(0)
+                        // this.$router.go(0)
                       })
 
 
@@ -727,7 +728,13 @@
               .then(res => {
                 if (res.data == 1) {
                   alert("添加评论内容成功!")
-                  this.$router.go(0)
+
+                  axios.get("http://127.0.0.1:8090/updateProContetnCommentCount?prid=" + this.$route.params.prid)
+                      .then(res => {
+                        alert("修改作品表中的评论个数成功！")
+                        this.$router.go(0)
+                      })
+
 
                 }
 
@@ -750,7 +757,13 @@
               .then(res => {
                 if (res.data == 1) {
                   alert("添加评论内容成功!")
-                  this.$router.go(0)
+
+                  axios.get("http://127.0.0.1:8090/updateProContetnCommentCount?prid=" + this.$route.params.prid)
+                      .then(res => {
+                        alert("修改作品表中的评论个数成功！")
+                        this.$router.go(0)
+                      })
+
 
 
                 }

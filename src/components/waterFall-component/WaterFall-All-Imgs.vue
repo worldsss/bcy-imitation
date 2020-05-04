@@ -146,8 +146,9 @@
                 {{item.pr_go}}
             </span>
             <span slot="img-comment">
-                {{item.pr_click}}
-<!--                {{item.pr_comment_count}}-->
+<!--                {{item.pr_click}}-->
+<!--                {{item.pr_click}}-->
+                {{item.pr_comment_count}}
             </span>
             <span slot="img-click">
 <!--                {{item.pr_click}}-->
