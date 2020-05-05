@@ -107,26 +107,26 @@
         <div :class="showState==5?'user-pro-content-div-show':'user-pro-content-div-none'">
           //每隔三个换行
 <!--           <el-row :gutter="10" v-for="(item,index) in userCollectImgs" v-if="index%4==0">-->
-           <el-row :gutter="10" v-for="(item,index) in userCollectProContent" v-if="index%4==0">
+           <el-row :gutter="10" v-for="(item,index) in userCollectProContent" v-if="index%4==0" style="margin: 10px 0px">
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link :href="'/content/'+userCollectPrid[index]">
+                    <a :href="'/content/'+userCollectPrid[index]" target="_blank">
                       <img :src="userCollectImgs[index]" class="collect-imgs"></img>
 <!--                        <img :src="item[index].pr_img" class="collect-imgs"></img>-->
-                    </el-link>
+                    </a>
                 </el-col>
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link :href="'/content/'+userCollectPrid[index+1]">
+                    <a :href="'/content/'+userCollectPrid[index+1]" target="_blank">
 <!--                        <el-image :src="userCollectImgs[1]"></el-image>-->
                         <img :src="userCollectImgs[index+1]" class="collect-imgs"></img>
 <!--                        <img :src="item[index+1].pr_img" class="collect-imgs"></img>-->
-                    </el-link>
+                    </a>
 
                 </el-col>
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link :href="'/content/'+userCollectPrid[index+2]">
+                    <a :href="'/content/'+userCollectPrid[index+2]" target="_blank">
                       <img :src="userCollectImgs[index+2]" class="collect-imgs"></img>
 <!--                      <img :src="item[index+2].pr_img" class="collect-imgs"></img>-->
-                    </el-link>
+                    </a>
 
                 </el-col>
             </el-row>
@@ -174,12 +174,13 @@
                     <el-avatar shape="square" :size="20" :src="squareUrl"></el-avatar>
                   </el-link>
                 </el-col>
-                <el-col :span="17">
+                <el-col :span="13">
                   <a :href="'/circle-page/'+item.tid" target="_blank" class="tags-link"> {{item.tags_name}}</a>
 
                 </el-col>
-                <el-col :span="5">
-                  <span style="float: right;opacity: 0.6;">{{item.tags_hot}}</span>
+                <el-col :span="8">
+<!--                  <span style="float: right;opacity: 0.6;">{{item.tags_hot}}</span>-->
+                  <span style="float: right;opacity: 0.6;">{{nowtime(item)}}</span>
                 </el-col>
               </el-row>
             </div>
@@ -422,7 +423,48 @@
           })
 
 
-    }
+    },
+    computed:{
+      nowtime(){
+        return function (index) {
+          // alert(index.tags_latest_time)
+          var lastTime = new Date(index.tags_latest_time+"")
+          var nowTime =  new Date("yyyy-MM-dd hh:mm:ss")
+
+          function time_dis (direct_time) {
+            // direct_time格式为yyyy-mm-dd hh:mm:ss 指定时间
+            var now_time = Date.parse(new Date());//当前时间的时间戳
+            var end_time = Date.parse(new Date(direct_time));//指定时间的时间戳
+
+            //计算相差天数
+            // var time_dis = end_time - now_time;
+            var time_dis = now_time - end_time;
+            var days=Math.floor(time_dis/(24*3600*1000));
+            //计算出小时数
+            var leave1=time_dis%(24*3600*1000);//计算天数后剩余的毫秒数
+            var hours=Math.floor(leave1/(3600*1000));
+            //计算相差分钟数
+            var leave2=leave1%(3600*1000);//计算小时数后剩余的毫秒数
+            var minutes=Math.floor(leave2/(60*1000));
+            //计算相差秒数
+            var leave3=leave2%(60*1000);//计算小时数后剩余的毫秒数
+            var second = leave3/1000;
+            // return days+"天"+hours+"小时"+minutes+"分"+second+"秒";
+            return minutes+"分"+second+"秒前";
+
+          }
+
+          // time_dis(index.tags_latest_time)//x天x小时x分钟x秒
+
+
+
+          // return index.tags_latest_time
+          return time_dis(index.tags_latest_time)//x天x小时x分钟x秒
+        }
+
+      },
+
+    },
   }
 </script>
 

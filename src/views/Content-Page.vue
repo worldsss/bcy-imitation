@@ -20,7 +20,7 @@
 
 
             <el-divider></el-divider>
-            <div >
+            <div>
               {{ProContent.pr_info}}
             </div>
             <div v-for="(item,index) in ProContent.pro_imgs" class="demo-image__preview" style="text-align: center">
@@ -64,10 +64,10 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>共{{ProContent.pr_comment_count}}条评论</span>
-            <el-button style="float: right; padding: 3px 0">
+            <el-button style="float: right; padding: 3px 0" @click="sortCommentByHot()">
               按热度顺序
             </el-button>
-            <el-button style="float: right; padding: 3px 10px">
+            <el-button style="float: right; padding: 3px 10px" @click="sortCommentByTime()">
               按发布顺序
             </el-button>
           </div>
@@ -166,7 +166,9 @@
 
                  </div>-->
                 <span style="float: left;margin-right: 0%" class="my-opacity">{{item.time}}</span>
-                <el-link style="float: right" @click="addProComment(item)"><i class="el-icon-magic-stick"></i>点赞 {{item.givelike}}</el-link>
+                <el-link style="float: right" @click="addProComment(item)"><i class="el-icon-magic-stick"></i>点赞
+                  {{item.givelike}}
+                </el-link>
                 <br>
                 <!--                                <el-divider direction="vertical"></el-divider>-->
                 <!-- <el-link>赞</el-link>
@@ -188,7 +190,9 @@
                         <span v-html="item1.content"></span>
                         <br><br>
                         <span class="my-opacity">{{item1.time}}</span>
-                        <el-link style="text-align: right;float: right" @click="addProComment(item1)">点赞 {{item1.givelike}}</el-link>
+                        <el-link style="text-align: right;float: right" @click="addProComment(item1)">点赞
+                          {{item1.givelike}}
+                        </el-link>
                       </p>
                       <div style="background-color: #f0f1f2" id="replys">
                         <el-collapse accordion>
@@ -208,9 +212,9 @@
 
                             </div>
                             <div style="height: 50px;width: 90%;margin: 0 auto">
-<!--                              <el-button style="float: right;display: block" @click="gotoReply(item1)">-->
+                              <!--                              <el-button style="float: right;display: block" @click="gotoReply(item1)">-->
                               <el-button style="float: right;display: block" @click="gotoReplyUser(item)">
-<!--                                回复-->
+                                <!--                                回复-->
                                 这里是哪个回复
                               </el-button>
                             </div>
@@ -275,8 +279,8 @@
 
                     </div>
                     <div style="height: 50px;width: 90%;margin: 0 auto">
-<!--                      <el-button style="float: right;display: block" @click="gotoReply(item)">-->
-<!--                      <el-button style="float: right;display: block" @click="gotoReplyUser(item)">-->
+                      <!--                      <el-button style="float: right;display: block" @click="gotoReply(item)">-->
+                      <!--                      <el-button style="float: right;display: block" @click="gotoReplyUser(item)">-->
                       <el-button style="float: right;display: block" @click="gotoReply(item)">
                         回复
                       </el-button>
@@ -455,7 +459,7 @@
           pr_go: 0,
           pro_imgs: [],
           pr_tags: [],
-          pr_comment_count:0,
+          pr_comment_count: 0,
         },
         imgList: [], //图片大图预览
         testImgList: [],
@@ -562,23 +566,23 @@
 
 
       //获取全部的用户评论信息
-     /* axios.get("http://127.0.0.1:8090/getProComIndexByPrid?prid=" + prid)
-          .then(res => {
-            console.log("这里是所有的评论内容")
-            console.log(res.data)
-            this.proComments = res.data
+      /* axios.get("http://127.0.0.1:8090/getProComIndexByPrid?prid=" + prid)
+           .then(res => {
+             console.log("这里是所有的评论内容")
+             console.log(res.data)
+             this.proComments = res.data
 
-          })*/
+           })*/
 
-     //获取全部的用户评论信息，根据当前时间
-    /*  axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByTime?prid=" + prid)
-          .then(res => {
-            console.log("这里是所有的评论内容")
-            console.log(res.data)
-            this.proComments = res.data
+      //获取全部的用户评论信息，根据当前时间
+      /*  axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByTime?prid=" + prid)
+            .then(res => {
+              console.log("这里是所有的评论内容")
+              console.log(res.data)
+              this.proComments = res.data
 
-          })
-*/
+            })
+  */
 
       //获取全部的用户评论信息，根据评论热度
       axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByGivelike?prid=" + prid)
@@ -588,7 +592,6 @@
             this.proComments = res.data
 
           })
-
 
 
     },
@@ -651,6 +654,7 @@
                 })
           }
           if (this.isGivelikeOne == 2) {
+            //取消点赞
             axios.post("http://localhost:8090/lessPrClickByPrid", this.proContents)
                 .then(res => {
                   if (res.data == 1) {
@@ -670,7 +674,7 @@
 
       //插入一条评论
       insertProComment() {
-        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+        if (this.$store.state.user.uid != '' && this.$store.state.user.uid != null) {
           var uid = parseInt(this.$store.state.user.uid)
           this.proComment.uid = uid;
 
@@ -700,7 +704,7 @@
 
               })
 
-        }else {
+        } else {
           alert("请先登录再完成评论功能")
 
         }
@@ -734,7 +738,7 @@
       },
       //添加一个评论的回复
       gotoReply(index) {
-        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+        if (this.$store.state.user.uid != '' && this.$store.state.user.uid != null) {
 
           var uid = parseInt(this.$store.state.user.uid)
           this.replyComment.uid = uid;
@@ -750,7 +754,7 @@
                       .then(res => {
 
                         // alert("修改作品表中的评论个数成功！")
-                        if(res.data == 1){
+                        if (res.data == 1) {
 
                           this.$router.go(0)
                         }
@@ -760,7 +764,7 @@
                 }
 
               })
-        }else {
+        } else {
           alert("请先登录!")
         }
 
@@ -768,11 +772,11 @@
 
       //添加一个回复评论的回复
       gotoReplyUser(index) {
-        if(this.$store.state.user.uid!='' && this.$store.state.user.uid!=null){
+        if (this.$store.state.user.uid != '' && this.$store.state.user.uid != null) {
           var uid = parseInt(this.$store.state.user.uid)
           this.replyComment.uid = uid;
           this.replyComment.parent_cid = index.cid
-          this.replyComment.content = "回复<a style='color: #409EFF'>@"+index.user_name+"</a>:"+this.textareaReply
+          this.replyComment.content = "回复<a style='color: #409EFF'>@" + index.user_name + "</a>:" + this.textareaReply
           console.log(this.replyComment)
           axios.post("http://localhost:8090/insertProComParentCid", this.replyComment)
               .then(res => {
@@ -786,28 +790,54 @@
                       })
 
 
-
                 }
 
               })
-        }else {
+        } else {
           alert("请先登录")
         }
 
       },
       //给评论内容点赞
-      addProComment(index){
+      addProComment(index) {
         var cid = index.cid
         alert(cid)
         axios.get("http://127.0.0.1:8090/updateProCommentGiveLike?cid=" + cid)
             .then(res => {
-              if(res.data == 1){
+              if (res.data == 1) {
                 // alert
                 this.$router.go(0)
 
               }
 
             })
+
+      },
+      //让当前作品评论按照热度排序
+      sortCommentByHot() {
+        var prid = this.$route.params.prid
+        //获取全部的用户评论信息，根据评论热度
+        axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByGivelike?prid=" + prid)
+            .then(res => {
+              console.log("这里是所有的评论内容")
+              console.log(res.data)
+              this.proComments = res.data
+              // this.$router.go(0)
+            })
+
+      },
+      sortCommentByTime() {
+        var prid = this.$route.params.prid
+        //获取全部的用户评论信息，根据当前时间
+        axios.get("http://127.0.0.1:8090/getProComIndexByPridOrderByTime?prid=" + prid)
+            .then(res => {
+              console.log("这里是所有的评论内容")
+              console.log(res.data)
+              this.proComments = res.data
+              // this.$router.go(0)
+
+            })
+
 
       }
 
