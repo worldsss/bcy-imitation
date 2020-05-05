@@ -96,8 +96,11 @@
                            class="user-name"
                            @click="gotoUserMain(item)"
                           ></el-avatar>-->
+
+<!--          :src="item.user_avatar"-->
             <img width="40" height="40" style="border-radius: 50%"
-                       :src="item.user_avatar"
+
+                       :src="'http://localhost:8080/'+item.user_avatar"
                        slot="img-avatar"
                        class="user-name"
                        @click="gotoUserMain(item)"
@@ -146,7 +149,7 @@
             <span slot="img-go">
                 {{item.pr_go}}
             </span>
-            <span slot="img-comment">
+            <span slot="img-comment"  @click="hrefContent(item.prid)">
 <!--                {{item.pr_click}}-->
 <!--                {{item.pr_click}}-->
                 {{item.pr_comment_count}}
@@ -341,7 +344,7 @@
                   axios.post("http://localhost:8090/addUserGivelikeByUidAndPrid", this.userGivelike)
                       .then(res => {
                         item.pr_givelike = res.data
-                        // item.pr_is_givelike = 1
+                        item.pr_is_givelike = 1
 
                       })
 
@@ -351,7 +354,7 @@
                   axios.post("http://localhost:8090/deleteUserGivelikeByUidAndPrid", this.userGivelike)
                       .then(res => {
                         item.pr_givelike = res.data
-                        // item.pr_is_givelike = 0
+                        item.pr_is_givelike = 0
 
                       })
                 }
