@@ -6,7 +6,7 @@
                     <!--瀑布流单图片-->
                     <water-fall-all-img :img-cute="imgCute01"></water-fall-all-img>
                     <!--瀑布流多图片-->
-                    <water-fall-all-imgs></water-fall-all-imgs>
+<!--                    <water-fall-all-imgs></water-fall-all-imgs>-->
                 </el-col>
                 <el-col :span="12">
                     <!--瀑布流单图片-->
