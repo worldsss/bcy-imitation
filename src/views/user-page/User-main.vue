@@ -105,48 +105,35 @@
         <!--              这里是内容-->
         <!--                <el-card>-->
         <div :class="showState==5?'user-pro-content-div-show':'user-pro-content-div-none'">
-          <!-- <el-row :gutter="10">
+          //每隔三个换行
+<!--           <el-row :gutter="10" v-for="(item,index) in userCollectImgs" v-if="index%4==0">-->
+           <el-row :gutter="10" v-for="(item,index) in userCollectProContent" v-if="index%4==0">
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[0]"></el-image>
+                    <el-link :href="'/content/'+userCollectPrid[index]">
+                      <img :src="userCollectImgs[index]" class="collect-imgs"></img>
+<!--                        <img :src="item[index].pr_img" class="collect-imgs"></img>-->
                     </el-link>
                 </el-col>
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[1]"></el-image>
+                    <el-link :href="'/content/'+userCollectPrid[index+1]">
+<!--                        <el-image :src="userCollectImgs[1]"></el-image>-->
+                        <img :src="userCollectImgs[index+1]" class="collect-imgs"></img>
+<!--                        <img :src="item[index+1].pr_img" class="collect-imgs"></img>-->
                     </el-link>
 
                 </el-col>
                 <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[2]"></el-image>
+                    <el-link :href="'/content/'+userCollectPrid[index+2]">
+                      <img :src="userCollectImgs[index+2]" class="collect-imgs"></img>
+<!--                      <img :src="item[index+2].pr_img" class="collect-imgs"></img>-->
                     </el-link>
 
                 </el-col>
             </el-row>
             <br>
-            <el-row :gutter="10">
-                <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[0]"></el-image>
-                    </el-link>
-                </el-col>
-                <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[1]"></el-image>
-                    </el-link>
-
-                </el-col>
-                <el-col :span="8" class="my-like-img-height">
-                    <el-link>
-                        <el-image :src="likeImg[2]"></el-image>
-                    </el-link>
-
-                </el-col>
-            </el-row>-->
 
 
-          <!--  <pro-content-cute :collect-imgs="userCollectProContent" :user-collect-imgs="userCollectImgs">
+           <!-- <pro-content-cute :collect-imgs="userCollectProContent" :user-collect-imgs="userCollectImgs">
 
             </pro-content-cute>-->
           <!--                    <user-collect-content></user-collect-content>-->
@@ -159,6 +146,9 @@
         <!--  <user-pro-content :imgs-list="imgsList">
 
           </user-pro-content>-->
+
+
+<!--        我的作品-->
         <div :class="showState==1?'user-pro-content-div-show':'user-pro-content-div-none'">
           <water-fall-all-imgs
                   v-for="(item,index) in imgsList"
@@ -288,6 +278,7 @@
         ], //我收藏的全部的作品
         showState: 1, //显示的收藏还是作品的状态
         userCollectImgs: [], //收藏的所有图片，存放为一个数组
+        userCollectPrid:[], //收藏的所有内容的prid,用于跳转页面使用
         rankTags: [],
         userTags: [], //用户的个人标签3个
       }
@@ -351,7 +342,8 @@
 
           })
 
-      //获取我收藏的全部的作品
+
+      //获取我收藏的全部的作品，未分页版
       axios.get("http://127.0.0.1:8090/getProContentByUserCollectUid?uid=" + uid)
           .then(res => {
             if (res.data != '') {
@@ -362,6 +354,9 @@
               for (var i = 0; i < res.data.length; i++) {
                 this.userCollectImgs.push(res.data[i].pr_img)
               }
+              for (var i = 0; i < res.data.length; i++) {
+                this.userCollectPrid.push(res.data[i].prid)
+              }
               console.log("这里是把返回的图片存到数组中的值");
               console.log(this.userCollectImgs)
 
@@ -369,6 +364,25 @@
             }
           })
 
+
+
+      //获取我收藏的全部的作品
+   /*   axios.get("http://127.0.0.1:8090/getUserCollectPaging?uid=" + uid)
+          .then(res => {
+            if (res.data != '') {
+              console.log("这里是当前用户收藏的作品分页内容")
+              console.log(res.data)
+              this.userCollectProContent = res.data.list
+              for (var i = 0; i < res.data.list.length; i++) {
+                this.userCollectImgs.push(res.data.list[i].pr_img)
+              }
+              console.log("这里是收藏作品的图片展示")
+              console.log(this.userCollectImgs)
+
+            }
+          })
+
+*/
 
       axios.get("http://127.0.0.1:8090/getSessionUserInfo")
           .then(res => {
@@ -489,6 +503,12 @@
 
   .tags-link:hover {
     text-decoration: underline;
+  }
+
+  .collect-imgs{
+    width: 100%;
+    /*height: 100%;*/
+    height: 200px;
   }
 
 
